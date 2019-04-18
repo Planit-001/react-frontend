@@ -65,6 +65,10 @@ input[placeholder] {
 	border-radius: 5px;
 }
 
+.checkedTodo {
+	text-decoration: line-through;
+	color: #656565;
+}
 
 .inputContainer {
 	padding: 15px;

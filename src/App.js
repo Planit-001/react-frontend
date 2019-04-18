@@ -9,12 +9,12 @@ import CheckboxList from './components/CheckboxList';
 
 function Todos() {
   return  <div>
-      <CheckboxList />
       <div className="container">
         <div className="header">
           <h1>Todo List</h1>
         </div>
-        <TodosContainer />
+        <CheckboxList />
+        {/* <TodosContainer /> */}
     </div>
   </div>;
 }
