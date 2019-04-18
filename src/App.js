@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Header from './components/Header'
 import CheckboxList from './components/CheckboxList';
 import CalendarFull from './components/CalendarFull';
+import CalendarToast from './components/CalendarToast';
+import CalendarBig from './components/CalendarBig';
+
 
 function Todos() {
   return  <div>
@@ -21,13 +24,22 @@ function Dashboard() {
   return <h2>Dashboard</h2>;
 }
 
-function Calendar() {
-  return <h2>Calendar</h2>;
+function BigCalendar() {
+  return <div>
+    <CalendarBig />
+  </div>;
 }
 
 function FullCalendar(){
-  return <div className="container">
+  return <div className="amazebert" style={{height: '800px', width: '800px'}}>
     <CalendarFull/>
+  </div>
+}
+
+
+function ToastCalendar(){
+  return <div className="amazebert" style={{height: '800px'}}>
+    <CalendarToast/>
   </div>
 }
 
@@ -50,12 +62,20 @@ class App extends Component {
                   <li>
                     <Link to="/calendar-full/">Calendar (FullCalendar)</Link>
                   </li>
+                  <li>
+                    <Link to="/calendar-toast/">Calendar (Toast Calendar)</Link>
+                  </li>
+                  <li>
+                    <Link to="/calendar-big/">Calendar (Big Calendar)</Link>
+                  </li>
                 </ul>
               </nav>
 
               <Route path="/" exact component={Dashboard} />
               <Route path="/todos/" component={Todos} />
               <Route path="/calendar-full/" component={FullCalendar} />
+              <Route path="/calendar-toast/" component={ToastCalendar} />
+              <Route path="/calendar-big/" component={BigCalendar} />
             </div>
           </Router>
        
