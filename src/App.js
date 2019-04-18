@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import TodosContainer from './components/TodosContainer';
+import './App.scss';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Button from '@material-ui/core/Button';
 import Header from './components/Header'
 import CheckboxList from './components/CheckboxList';
+import CalendarFull from './components/CalendarFull';
 
 function Todos() {
   return  <div>
@@ -27,6 +25,12 @@ function Calendar() {
   return <h2>Calendar</h2>;
 }
 
+function FullCalendar(){
+  return <div className="container">
+    <CalendarFull/>
+  </div>
+}
+
 
 class App extends Component {
   render() {
@@ -44,14 +48,14 @@ class App extends Component {
                     <Link to="/todos/">Todos</Link>
                   </li>
                   <li>
-                    <Link to="/calendar/">Calendar</Link>
+                    <Link to="/calendar-full/">Calendar (FullCalendar)</Link>
                   </li>
                 </ul>
               </nav>
 
               <Route path="/" exact component={Dashboard} />
               <Route path="/todos/" component={Todos} />
-              <Route path="/calendar/" component={Calendar} />
+              <Route path="/calendar-full/" component={FullCalendar} />
             </div>
           </Router>
        
