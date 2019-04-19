@@ -1,6 +1,7 @@
 import { 
   GET_TODOS, 
   CREATE_TODO, 
+  UPDATE_TODO,
   DELETE_TODO 
 } from "../constants/actionTypes";
 
@@ -10,8 +11,6 @@ function handleErrors(response) {
   }
   return response;
 }
-
-
 
 export function getTodos() {  
   return function(dispatch){
@@ -40,16 +39,31 @@ export function createTodo(payload) {
   }
 };
 
-export function deleteTodo(payload) {
-
+export function updateTodo(id, payload){
   return function(dispatch){
-    return fetch(`/api/v1/todos/${payload}`, {
+    return fetch(`/api/v1/todos/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(json => {
+      dispatch({ type: UPDATE_TODO, payload: json})
+    });
+  }
+}
+
+export function deleteTodo(id) {
+  return function(dispatch){
+    return fetch(`/api/v1/todos/${id}`, {
       method: "DELETE"
     })
     .then(handleErrors)
     .then(response => {
-        dispatch({ type: DELETE_TODO, payload })
+        dispatch({ type: DELETE_TODO, payload: id })
     })
   }
-
 };

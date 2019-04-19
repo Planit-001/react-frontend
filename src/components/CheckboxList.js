@@ -11,7 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Input from '@material-ui/core/Input';
 
 import { connect } from "react-redux";
-import { getTodos, createTodo, deleteTodo } from "../redux/actions/index";
+import { getTodos, createTodo, updateTodo, deleteTodo } from "../redux/actions/index";
 
 
 import axios from 'axios'
@@ -79,18 +79,24 @@ class CheckboxList extends React.Component {
       newChecked.splice(currentIndex, 1);
     }
 
-    axios.put(`/api/v1/todos/${id}`, {todo: {done: e.target.checked}})
-    .then(response => {
-      const todoIndex = this.props.todos.findIndex(x => x.id === response.data.id)
-      const todos = update(this.props.todos, {
-        [todoIndex]: {$set: response.data}
-      })
-      this.setState({
-        todos: todos,
-        checked: newChecked
-      })
-    })
-    .catch(error => console.log(error))      
+    const todoBody = {todo: {done: e.target.checked}};
+
+    this.props.updateTodo(id, todoBody);
+
+    this.setState({checked: newChecked});
+
+    // axios.put(`/api/v1/todos/${id}`, todoBody)
+    // .then(response => {
+    //   const todoIndex = this.props.todos.findIndex(x => x.id === response.data.id)
+    //   const todos = update(this.props.todos, {
+    //     [todoIndex]: {$set: response.data}
+    //   })
+    //   this.setState({
+    //     todos: todos,
+    //     checked: newChecked
+    //   })
+    // })
+    // .catch(error => console.log(error))      
   }
 
   deleteTodo = (id) => {
@@ -132,7 +138,6 @@ class CheckboxList extends React.Component {
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
-
             </ListItem>
           ))}
         </List>
@@ -149,4 +154,4 @@ const mapStateToProps = state => {
   return { todos: state.todos };
 };
 
-export default connect(mapStateToProps, { getTodos, createTodo, deleteTodo })(withStyles(styles)(CheckboxList));
+export default connect(mapStateToProps, { getTodos, createTodo, updateTodo, deleteTodo })(withStyles(styles)(CheckboxList));
