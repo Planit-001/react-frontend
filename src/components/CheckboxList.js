@@ -11,7 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Input from '@material-ui/core/Input';
 
 import { connect } from "react-redux";
-import { getTodos, createTodo } from "../redux/actions/index";
+import { getTodos, createTodo, deleteTodo } from "../redux/actions/index";
 
 
 import axios from 'axios'
@@ -94,19 +94,7 @@ class CheckboxList extends React.Component {
   }
 
   deleteTodo = (id) => {
-
-    console.log('delete!');
-    axios.delete(`/api/v1/todos/${id}`)
-    .then(response => {
-      const todoIndex = this.props.todos.findIndex(x => x.id === id)
-      const todos = update(this.props.todos, {
-        $splice: [[todoIndex, 1]]
-      })
-      this.setState({
-        todos: todos
-      })
-    })
-    .catch(error => console.log(error))
+    this.props.deleteTodo(id);
   }
 
 
@@ -161,4 +149,4 @@ const mapStateToProps = state => {
   return { todos: state.todos };
 };
 
-export default connect(mapStateToProps, { getTodos, createTodo })(withStyles(styles)(CheckboxList));
+export default connect(mapStateToProps, { getTodos, createTodo, deleteTodo })(withStyles(styles)(CheckboxList));

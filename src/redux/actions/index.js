@@ -1,5 +1,4 @@
 import { 
-  ADD_TODO, 
   GET_TODOS, 
   CREATE_TODO, 
   DELETE_TODO 
@@ -42,5 +41,15 @@ export function createTodo(payload) {
 };
 
 export function deleteTodo(payload) {
-  return { type: DELETE_TODO, payload }
+
+  return function(dispatch){
+    return fetch(`/api/v1/todos/${payload}`, {
+      method: "DELETE"
+    })
+    .then(handleErrors)
+    .then(response => {
+        dispatch({ type: DELETE_TODO, payload })
+    })
+  }
+
 };

@@ -1,4 +1,4 @@
-import { ADD_TODO, GET_TODOS, CREATE_TODO } from "../constants/actionTypes";
+import { GET_TODOS, CREATE_TODO, DELETE_TODO } from "../constants/actionTypes";
 
 const initialState = {
   todos: []
@@ -16,6 +16,13 @@ function rootReducer(state = initialState, action) {
     return Object.assign({}, state, {
       todos: state.todos.concat(action.payload)
     })
+  }
+
+  if (action.type === DELETE_TODO){
+    let newState = {...state}
+    return Object.assign({}, state, {
+      todos: newState.todos.filter(item => item.id !== action.payload)
+    });
   }
 
   return state;
