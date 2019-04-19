@@ -8,9 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-
 import Input from '@material-ui/core/Input';
 
+import { connect } from "react-redux";
 
 import axios from 'axios'
 import update from 'immutability-helper'
@@ -173,4 +173,8 @@ CheckboxList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CheckboxList);
+const mapStateToProps = state => {
+  return { todos: state.todos };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(CheckboxList));
