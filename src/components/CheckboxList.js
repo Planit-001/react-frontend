@@ -35,7 +35,7 @@ class CheckboxList extends React.Component {
     };
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.props.getTodos();
   }
 
@@ -68,7 +68,6 @@ class CheckboxList extends React.Component {
   };
 
   updateTodo = (e, id) => {
-
     const { checked } = this.state;
     const currentIndex = checked.indexOf(e);
     const newChecked = [...checked];
@@ -80,27 +79,21 @@ class CheckboxList extends React.Component {
     }
 
     const todoBody = {todo: {done: e.target.checked}};
-
     this.props.updateTodo(id, todoBody);
-
     this.setState({checked: newChecked});
 
-    // axios.put(`/api/v1/todos/${id}`, todoBody)
-    // .then(response => {
-    //   const todoIndex = this.props.todos.findIndex(x => x.id === response.data.id)
-    //   const todos = update(this.props.todos, {
-    //     [todoIndex]: {$set: response.data}
-    //   })
-    //   this.setState({
-    //     todos: todos,
-    //     checked: newChecked
-    //   })
-    // })
-    // .catch(error => console.log(error))      
   }
 
   deleteTodo = (id) => {
     this.props.deleteTodo(id);
+  }
+
+  sortTodos = (todos) => {
+    if (todos.length >= 1){
+      return todos.sort((a, b) => (a.id < b.id) ? 1 : -1)
+    }else{
+      return todos
+    }
   }
 
 
@@ -120,7 +113,7 @@ class CheckboxList extends React.Component {
           />
 
         <List className={classes.root}>
-          {todos.map(todo => (
+          {todos && todos.length >= 1 && this.sortTodos(todos).map(todo => (
             <ListItem key={todo.id} 
               role={undefined} dense button 
               onClick={(e) => this.updateTodo(e, todo.id)}>
