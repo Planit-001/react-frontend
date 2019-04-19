@@ -11,6 +11,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Input from '@material-ui/core/Input';
 
 import { connect } from "react-redux";
+import { getTodos } from "../redux/actions/index";
+
 
 import axios from 'axios'
 import update from 'immutability-helper'
@@ -33,19 +35,15 @@ class CheckboxList extends React.Component {
     };
   }
 
-  getTodos() {
-    axios.get('/api/v1/todos')
-    .then(response => {
-      this.setState({todos: response.data})
-    })
-    .catch(error => console.log(error))
+  componentWillMount(){
+    this.props.getTodos();
   }
 
   createTodo = (e) => {
     if (e.key === 'Enter' && !(e.target.value === '')) {
       axios.post('/api/v1/todos', {todo: {title: e.target.value}})
       .then(response => {
-        const todos = update(this.state.todos, {
+        const todos = update(this.props.todos, {
           $splice: [[0, 0, response.data]]
         })
         console.log('setting input value...')
@@ -92,8 +90,8 @@ class CheckboxList extends React.Component {
 
     axios.put(`/api/v1/todos/${id}`, {todo: {done: e.target.checked}})
     .then(response => {
-      const todoIndex = this.state.todos.findIndex(x => x.id === response.data.id)
-      const todos = update(this.state.todos, {
+      const todoIndex = this.props.todos.findIndex(x => x.id === response.data.id)
+      const todos = update(this.props.todos, {
         [todoIndex]: {$set: response.data}
       })
       this.setState({
@@ -109,8 +107,8 @@ class CheckboxList extends React.Component {
     console.log('delete!');
     axios.delete(`/api/v1/todos/${id}`)
     .then(response => {
-      const todoIndex = this.state.todos.findIndex(x => x.id === id)
-      const todos = update(this.state.todos, {
+      const todoIndex = this.props.todos.findIndex(x => x.id === id)
+      const todos = update(this.props.todos, {
         $splice: [[todoIndex, 1]]
       })
       this.setState({
@@ -121,13 +119,8 @@ class CheckboxList extends React.Component {
   }
 
 
-
-  componentDidMount() {
-    this.getTodos()
-	}
-
   render() {
-    const { classes } = this.props;
+    const { classes, todos } = this.props;
 
     return (
       <div>
@@ -142,7 +135,7 @@ class CheckboxList extends React.Component {
           />
 
         <List className={classes.root}>
-          {this.state.todos.map(todo => (
+          {todos.map(todo => (
             <ListItem key={todo.id} 
               role={undefined} dense button 
               onClick={(e) => this.updateTodo(e, todo.id)}>
@@ -177,4 +170,4 @@ const mapStateToProps = state => {
   return { todos: state.todos };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(CheckboxList));
+export default connect(mapStateToProps, { getTodos })(withStyles(styles)(CheckboxList));
