@@ -48,6 +48,7 @@ class CheckboxList extends React.Component {
         const todos = update(this.state.todos, {
           $splice: [[0, 0, response.data]]
         })
+        console.log('setting input value...')
         this.setState({
           todos: todos,
           inputValue: ''
@@ -131,7 +132,7 @@ class CheckboxList extends React.Component {
     return (
       <div>
           <Input
-            defaultValue={this.state.inputValue}
+            value={this.state.inputValue}
             onChange={this.handleChange}
             onKeyPress={this.createTodo}
             placeholder="Add a task" maxLength="50"
