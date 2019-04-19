@@ -11,7 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Input from '@material-ui/core/Input';
 
 import { connect } from "react-redux";
-import { getTodos } from "../redux/actions/index";
+import { getTodos, createTodo } from "../redux/actions/index";
 
 
 import axios from 'axios'
@@ -41,18 +41,9 @@ class CheckboxList extends React.Component {
 
   createTodo = (e) => {
     if (e.key === 'Enter' && !(e.target.value === '')) {
-      axios.post('/api/v1/todos', {todo: {title: e.target.value}})
-      .then(response => {
-        const todos = update(this.props.todos, {
-          $splice: [[0, 0, response.data]]
-        })
-        console.log('setting input value...')
-        this.setState({
-          todos: todos,
-          inputValue: ''
-        })
-      })
-      .catch(error => console.log(error))      
+      const body = {todo: {title: e.target.value}}
+      this.props.createTodo(body);
+      this.setState({inputValue: ''});
     }    
   }
 
@@ -170,4 +161,4 @@ const mapStateToProps = state => {
   return { todos: state.todos };
 };
 
-export default connect(mapStateToProps, { getTodos })(withStyles(styles)(CheckboxList));
+export default connect(mapStateToProps, { getTodos, createTodo })(withStyles(styles)(CheckboxList));
