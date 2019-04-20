@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
 import Input from '@material-ui/core/Input';
 import Typography from '@material-ui/core/Typography';
 
-import TodoItem from './../components/TodoItem';
+import CreateTodo from './../components/CreateTodo';
 import TodoList from './../components/TodoList';
 
 import { connect } from "react-redux";
@@ -72,16 +71,7 @@ class Todos extends React.Component {
         <Typography variant="h4" gutterBottom component="h2">
             Your Todos
         </Typography>
-          <Input
-            value={this.state.inputValue}
-            onChange={this.handleChange}
-            onKeyPress={this.createTodo}
-            placeholder="Add a task" maxLength="50"
-            inputProps={{
-              'aria-label': 'Description',
-            }}
-          />
-
+        <CreateTodo />
         <TodoList todos={todos} deleteTodo={this.deleteTodo} updateTodo={this.updateTodo} />
       </div>
     );

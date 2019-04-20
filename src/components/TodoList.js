@@ -19,7 +19,7 @@ const TodoList = memo(props => {
         {props.todos && props.todos.length > 0 && (
         <Paper style={{ margin: 16 }}>
             <List style={{ overflow: "scroll" }}>
-            {props.todos.map((todo, idx) => (
+            {sortTodos(props.todos).map((todo, idx) => (
                 <TodoListItem
                   todo={todo}
                   key={`TodoItem.${idx}`}
