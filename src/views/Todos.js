@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
 
 import TodoItem from './../components/TodoItem';
+import TodoList from './../components/TodoList';
 
 import { connect } from "react-redux";
 import { getTodos, createTodo, updateTodo, deleteTodo } from "../redux/actions/index";
@@ -23,7 +25,6 @@ class Todos extends React.Component {
     this.state = {
       todos: [],
       inputValue: '',
-      checked: [0],
     };
   }
 
@@ -68,6 +69,9 @@ class Todos extends React.Component {
 
     return (
       <div>
+        <Typography variant="h4" gutterBottom component="h2">
+            Your Todos
+        </Typography>
           <Input
             value={this.state.inputValue}
             onChange={this.handleChange}
@@ -78,17 +82,7 @@ class Todos extends React.Component {
             }}
           />
 
-        <List className={classes.root}>
-          {todos && todos.length >= 1 && this.sortTodos(todos).map((todo, index) => (
-
-            <TodoItem 
-              key={`todo-${index}`}
-              todo={todo}
-              deleteTodo={this.deleteTodo}
-              updateTodo={this.updateTodo}/>
-
-          ))}
-        </List>
+        <TodoList todos={todos} deleteTodo={this.deleteTodo} updateTodo={this.updateTodo} />
       </div>
     );
   }

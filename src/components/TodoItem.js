@@ -12,13 +12,12 @@ class TodoItem extends React.Component {
     const { todo, deleteTodo, updateTodo } = this.props;
 
     return (
-        <ListItem key={todo.id} 
-            role={undefined} dense button 
-            onClick={(e) => updateTodo(e, todo.id)}>
-
+        <ListItem key={todo.id} dense>
+        
             <Checkbox
                 checked={todo.done}
                 tabIndex={-1}
+                onClick={(e) => updateTodo(e, todo.id)}
                 disableRipple />
 
             <ListItemText  
