@@ -58,17 +58,17 @@ class Todos extends React.Component {
           direction="row"
           justify="center"
           alignItems="flex-start">
-          <Grid item xs={5}>
+          <Grid item xs={12} sm={5}>
             <TodoBlock 
               title="Today's Todos"
               todos={todos} />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <TodoBlock 
               title="Tomorrow's Todos"
               todos={[]} />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <TodoBlock 
               title="The Day After"
               todos={[]} />

@@ -66,13 +66,14 @@ class TodoItem extends React.Component {
                 </DialogTitle>
                 <DialogContent>
                 <MuiPickersUtilsProvider utils={MomentUtils}>
+
                   <Grid container justify="space-around">
                     <DatePicker
                       margin="normal"
                       label="Date picker"
                       value={selectedDate}
-                      onChange={this.handleDateChange}
-                    />
+                      onChange={this.handleDateChange}/>
+                      
                     <TimePicker
                       margin="normal"
                       label="Time picker"
@@ -80,6 +81,7 @@ class TodoItem extends React.Component {
                       onChange={this.handleDateChange}
                     />
                   </Grid>
+
                 </MuiPickersUtilsProvider>
                 </DialogContent>
                 <DialogActions>
@@ -107,9 +109,11 @@ class TodoItem extends React.Component {
                     <AccessTimeIcon />
                   </IconButton>                
                 </Tooltip>
+
                 <IconButton onClick={() => this.deleteTodo(todo.id)} aria-label="Delete">
                     <DeleteIcon />
                 </IconButton>
+
             </ListItemSecondaryAction>
         </ListItem>
     );
