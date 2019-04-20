@@ -1,12 +1,10 @@
 import { GET_TODOS, CREATE_TODO, UPDATE_TODO, DELETE_TODO } from "../constants/actionTypes";
-import { combineReducers } from 'redux'
-import uiReducer from './ui';
 
 const initialState = {
   todos: []
 };
 
-function rootReducer2(state = initialState, action) {
+function todoReducer(state = initialState, action) {
 
   if (action.type === GET_TODOS){
     return Object.assign({}, state, {
@@ -39,16 +37,10 @@ function rootReducer2(state = initialState, action) {
           ...action.payload
         }
       })
-    })
-
+    });
   }
-
   return state;
 }
-const rootReducer = combineReducers({
-  rootReducer2,
-  uiReducer,
-})
 
 
-export default rootReducer;
+export default todoReducer;

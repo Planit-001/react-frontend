@@ -30,9 +30,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
-import Todos from './views/Todos'
-import SignUp from './views/SignUp';
+import Dashboard from './views/Dashboard';
 import SignIn from './views/SignIn';
+import SignUp from './views/SignUp';
+import Todos from './views/Todos'
 
 const drawerWidth = 240;
 
@@ -114,10 +115,6 @@ const styles = theme => ({
   },
 });
 
-
-function Dashboard() {
-  return <h2>Dashboard</h2>;
-}
 
 function BigCalendar() {
   return <div>
