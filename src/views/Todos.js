@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import Typography from '@material-ui/core/Typography';
 
 import CreateTodo from './../components/CreateTodo';
@@ -31,17 +30,6 @@ class Todos extends React.Component {
     this.props.getTodos();
   }
 
-  createTodo = (e) => {
-    if (e.key === 'Enter' && !(e.target.value === '')) {
-      const body = {todo: {title: e.target.value}}
-      this.props.createTodo(body);
-      this.setState({inputValue: ''});
-    }    
-  }
-
-  handleChange = (e) => {
-    this.setState({inputValue: e.target.value});
-  }
 
   updateTodo = (e, id) => {
     if(e.target.checked !== undefined){
@@ -54,17 +42,9 @@ class Todos extends React.Component {
     this.props.deleteTodo(id);
   }
 
-  sortTodos = (todos) => {
-    if (todos.length >= 1){
-      return todos.sort((a, b) => (a.id < b.id) ? 1 : -1)
-    }else{
-      return todos
-    }
-  }
-
 
   render() {
-    const { classes, todos } = this.props;
+    const { todos } = this.props;
 
     return (
       <div>
