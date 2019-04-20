@@ -9,8 +9,6 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Tooltip from '@material-ui/core/Tooltip';
 import MomentUtils from '@date-io/moment';
 
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -20,19 +18,14 @@ import { connect } from "react-redux";
 import { updateTodo, deleteTodo } from "../redux/actions/index";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-// import DateFnsUtils from '@date-io/date-fns';
-
-import Typography from '@material-ui/core/Typography';
 
 class TodoItem extends React.Component {
 
   state = {
     timeModal: false,
     selectedDate: new Date(),
-
   }
 
-  
   handleDateChange = date => {
     this.setState({ selectedDate: date });
   };
@@ -48,47 +41,55 @@ class TodoItem extends React.Component {
     this.props.deleteTodo(id);
   }
 
+  handleClose = () => {
+    this.setState({
+      timeModal: false
+    });
+  };
+
   render() {
     const { todo } = this.props;
     const { selectedDate } = this.state;
 
     return (
         <ListItem key={todo.id} dense>
-          <ClickAwayListener onClickAway={() => this.setState({timeModal: false})}>
-            <Dialog
-              onClose={this.handleClose}
-              aria-labelledby="customized-dialog-title"
-              open={this.state.timeModal}>
-              <DialogTitle id="customized-dialog-title" onClose={() => this.setState({timeModal: false})}>
-                Modal title
-              </DialogTitle>
-              <DialogContent>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
+          
+          <Dialog
+            onClose={this.handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={this.state.timeModal}>
+            <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+              Modal title
+            </DialogTitle>
+            <DialogContent>
+              <MuiPickersUtilsProvider utils={MomentUtils}>
 
-                  <Grid container justify="space-around">
-                    <DatePicker
-                      margin="normal"
-                      label="Date picker"
-                      value={selectedDate}
-                      onChange={this.handleDateChange}/>
-                      
-                    <TimePicker
-                      margin="normal"
-                      label="Time picker"
-                      value={selectedDate}
-                      onChange={this.handleDateChange}
-                    />
-                  </Grid>
+                <Grid container justify="space-around">
+                  <DatePicker
+                    margin="normal"
+                    label="Date picker"
+                    value={selectedDate}
+                    onChange={this.handleDateChange}/>
+                    
+                  <TimePicker
+                    margin="normal"
+                    label="Time picker"
+                    value={selectedDate}
+                    onChange={this.handleDateChange}
+                  />
+                </Grid>
 
-                </MuiPickersUtilsProvider>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={() => this.setState({timeModal: false})} color="primary">
-                  Save changes
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </ClickAwayListener>
+              </MuiPickersUtilsProvider>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="secondary">
+                Cancel
+              </Button>
+              <Button onClick={this.handleClose} color="primary">
+                Save changes
+              </Button>
+            </DialogActions>
+          </Dialog>
         
           <Checkbox
               checked={todo.done}
