@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CheckboxList from './components/CheckboxList';
 import CalendarFull from './components/CalendarFull';
 import CalendarToast from './components/CalendarToast';
 import CalendarBig from './components/CalendarBig';
@@ -31,6 +30,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
+import Todos from './views/Todos'
 import SignUp from './views/SignUp';
 import SignIn from './views/SignIn';
 
@@ -79,6 +79,7 @@ const styles = theme => ({
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
+    height: '100%',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -113,17 +114,6 @@ const styles = theme => ({
   },
 });
 
-
-function Todos() {
-  return  <div>
-      <div className="container">
-        <div className="header">
-          <h1>Todo List</h1>
-        </div>
-        <CheckboxList />
-    </div>
-  </div>;
-}
 
 function Dashboard() {
   return <h2>Dashboard</h2>;

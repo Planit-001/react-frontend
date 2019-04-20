@@ -34,7 +34,7 @@ function rootReducer(state = initialState, action) {
         }
         return {
           ...item,
-          ... action.payload
+          ...action.payload
         }
       })
     })
