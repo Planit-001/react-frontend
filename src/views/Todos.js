@@ -26,6 +26,9 @@ class Todos extends React.Component {
   }
 
   componentDidMount(){
+    if (this.props.todos && this.props.todos.length >=1 ){
+      return
+    }
     this.props.getTodos();
   }
 

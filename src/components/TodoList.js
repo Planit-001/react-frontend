@@ -18,7 +18,7 @@ const TodoList = memo(props => {
     <div>
         {props.todos && props.todos.length > 0 && (
         <Paper style={{ margin: 16 }}>
-            <List style={{ overflow: "scroll" }}>
+            <List>
               {sortTodos(props.todos).map((todo, idx) => (
                   <TodoListItem
                     todo={todo}
