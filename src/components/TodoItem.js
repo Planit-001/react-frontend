@@ -28,7 +28,7 @@ class TodoItem extends React.Component {
 
   state = {
     timeModal: false,
-    selectedDate: new Date('2014-08-18T21:11:54'),
+    selectedDate: new Date(),
 
   }
 
@@ -52,19 +52,17 @@ class TodoItem extends React.Component {
     const { todo } = this.props;
     const { selectedDate } = this.state;
 
-
     return (
         <ListItem key={todo.id} dense>
           <ClickAwayListener onClickAway={() => this.setState({timeModal: false})}>
-
             <Dialog
-                onClose={this.handleClose}
-                aria-labelledby="customized-dialog-title"
-                open={this.state.timeModal}>
-                <DialogTitle id="customized-dialog-title" onClose={() => this.setState({timeModal: false})}>
-                  Modal title
-                </DialogTitle>
-                <DialogContent>
+              onClose={this.handleClose}
+              aria-labelledby="customized-dialog-title"
+              open={this.state.timeModal}>
+              <DialogTitle id="customized-dialog-title" onClose={() => this.setState({timeModal: false})}>
+                Modal title
+              </DialogTitle>
+              <DialogContent>
                 <MuiPickersUtilsProvider utils={MomentUtils}>
 
                   <Grid container justify="space-around">
@@ -83,38 +81,38 @@ class TodoItem extends React.Component {
                   </Grid>
 
                 </MuiPickersUtilsProvider>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={() => this.setState({timeModal: false})} color="primary">
-                    Save changes
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </ClickAwayListener>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => this.setState({timeModal: false})} color="primary">
+                  Save changes
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </ClickAwayListener>
         
-            <Checkbox
-                checked={todo.done}
-                tabIndex={-1}
-                onClick={(e) => this.updateTodo(e, todo.id)}
-                disableRipple />
+          <Checkbox
+              checked={todo.done}
+              tabIndex={-1}
+              onClick={(e) => this.updateTodo(e, todo.id)}
+              disableRipple />
 
-            <ListItemText  
-                className={todo.done ? 'checkedTodo' : ''}
-                primary={todo.title} />
+          <ListItemText  
+              className={todo.done ? 'checkedTodo' : ''}
+              primary={todo.title} />
 
-            <ListItemSecondaryAction>
-              
-                <Tooltip title="Add Time" placement="right-start">
-                  <IconButton onClick={() => this.setState({timeModal: true})} aria-label="Add Time">
-                    <AccessTimeIcon />
-                  </IconButton>                
-                </Tooltip>
+          <ListItemSecondaryAction>
+            
+              <Tooltip title="Add Time" placement="right-start">
+                <IconButton onClick={() => this.setState({timeModal: true})} aria-label="Add Time">
+                  <AccessTimeIcon />
+                </IconButton>                
+              </Tooltip>
 
-                <IconButton onClick={() => this.deleteTodo(todo.id)} aria-label="Delete">
-                    <DeleteIcon />
-                </IconButton>
+              <IconButton onClick={() => this.deleteTodo(todo.id)} aria-label="Delete">
+                  <DeleteIcon />
+              </IconButton>
 
-            </ListItemSecondaryAction>
+          </ListItemSecondaryAction>
         </ListItem>
     );
   }

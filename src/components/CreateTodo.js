@@ -33,15 +33,16 @@ class CreateTodo extends React.Component {
     return (
         <Paper style={{ margin: 16, padding: 16 }}>
           <Grid container justify="space-around">
+            
             <Grid xs={9} item>
                 <TextField
                     placeholder="Add Todo here"
                     value={this.state.inputValue}
                     onChange={this.handleChange}
                     onKeyPress={this.onEnter}
-                    fullWidth
-                />
+                    fullWidth/>
             </Grid>
+
             <Grid xs={2} item>
               <Button
                   fullWidth
@@ -51,6 +52,7 @@ class CreateTodo extends React.Component {
                   Add
               </Button>
             </Grid>
+            
           </Grid>
         </Paper>
     );
