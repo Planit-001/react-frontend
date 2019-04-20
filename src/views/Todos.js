@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
-import CreateTodo from './../components/CreateTodo';
-import TodoList from './../components/TodoList';
 
 import { connect } from "react-redux";
 import { getTodos, createTodo, updateTodo, deleteTodo } from "../redux/actions/index";
+import TodoBlock from './../components/TodoBlock';
 
 const styles = theme => ({
   root: {
@@ -48,11 +47,30 @@ class Todos extends React.Component {
 
     return (
       <div>
-        <Typography variant="h4" gutterBottom component="h2">
-            Your Todos
+        <Typography variant="h3" gutterBottom component="h1">
+          Your Todos
         </Typography>
-        <CreateTodo />
-        <TodoList todos={todos} deleteTodo={this.deleteTodo} updateTodo={this.updateTodo} />
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start">
+          <Grid item xs={5}>
+            <TodoBlock 
+              title="Today's Todos"
+              todos={todos} />
+          </Grid>
+          <Grid item xs={3}>
+            <TodoBlock 
+              title="Tomorrow's Todos"
+              todos={[]} />
+          </Grid>
+          <Grid item xs={3}>
+            <TodoBlock 
+              title="The Day After"
+              todos={[]} />
+          </Grid>
+        </Grid>
       </div>
     );
   }
@@ -63,7 +81,7 @@ Todos.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { todos: state.todos };
+  return { todos: state.todoReducer.todos };
 };
 
 export default connect(mapStateToProps, { getTodos, createTodo, updateTodo, deleteTodo })(withStyles(styles)(Todos));

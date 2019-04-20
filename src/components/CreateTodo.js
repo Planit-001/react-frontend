@@ -29,30 +29,29 @@ class CreateTodo extends React.Component {
   }
 
   render() {
-    const { classes, todos } = this.props;
 
     return (
         <Paper style={{ margin: 16, padding: 16 }}>
-            <Grid container>
-                <Grid xs={10} md={11} item style={{ paddingRight: 16 }}>
-                    <TextField
-                        placeholder="Add Todo here"
-                        value={this.state.inputValue}
-                        onChange={this.handleChange}
-                        onKeyPress={this.onEnter}
-                        fullWidth
-                    />
-                </Grid>
-                <Grid xs={2} md={1} item>
-                    <Button
-                        fullWidth
-                        color="secondary"
-                        variant="outlined"
-                        onClick={() => this.createTodo(this.state.inputValue)}>
-                        Add
-                    </Button>
-                </Grid>
+          <Grid container>
+            <Grid xs={10} item style={{ paddingRight: 16 }}>
+                <TextField
+                    placeholder="Add Todo here"
+                    value={this.state.inputValue}
+                    onChange={this.handleChange}
+                    onKeyPress={this.onEnter}
+                    fullWidth
+                />
             </Grid>
+            <Grid xs={2} item>
+              <Button
+                  fullWidth
+                  color="secondary"
+                  variant="outlined"
+                  onClick={() => this.createTodo(this.state.inputValue)}>
+                  Add
+              </Button>
+            </Grid>
+          </Grid>
         </Paper>
     );
   }

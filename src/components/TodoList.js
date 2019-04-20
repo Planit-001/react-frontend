@@ -19,15 +19,15 @@ const TodoList = memo(props => {
         {props.todos && props.todos.length > 0 && (
         <Paper style={{ margin: 16 }}>
             <List style={{ overflow: "scroll" }}>
-            {sortTodos(props.todos).map((todo, idx) => (
-                <TodoListItem
-                  todo={todo}
-                  key={`TodoItem.${idx}`}
-                  divider={idx !== props.todos.length - 1}
-                  deleteTodo={props.deleteTodo}
-                  updateTodo={props.updateTodo}
-                />
-            ))}
+              {sortTodos(props.todos).map((todo, idx) => (
+                  <TodoListItem
+                    todo={todo}
+                    key={`TodoItem.${idx}`}
+                    divider={idx !== props.todos.length - 1}
+                    deleteTodo={props.deleteTodo}
+                    updateTodo={props.updateTodo}
+                  />
+              ))}
             </List>
         </Paper>
         )}
