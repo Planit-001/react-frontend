@@ -1,7 +1,7 @@
 import React, { memo } from "react";
-import { List, Paper, Grid } from "@material-ui/core";
+import { List, Paper } from "@material-ui/core";
 
-import TodoListItem from "./TodoItem";
+import TodoItem from "./TodoItem";
 
 function sortTodos(todos){
   if (todos.length >= 1){
@@ -20,7 +20,7 @@ const TodoList = memo(props => {
         <Paper style={{ margin: 16 }}>
             <List>
               {sortTodos(props.todos).map((todo, idx) => (
-                  <TodoListItem
+                  <TodoItem
                     todo={todo}
                     key={`TodoItem.${idx}`}
                     divider={idx !== props.todos.length - 1}

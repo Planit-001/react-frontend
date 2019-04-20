@@ -4,6 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3000",
   "dependencies": {
+    "@date-io/date-fns": "^1.2.0",
+    "@date-io/moment": "^1.2.0",
     "@fullcalendar/core": "^4.0.2",
     "@fullcalendar/daygrid": "^4.0.1",
     "@fullcalendar/interaction": "^4.0.2",
@@ -14,6 +16,7 @@
     "@toast-ui/react-calendar": "^1.0.1",
     "axios": "^0.18.0",
     "immutability-helper": "^3.0.0",
+    "material-ui-pickers": "^2.2.4",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "react": "^16.8.6",
