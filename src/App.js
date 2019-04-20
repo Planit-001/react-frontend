@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import AppBar from '@material-ui/core/AppBar';
-import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 import CheckboxList from './components/CheckboxList';
 import CalendarFull from './components/CalendarFull';
@@ -21,21 +20,19 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import NotificationsIcon from '@material-ui/icons/Notifications';
-
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import { mainListItems, secondaryListItems } from './layouts/ListItems';
 import { withStyles } from '@material-ui/core';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import BarChartIcon from '@material-ui/icons/BarChart';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
+import SignUp from './views/SignUp';
+import SignIn from './views/SignIn';
 
 const drawerWidth = 240;
 
@@ -201,8 +198,7 @@ class App extends Component {
                 variant="h6"
                 color="inherit"
                 noWrap
-                className={classes.title}
-              >
+                className={classes.title}>
                 Small Business
               </Typography>
               <Button component={Link} to="/" color="inherit">Dashboard</Button>
@@ -223,14 +219,15 @@ class App extends Component {
                 <MenuItem component={Link} onClick={this.handleCalMenuClose} to="/calendar-toast">Toast Calendar</MenuItem>
                 <MenuItem component={Link} onClick={this.handleCalMenuClose} to="/calendar-big">Big Calendar</MenuItem>
               </Menu>
-              <Button color="inherit" variant="outlined">
-                Login
+              <Button component={Link} to="/signin/" color="inherit" variant="outlined">
+                Sign In
               </Button>
-              <Button color="inherit" variant="outlined">
+              <Button component={Link} to="/signup/" color="inherit" variant="outlined">
                 Sign Up
               </Button>
             </Toolbar>
           </AppBar>
+
           <Drawer
             variant="permanent"
             classes={{
@@ -239,11 +236,14 @@ class App extends Component {
             open={this.state.open}>
 
             <div className={classes.toolbarIcon}>
+              <span style={{fontStyle: 'italic'}}>Explore!</span>
               <IconButton onClick={this.handleDrawerClose}>
                 <ChevronLeftIcon />
               </IconButton>
             </div>
+
             <Divider />
+            
             <List>
               <ListItem button component={Link} to="/">
                 <ListItemIcon>
@@ -253,19 +253,25 @@ class App extends Component {
               </ListItem>  
               <ListItem component={Link} to="/todos/" button={true} >
                 <ListItemIcon>
-                <BarChartIcon />
+                <FormatListBulletedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Todos" />
               </ListItem>
             </List>
-          </Drawer>
-          <br/><br/><br/><br/><br/><br/><br/>
 
-          <Route path="/" exact component={Dashboard} />
-          <Route path="/todos/" component={Todos} />
-          <Route path="/calendar-full/" component={FullCalendar} />
-          <Route path="/calendar-toast/" component={ToastCalendar} />
-          <Route path="/calendar-big/" component={BigCalendar} />
+          </Drawer>
+          
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <Route path="/" exact component={Dashboard} />
+            <Route path="/todos/" component={Todos} />
+            <Route path="/signup/" component={SignUp} />
+            <Route path="/signin/" component={SignIn} />
+            <Route path="/calendar-full/" component={FullCalendar} />
+            <Route path="/calendar-toast/" component={ToastCalendar} />
+            <Route path="/calendar-big/" component={BigCalendar} />
+          </main>
+
 
         </Router>
       </div>
