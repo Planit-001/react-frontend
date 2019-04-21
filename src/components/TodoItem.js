@@ -143,7 +143,7 @@ class TodoItem extends React.Component {
 
           <ListItemSecondaryAction>
             
-              <Tooltip title="Add Time" placement="right-start">
+              <Tooltip title="Change Time" placement="right-start">
                 <IconButton onClick={() => this.setState({timeModal: true})} aria-label="Add Time">
                   <AccessTimeIcon />
                 </IconButton>                

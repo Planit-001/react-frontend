@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import { connect } from "react-redux";
-import { getTodos, createTodo, updateTodo, deleteTodo } from "../redux/actions/index";
+import { getTodos } from "../redux/actions/index";
 import TodoBlock from './../components/TodoBlock';
 
 const styles = theme => ({
@@ -31,19 +31,6 @@ class Todos extends React.Component {
     }
     this.props.getTodos();
   }
-
-
-  updateTodo = (e, id) => {
-    if(e.target.checked !== undefined){
-      const todoBody = {todo: {done: e.target.checked}};
-      this.props.updateTodo(id, todoBody);
-    }
-  }
-
-  deleteTodo = (id) => {
-    this.props.deleteTodo(id);
-  }
-
 
   render() {
     const { todos } = this.props;
@@ -87,4 +74,4 @@ const mapStateToProps = state => {
   return { todos: state.todoReducer.todos };
 };
 
-export default connect(mapStateToProps, { getTodos, createTodo, updateTodo, deleteTodo })(withStyles(styles)(Todos));
+export default connect(mapStateToProps, { getTodos })(withStyles(styles)(Todos));

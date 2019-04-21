@@ -4,3 +4,4 @@ Next steps:
     - set up dark mode toggle
     - add toasts
     - incorporate 'sign in'
+    - add something to preserve state in store (local storage ?)
