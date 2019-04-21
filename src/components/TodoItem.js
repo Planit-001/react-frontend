@@ -10,10 +10,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import MomentUtils from '@date-io/moment';
 
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import TextField from '@material-ui/core/TextField';
 import { connect } from "react-redux";
 import { updateTodo, deleteTodo } from "../redux/actions/index";
 import Button from '@material-ui/core/Button';
@@ -23,6 +25,8 @@ class TodoItem extends React.Component {
 
   state = {
     timeModal: false,
+    editable: false,
+    newTitle: '',
     selectedDate: new Date(),
   }
 
@@ -37,6 +41,11 @@ class TodoItem extends React.Component {
     }
   }
 
+  updateTodoTitle = (newTitle, id) => {
+    const todoBody = { todo: {title: newTitle}}
+    this.props.updateTodo(id, todoBody)
+  }
+
   deleteTodo = (id) => {
     this.props.deleteTodo(id);
   }
@@ -47,13 +56,33 @@ class TodoItem extends React.Component {
     });
   };
 
+  onTodoClick = () => {
+    this.setState({
+      editable: true,
+      newTitle: this.props.todo.title
+    })
+  }
+
+  handleClickAway = () => {
+    this.setState({
+      editable: false
+    }, () => {
+      this.updateTodoTitle(this.state.newTitle, this.props.todo.id)
+    })
+  }
+
+  onEnter = (e) => {
+    if (e.key === 'Enter' && !(e.target.value === '')) {
+        this.handleClickAway()
+    }  
+  }
+
   render() {
     const { todo } = this.props;
     const { selectedDate } = this.state;
 
     return (
-        <ListItem key={todo.id} dense>
-          
+        <ListItem>
           <Dialog
             onClose={this.handleClose}
             aria-labelledby="customized-dialog-title"
@@ -75,8 +104,7 @@ class TodoItem extends React.Component {
                     margin="normal"
                     label="Time picker"
                     value={selectedDate}
-                    onChange={this.handleDateChange}
-                  />
+                    onChange={this.handleDateChange}/>
                 </Grid>
 
               </MuiPickersUtilsProvider>
@@ -96,10 +124,22 @@ class TodoItem extends React.Component {
               tabIndex={-1}
               onClick={(e) => this.updateTodo(e, todo.id)}
               disableRipple />
-
-          <ListItemText  
-              className={todo.done ? 'checkedTodo' : ''}
-              primary={todo.title} />
+          {this.state.editable ? (
+            <ClickAwayListener onClickAway={this.handleClickAway}>
+              <TextField
+                label="Update Todo"
+                // className={classes.textField}
+                onKeyPress={this.onEnter}
+                margin="dense"
+                value={this.state.newTitle}
+                onChange={(e) => this.setState({newTitle: e.target.value})}/>
+            </ClickAwayListener>
+          ):(
+            <ListItemText
+                className={todo.done ? 'checkedTodo' : ''}
+                onClick={this.onTodoClick}
+                primary={todo.title} />
+          )}
 
           <ListItemSecondaryAction>
             

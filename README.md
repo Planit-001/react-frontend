@@ -1,6 +1,6 @@
 Next steps:
 
     - refactor and modularize app.js
-    - refactor and modularize checkboxlist.js
+    - set up dark mode toggle
     - add toasts
-    - improve styling of todo page
+    - incorporate 'sign in'

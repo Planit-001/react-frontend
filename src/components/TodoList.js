@@ -12,24 +12,23 @@ function sortTodos(todos){
 }
 
 
-const TodoList = memo(props => {  
-  console.log("props.todos: ", props)
+const TodoList = memo(props => {
     return (
     <div>
         {props.todos && props.todos.length > 0 && (
-        <Paper style={{ margin: 16 }}>
-            <List>
-              {sortTodos(props.todos).map((todo, idx) => (
-                  <TodoItem
-                    todo={todo}
-                    key={`TodoItem.${idx}`}
-                    divider={idx !== props.todos.length - 1}
-                    deleteTodo={props.deleteTodo}
-                    updateTodo={props.updateTodo}
-                  />
-              ))}
-            </List>
-        </Paper>
+          <Paper style={{ margin: 16 }}>
+              <List dense={true}>
+                {sortTodos(props.todos).map((todo, idx) => (
+                    <TodoItem
+                      todo={todo}
+                      key={`TodoItem.${idx}`}
+                      divider={idx !== props.todos.length - 1}
+                      deleteTodo={props.deleteTodo}
+                      updateTodo={props.updateTodo}
+                    />
+                ))}
+              </List>
+          </Paper>
         )}
     </div>
 )});
