@@ -26,8 +26,13 @@ const initialData = {
         title: 'In Progress',
         taskIds: [],
       },
+      'column-3': {
+        id: 'column-3',
+        title: 'Done',
+        taskIds: [],
+      },
     },
-    columnOrder: ['column-1', 'column-2'],
+    columnOrder: ['column-1', 'column-2', 'column-3'],
   };
 
 
@@ -36,6 +41,13 @@ const Container = styled.div`
 `
 
 
+class OuterList extends React.PureComponent{
+    render(){
+        const { column, taskMap, index } = this.props;
+        const tasks = column.taskIds.map(taskId => taskMap[taskId]);
+        return <Column column={column} tasks={tasks} index={index} />
+    }
+}
 
 
 class PipelineBuilder extends React.Component {
@@ -163,9 +175,16 @@ class PipelineBuilder extends React.Component {
                                 >
                                 {this.state.columnOrder.map((columnId, index) => {
                                     const column = this.state.columns[columnId];
-                                    const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+                                    // const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+                                    return (
+                                        <OuterList 
+                                            key={column.id}
+                                            column={column}
+                                            taskMap={this.state.tasks}
+                                            index={index}/>
+                                    )
 
-                                    return <Column key={column.id} column={column} tasks={tasks} index={index} />
+                                    // return <Column key={column.id} column={column} tasks={tasks} index={index} />
                                 })}
                                 {provided.placeholder}
                             </Container>
