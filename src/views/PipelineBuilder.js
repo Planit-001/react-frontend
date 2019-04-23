@@ -1,6 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Column from './../components/pipeline/Column';
+import styled from 'styled-components'
+
 
 import {DragDropContext} from 'react-beautiful-dnd';
 
@@ -18,10 +20,27 @@ const initialData = {
         id: 'column-1',
         title: 'To do',
         taskIds: ['task-1', 'task-2', 'task-3', 'task-4'],
+      },
+      'column-2': {
+        id: 'column-2',
+        title: 'In Progress',
+        taskIds: [],
+      },
+      'column-3': {
+        id: 'column-3',
+        title: 'Done',
+        taskIds: [],
       }
     },
-    columnOrder: ['column-1'],
+    columnOrder: ['column-1', 'column-2', 'column-3'],
   };
+
+
+const Container = styled.div`
+  display: flex;
+`
+
+
 
 
 class PipelineBuilder extends React.Component {
@@ -29,8 +48,92 @@ class PipelineBuilder extends React.Component {
         ...initialData
     }
 
-    onDragEnd = result => {
+    onDragStart = () => {
+        document.body.style.color = 'orange';
+        document.body.style.transition = 'background-color 0.2s ease';
+    }
 
+    onDragUpdate = update => {
+        const { destination } = update;
+        const opacity = destination ? 
+            destination.index / Object.keys(this.state.tasks).length
+            : 0;
+
+        document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`
+    }
+
+    onDragEnd = result => {
+        document.body.style.color = 'inherit';
+        document.body.style.backgroundColor = 'inherit';
+
+        const { destination, source, draggableId } = result;
+
+        if(!destination){
+            return;
+        }
+
+        if (
+            destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ){
+            return;
+        }
+
+        const start = this.state.columns[source.droppableId];
+        const finish = this.state.columns[destination.droppableId];
+
+        if(start === finish){
+            const newTaskIds = Array.from(start.taskIds);
+            newTaskIds.splice(source.index, 1);
+    
+            newTaskIds.splice(destination.index, 0, draggableId);
+    
+            const newColumn = {
+                ...start,
+                taskIds: newTaskIds,
+            }
+    
+            const newState = {
+                ...this.state,
+                columns: {
+                    ...this.state.columns,
+                    [newColumn.id]: newColumn
+                }
+            }
+            this.setState(newState);
+            return;
+        }
+
+        const startTaskIds = Array.from(start.taskIds);
+        startTaskIds.splice(source.index, 1);
+
+        const newStart = {
+            ...start,
+            taskIds: startTaskIds
+        };
+
+        const finishTaskIds = Array.from(finish.taskIds);
+        finishTaskIds.splice(destination.index, 0, draggableId);
+
+        const newFinish = {
+            ...finish,
+            taskIds: finishTaskIds
+        }
+
+        const newState = {
+            ...this.state,
+            columns: {
+                ...this.state.columns,
+                [newStart.id]: newStart,
+                [newFinish.id]: newFinish
+            },
+        };
+
+        this.setState(newState)
+
+
+        // after performing this 'optimistic' ui update,
+        // call an endpoint to let a server know that a reorder has occured
     }
 
     render(){
@@ -40,15 +143,20 @@ class PipelineBuilder extends React.Component {
                 <Typography variant="h2" gutterBottom component="h1">
                     Pipeline Builder
                 </Typography>
-                <DragDropContext
-                    onDragEnd={this.onDragEnd}>
-                    {this.state.columnOrder.map((columnId, index) => {
-                        const column = this.state.columns[columnId];
-                        const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
+                <Container>
+                    <br/>
+                    <DragDropContext
+                        onDragStart={this.onDragStart}
+                        onDragUpdate={this.onDragUpdate}
+                        onDragEnd={this.onDragEnd}>
+                        {this.state.columnOrder.map((columnId, index) => {
+                            const column = this.state.columns[columnId];
+                            const tasks = column.taskIds.map(taskId => this.state.tasks[taskId]);
 
-                        return <Column key={column.id} column={column} tasks={tasks} />
-                    })}
-                </DragDropContext>
+                            return <Column key={column.id} column={column} tasks={tasks} />
+                        })}
+                    </DragDropContext>
+                </Container>
             </div>
         )
     }
