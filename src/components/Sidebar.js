@@ -11,9 +11,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 
+import ViewWeekIcon from '@material-ui/icons/ViewWeek';
 
 class Sidebar extends Component {
  
@@ -36,16 +39,28 @@ class Sidebar extends Component {
         <Divider />
         <List>
             <ListItem button component={Link} to="/">
-            <ListItemIcon>
-                <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
+                <ListItemIcon>
+                    <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
             </ListItem>  
             <ListItem component={Link} to="/todos/" button={true} >
-            <ListItemIcon>
-            <FormatListBulletedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Todos" />
+                <ListItemIcon>
+                    <FormatListBulletedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Todos" />
+            </ListItem>
+            <ListItem button={true} >
+                <ListItemIcon>
+                    <DateRangeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Calendar" />
+            </ListItem>
+            <ListItem component={Link} to="/pipelines/" button={true} >
+                <ListItemIcon>
+                    <ViewWeekIcon />
+                </ListItemIcon>
+                <ListItemText primary="Pipelines" />
             </ListItem>
         </List>
         </Drawer>

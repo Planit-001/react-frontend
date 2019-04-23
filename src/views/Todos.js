@@ -38,7 +38,7 @@ class Todos extends React.Component {
     return (
       <div>
         <Typography variant="h3" gutterBottom component="h1">
-          Your Todos
+          Daily Todos
         </Typography>
         <Grid
           container

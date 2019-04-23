@@ -10,6 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Dashboard from './views/Dashboard';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import PipelineBuilder from './views/PipelineBuilder';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import Todos from './views/Todos'
@@ -85,6 +86,7 @@ class App extends Component {
             <Route path="/todos/" component={Todos} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
+            <Route path="/pipelines/" component={PipelineBuilder} />
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
             <Route path="/calendar-big/" component={BigCalendar} />
