@@ -8,7 +8,7 @@ import moment from 'moment';
 import { connect } from "react-redux";
 import { getTodos } from "../redux/actions/index";
 import TodoBlock from './../components/TodoBlock';
-
+import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -38,15 +38,18 @@ class Todos extends React.Component {
   }
 
   filterTodosToday(todos){
+    return todayNullOrBefore(todos);
+    // console.log('totalToday: ', totalToday);
     return todos.filter((todo, i) => {
       return todo.due_date === null || (this.sameYear(todo.due_date) && moment(todo.due_date).dayOfYear() === moment().dayOfYear())
     });
   }
 
   filterTodosTomorrow(todos){
-    return todos.filter((todo, i) => {
-      return this.sameYear(todo.due_date) 
-    });
+    return tomorrowsTodos(todos)
+    // return todos.filter((todo, i) => {
+    //   return this.sameYear(todo.due_date) 
+    // });
   }
 
   render() {
@@ -77,7 +80,19 @@ class Todos extends React.Component {
             <TodoBlock 
               defaultDueDate={moment().add(2, 'day')}
               title="The Day After"
-              todos={[]} />
+              todos={dayAfterTodos(todos)} />
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          direction="row"
+          alignItems="flex-start">
+          <Grid item sm={12} md={5}>
+            <TodoBlock 
+              title="Future Todos"
+              showDate={true}
+              disableCreate={true}
+              todos={futureTodos(todos)} />
           </Grid>
         </Grid>
       </div>

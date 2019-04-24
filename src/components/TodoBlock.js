@@ -22,14 +22,14 @@ class TodoBlock extends React.Component {
 
 
   render() {
-    const { todos, title } = this.props;
+    const { todos, title, disableCreate } = this.props;
 
     return (
       <div>
         <Typography variant="h5" align="center" gutterBottom component="h4">
             {title}
         </Typography>
-        <CreateTodo defaultDueDate={this.props.defaultDueDate} />
+        {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} />} 
         <TodoList todos={todos} />
       </div>
     );
