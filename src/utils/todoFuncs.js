@@ -34,7 +34,7 @@ export function todaysTodos(todos){
 
 export function todayNullOrBefore(todos){
     return todos.filter((todo) => {
-        return sameDay(todo.due_date) || _.isNull(todo.due_date) || beforeToday(todo.due_date);
+        return _.isNull(todo.due_date) || sameDay(todo.due_date) || beforeToday(todo.due_date);
     });
 }
 
@@ -56,3 +56,14 @@ export function futureTodos(todos){
     })
 }
 
+export function filterDone(todos){
+    return todos.filter(todo => {
+        return todo.done
+    })
+}
+
+export function filterNotDone(todos){
+    return todos.filter(todo => {
+        return !todo.done
+    })
+}

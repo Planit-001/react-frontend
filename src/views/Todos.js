@@ -85,8 +85,7 @@ class Todos extends React.Component {
         </Grid>
         <Grid
           container
-          direction="row"
-          alignItems="flex-start">
+          direction="row">
           <Grid item sm={12} md={5}>
             <TodoBlock 
               title="Future Todos"
