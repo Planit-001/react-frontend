@@ -2,6 +2,7 @@ import React from "react";
 import { TextField, Paper, Button, Grid } from "@material-ui/core";
 import { createTodo } from "../redux/actions/index";
 import { connect } from "react-redux";
+import moment from 'moment';
 
 class CreateTodo extends React.Component {
   constructor(props){
@@ -19,8 +20,12 @@ class CreateTodo extends React.Component {
   }
 
   createTodo = (input) => {
-      const body = {todo: {title: input}}
-      this.props.createTodo(body);
+      const dueDate = this.props.defaultDueDate
+      const todoBody = {title: input}
+      if(dueDate && moment.isMoment(dueDate)){
+        todoBody.due_date = dueDate.format();
+      }
+      this.props.createTodo({todo: todoBody});
       this.setState({inputValue: ''});
   }
 

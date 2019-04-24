@@ -29,7 +29,7 @@ class TodoBlock extends React.Component {
         <Typography variant="h5" align="center" gutterBottom component="h4">
             {title}
         </Typography>
-        <CreateTodo />
+        <CreateTodo defaultDueDate={this.props.defaultDueDate} />
         <TodoList todos={todos} />
       </div>
     );

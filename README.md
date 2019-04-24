@@ -1,6 +1,6 @@
 Next steps:
 
-    - fix dates for todos
+    - resolve dates for todo sorting
     - improve theme (colours, etc.)
     - set up dark mode toggle
     - add toasts

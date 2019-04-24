@@ -34,6 +34,12 @@ class TodoItem extends React.Component {
     selectedTime: null
   }
 
+  componentDidMount(){
+    if(this.props.todo.due_date){
+      this.setState({selectedDate: this.props.todo.due_date})
+    }
+  }
+
   handleDateChange = date => {
     console.log('date: ', date)
     this.setState({ selectedDate: date });
