@@ -28,7 +28,7 @@ const Handle = styled.div`
 
 export default class Class extends React.Component {
     render() {
-        const isDragDisabled = this.props.task.id === 'task-1';
+        const isDragDisabled = false// this.props.task.id === 'task-1';
         return (
             <Draggable 
                 draggableId={this.props.task.id} 
