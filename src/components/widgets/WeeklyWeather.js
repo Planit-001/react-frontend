@@ -15,9 +15,7 @@ function WeeklyWeather(props){
   const classes = props.classes;
   const result = props.data
   let days
-  result.shift()
-
-  days = result.map(day=>
+  days = result.slice(1).map(day=>
     <DailyWeather data={day} key={day.dt}/>
   )
 
