@@ -66,9 +66,13 @@ class Dashboard extends React.Component {
                 <Grid
                     container
                     direction="row"
-                    justify="center"
+                    justify="space-around"
+                    spacing={32}
                     alignItems="flex-start">
-                    {currentWeather && !_.isEmpty(currentWeather) && <Grid item sm={12} md={12}>
+                    {currentWeather && !_.isEmpty(currentWeather) && <Grid item sm={12} md={7} lg={6}>
+                        <Typography variant="h5" align="center" gutterBottom component="h4">
+                            Today's Weather
+                        </Typography>
                         <WeatherCard data={currentWeather}/>
                     </Grid>}
                     <Grid item sm={12} md={5}>
