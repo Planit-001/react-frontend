@@ -1,7 +1,5 @@
 Next steps:
 
-    - add 'done' functionality to TODO sorting
-    - built in time setting when creating todo in future
     - fix styling of todo page
 
 Future steps:

@@ -4,18 +4,18 @@ import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pic
 import { connect } from "react-redux";
 import { updateTodo, deleteTodo } from "../redux/actions/index";
 import moment from 'moment';
+import {readableDate} from './../utils/dateFuncs';
 
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ClearIcon from '@material-ui/icons/Clear';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
@@ -165,6 +165,7 @@ class TodoItem extends React.Component {
               disableRipple />
           {this.state.editable ? (
             <ClickAwayListener onClickAway={this.handleClickAway}>
+            <ListItem>
               <TextField
                 label="Update Todo"
                 // className={classes.textField}
@@ -172,16 +173,16 @@ class TodoItem extends React.Component {
                 margin="dense"
                 value={this.state.newTitle}
                 onChange={(e) => this.setState({newTitle: e.target.value})}/>
+                </ListItem>
             </ClickAwayListener>
           ):(
             <ListItemText
                 className={todo.done ? 'checkedTodo' : ''}
                 onClick={this.onTodoClick}
-                primary={todo.title} />
+                primary={todo.title}
+                secondary={this.props.showDate ? readableDate(todo.due_date) : null} />
           )}
-
           <ListItemSecondaryAction>
-            
               <Tooltip title="Change Time" placement="right-start">
                 <IconButton onClick={() => this.setState({timeModal: true})} aria-label="Add Time">
                   <AccessTimeIcon />

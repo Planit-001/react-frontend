@@ -20,6 +20,7 @@ const TodoList = memo(props => {
               <List dense={true}>
                 {sortTodos(props.todos).map((todo, idx) => (
                     <TodoItem
+                      showDate={props.showDate}
                       todo={todo}
                       key={`TodoItem.${idx}`}
                       divider={idx !== props.todos.length - 1}

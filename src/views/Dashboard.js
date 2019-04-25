@@ -1,13 +1,16 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import { connect } from "react-redux";
+import { getTodos } from "../redux/actions/index";
+
 import { changeDarkMode } from "../redux/actions/ui";
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
-import { getTodos } from "../redux/actions/index";
-import TodoBlock from './../components/TodoBlock';;
+import TodoBlock from './../components/TodoBlock';
+import Typography from '@material-ui/core/Typography';
+
+import {todayNullOrBefore} from './../utils/todoFuncs'
 
 class Dashboard extends React.Component {
     handleChange = name => event => {
@@ -47,7 +50,7 @@ class Dashboard extends React.Component {
                     <Grid item sm={12} md={5}>
                         <TodoBlock 
                         title="Today's Todos"
-                        todos={todos} />
+                        todos={todayNullOrBefore(todos)} />
                     </Grid>
                 </Grid>
             </div>

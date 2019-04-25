@@ -1,14 +1,16 @@
 import React from 'react';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import moment from 'moment';
+import { getTodos } from "../redux/actions/index";
+import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
+
 import { withStyles } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import moment from 'moment';
-
-import { connect } from "react-redux";
-import { getTodos } from "../redux/actions/index";
 import TodoBlock from './../components/TodoBlock';
-import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -63,14 +65,14 @@ class Todos extends React.Component {
         <Grid
           container
           direction="row"
-          justify="center"
+          spacing={40}
           alignItems="flex-start">
           <Grid item sm={12} md={5}>
             <TodoBlock 
               title="Today's Todos"
               todos={this.filterTodosToday(todos)} />
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item sm={12} md={4}>
             <TodoBlock 
               defaultDueDate={moment().add(1, 'day')}
               title="Tomorrow's Todos"
@@ -83,9 +85,13 @@ class Todos extends React.Component {
               todos={dayAfterTodos(todos)} />
           </Grid>
         </Grid>
+        
+
         <Grid
           container
-          direction="row">
+          direction="row"
+          spacing={40}>
+
           <Grid item sm={12} md={5}>
             <TodoBlock 
               title="Future Todos"
