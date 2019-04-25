@@ -33,7 +33,7 @@ class Sidebar extends Component {
             <div className={classes.toolbarIcon}>
                 <span style={{fontStyle: 'italic'}}>Explore!</span>
                 <IconButton onClick={drawerClose}>
-                <ChevronLeftIcon />
+                    <ChevronLeftIcon />
                 </IconButton>
             </div>
             <Divider />
@@ -50,7 +50,7 @@ class Sidebar extends Component {
                     </ListItemIcon>
                     <ListItemText primary="Todos" />
                 </ListItem>
-                <ListItem button={true} >
+                <ListItem component={Link} to="/calendar-full" button={true}>
                     <ListItemIcon>
                         <DateRangeIcon />
                     </ListItemIcon>

@@ -48,8 +48,6 @@ class Header extends Component {
               className={classes.title}>
               Small Business
             </Typography>
-            <Button component={Link} to="/" color="inherit">Dashboard</Button>
-            <Button component={Link} to="/todos/" color="inherit">Todos</Button>
             <Button
               aria-owns={anchorEl ? 'simple-menu' : undefined}
               aria-haspopup="true"
@@ -66,7 +64,7 @@ class Header extends Component {
               <MenuItem component={Link} onClick={handleCalMenuClose} to="/calendar-toast">Toast Calendar</MenuItem>
               <MenuItem component={Link} onClick={handleCalMenuClose} to="/calendar-big">Big Calendar</MenuItem>
             </Menu>
-            <Button component={Link} to="/signin/" color="inherit" variant="outlined">
+            <Button className={classes.toolbarBtn} component={Link} to="/signin/" color="inherit" variant="outlined">
               Sign In
             </Button>
             <Button component={Link} to="/signup/" color="inherit" variant="outlined">

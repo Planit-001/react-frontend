@@ -16,7 +16,7 @@ import PipelineBuilder from './views/PipelineBuilder';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import Todos from './views/Todos'
-
+import Typography from '@material-ui/core/Typography';
 
 function BigCalendar() {
   return <div>
@@ -25,9 +25,15 @@ function BigCalendar() {
 }
 
 function FullCalendar(){
-  return <div className="amazebert" style={{height: '800px', width: '800px'}}>
-    <CalendarFull/>
-  </div>
+  return <div>
+    <Typography variant="h2" gutterBottom component="h1">
+        Your Calendar
+    </Typography>
+    <div className="spacer"></div>
+    <div className="amazebert" style={{height: '800px', width: '800px'}}>
+      <CalendarFull/>
+    </div>
+  </div> 
 }
 
 
@@ -120,6 +126,9 @@ const styles = theme => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+  },
+  toolbarBtn: {
+    marginRight: 12
   },
   toolbarIcon: {
     display: 'flex',
