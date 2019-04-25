@@ -37,9 +37,9 @@ class CreateTodo extends React.Component {
 
     return (
         <Paper style={{ margin: 16, padding: 16 }}>
-          <Grid container justify="space-around">
+          <Grid container spacing={8} justify="space-around">
             
-            <Grid xs={9} item>
+            <Grid sm={12} md={9} item>
                 <TextField
                     placeholder="Add Todo here"
                     value={this.state.inputValue}
@@ -48,11 +48,11 @@ class CreateTodo extends React.Component {
                     fullWidth/>
             </Grid>
 
-            <Grid xs={2} item>
+            <Grid md={3} item>
               <Button
+                  color="primary"
+                  variant="contained"
                   fullWidth
-                  color="secondary"
-                  variant="outlined"
                   onClick={() => this.createTodo(this.state.inputValue)}>
                   Add
               </Button>

@@ -1,26 +1,15 @@
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 
-.amazebert{
-	height: 600px;
-}
-
-
-
-
 
 .checkedTodo {
 	text-decoration: line-through;
 	color: #656565;
 }
 
-.inputContainer {
-	padding: 15px;
-}
 
-.inputContainer .taskInput {
-	padding: 10px;
-	width: 100%;
-	border-radius: 25px;
-	box-sizing: border-box;
+.spacer {
+	@media screen and (min-width: 960px) {
+		height: 50px;
+	}
 }

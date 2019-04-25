@@ -41,17 +41,10 @@ class Todos extends React.Component {
 
   filterTodosToday(todos){
     return todayNullOrBefore(todos);
-    // console.log('totalToday: ', totalToday);
-    return todos.filter((todo, i) => {
-      return todo.due_date === null || (this.sameYear(todo.due_date) && moment(todo.due_date).dayOfYear() === moment().dayOfYear())
-    });
   }
 
   filterTodosTomorrow(todos){
     return tomorrowsTodos(todos)
-    // return todos.filter((todo, i) => {
-    //   return this.sameYear(todo.due_date) 
-    // });
   }
 
   render() {
@@ -62,10 +55,11 @@ class Todos extends React.Component {
         <Typography variant="h3" gutterBottom component="h1">
           Daily Todos
         </Typography>
+        <div className="spacer"></div>
         <Grid
           container
           direction="row"
-          spacing={40}
+          spacing={32}
           alignItems="flex-start">
           <Grid item sm={12} md={5}>
             <TodoBlock 
@@ -85,7 +79,7 @@ class Todos extends React.Component {
               todos={dayAfterTodos(todos)} />
           </Grid>
         </Grid>
-        
+        <div className="spacer"></div>
 
         <Grid
           container
