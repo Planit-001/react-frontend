@@ -11,8 +11,6 @@ const initialState = {
 function externalReducer(state = initialState, action) {
 
   if (action.type === GET_WEATHER_CURRENT){
-    console.log('action: ', action)
-      
     return Object.assign({}, state, {
       currentWeather: action.payload
     })

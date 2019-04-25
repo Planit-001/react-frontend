@@ -1,6 +1,6 @@
 import React from 'react';
 import MomentUtils from '@date-io/moment';
-import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import { connect } from "react-redux";
 import { updateTodo, deleteTodo } from "../redux/actions/index";
 import moment from 'moment';
@@ -9,7 +9,6 @@ import {readableDate} from './../utils/dateFuncs';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
-import Chip from '@material-ui/core/Chip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Dialog from '@material-ui/core/Dialog';
@@ -30,8 +29,8 @@ class TodoItem extends React.Component {
     timeModal: false,
     editable: false,
     newTitle: '',
-    selectedDate: moment().format(),
-    selectedTime: null
+    selectedDate: null, // moment().format(),
+    // selectedTime: null
   }
 
   componentDidMount(){
@@ -111,7 +110,7 @@ class TodoItem extends React.Component {
 
   render() {
     const { todo } = this.props;
-    const { selectedDate, selectedTime } = this.state;
+    const { selectedDate } = this.state;
 
     return (
         <ListItem>

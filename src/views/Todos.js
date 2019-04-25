@@ -6,7 +6,6 @@ import { getTodos } from "../redux/actions/index";
 import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
 
 import { withStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TodoBlock from './../components/TodoBlock';

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
+import _ from 'lodash';
 import { getTodos } from "../redux/actions/index";
 import { getWeatherCurrent } from "../redux/actions/external";
 
@@ -11,11 +12,13 @@ import Switch from '@material-ui/core/Switch';
 import TodoBlock from './../components/TodoBlock';
 import Typography from '@material-ui/core/Typography';
 
+import WeatherCard from './../components/widgets/WeatherCard';
+
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
 class Dashboard extends React.Component {
     componentDidMount(){
-        this.props.getWeatherCurrent()
+        // this.props.getWeatherCurrent()
         this.geoLocate();
         
         if (this.props.todos && this.props.todos.length >=1 ){
@@ -29,19 +32,21 @@ class Dashboard extends React.Component {
     };
 
     geoLocate(){
+        const {getWeatherCurrent} = this.props;
         function showPosition(position) {
-            console.log("position: ", position)
-          }
+            getWeatherCurrent(position.coords.latitude, position.coords.longitude);
+        }
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
-          } else {
+        } else {
             console.log("Geolocation is not supported by this browser.");
-          }
+        }
 
     }
     
     render(){
-        const { todos } = this.props
+        const { todos, currentWeather } = this.props
+        console.log('currentWeather: ', currentWeather);
         return (
             <div>
                 <Typography variant="h2" gutterBottom component="h1">
@@ -63,6 +68,9 @@ class Dashboard extends React.Component {
                     direction="row"
                     justify="center"
                     alignItems="flex-start">
+                    {currentWeather && !_.isEmpty(currentWeather) && <Grid item sm={12} md={12}>
+                        <WeatherCard data={currentWeather}/>
+                    </Grid>}
                     <Grid item sm={12} md={5}>
                         <TodoBlock 
                         title="Today's Todos"
@@ -78,7 +86,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
     return { 
         todos: state.todoReducer.todos,
-        darkMode: state.uiReducer.darkMode 
+        darkMode: state.uiReducer.darkMode,
+        currentWeather: state.externalReducer.currentWeather
     };
 };
 

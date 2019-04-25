@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import Task from './Task'
+// import Task from './Task'
 import InnerList from './InnerList';
 
 const Container = styled.div`
