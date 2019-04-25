@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { getTodos } from "../redux/actions/index";
+import { getWeatherCurrent } from "../redux/actions/external";
 
 import { changeDarkMode } from "../redux/actions/ui";
 import FormGroup from '@material-ui/core/FormGroup';
@@ -13,15 +14,30 @@ import Typography from '@material-ui/core/Typography';
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
 class Dashboard extends React.Component {
+    componentDidMount(){
+        this.props.getWeatherCurrent()
+        this.geoLocate();
+        
+        if (this.props.todos && this.props.todos.length >=1 ){
+            return
+        }
+        this.props.getTodos();
+    }
+
     handleChange = name => event => {
         this.props.changeDarkMode(event.target.checked)
     };
 
-    componentDidMount(){
-    if (this.props.todos && this.props.todos.length >=1 ){
-        return
-    }
-    this.props.getTodos();
+    geoLocate(){
+        function showPosition(position) {
+            console.log("position: ", position)
+          }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            console.log("Geolocation is not supported by this browser.");
+          }
+
     }
     
     render(){
@@ -66,4 +82,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {changeDarkMode, getTodos})(Dashboard);
+export default connect(mapStateToProps, {changeDarkMode, getTodos, getWeatherCurrent})(Dashboard);

@@ -1,4 +1,5 @@
 Next steps:
+    - add weather widget to dash
     - improve theme (colours, etc.)
     - improve navbar
 
