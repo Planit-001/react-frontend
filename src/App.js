@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { withStyles } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from "react-redux";
+import blue from '@material-ui/core/colors/blue';
 
 import CalendarFull from './components/CalendarFull';
 import CalendarToast from './components/CalendarToast';
@@ -73,7 +74,13 @@ class App extends Component {
 
     const muiTheme = createMuiTheme({
       palette: {
-        type: darkMode ? 'dark' : 'light', 
+        type: darkMode ? 'dark' : 'light',
+        primary: {
+          main: '#1565c0', // blue
+        },
+        secondary: {
+          main: '#ec407a'
+        }
       },
       typography: { useNextVariants: true },
     });
