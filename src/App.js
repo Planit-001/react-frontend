@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { withStyles } from '@material-ui/core';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { connect } from "react-redux";
 
 import CalendarFull from './components/CalendarFull';
 import CalendarToast from './components/CalendarToast';
@@ -36,6 +38,7 @@ function ToastCalendar(){
 }
 
 
+
 class App extends Component {
   state = {
     open: false,
@@ -59,11 +62,20 @@ class App extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, darkMode } = this.props;
     const { anchorEl } = this.state;
+
+    const muiTheme = createMuiTheme({
+      palette: {
+        type: darkMode ? 'dark' : 'light', 
+      },
+      typography: { useNextVariants: true },
+    });
 
     return (
       <div className={classes.root}>
+      <MuiThemeProvider theme={muiTheme}>
+
         <CssBaseline />
         <Router>
           <Header
@@ -94,6 +106,7 @@ class App extends Component {
 
 
         </Router>
+      </MuiThemeProvider>
       </div>
     );
   }
@@ -180,5 +193,11 @@ const styles = theme => ({
 });
 
 
+const mapStateToProps = state => {
+  return { 
+      darkMode: state.uiReducer.darkMode 
+  };
+};
 
-export default withStyles(styles)(App);
+// export default withStyles(styles)(App);
+export default withStyles(styles)(connect(mapStateToProps)(App));

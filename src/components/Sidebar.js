@@ -24,45 +24,45 @@ class Sidebar extends Component {
     const { classes, drawerClose, open } = this.props;
     return (
         <Drawer
-        variant="permanent"
-        classes={{
-            paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}>
+            variant="permanent"
+            classes={{
+                paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
+            }}
+            open={open}>
 
-        <div className={classes.toolbarIcon}>
-            <span style={{fontStyle: 'italic'}}>Explore!</span>
-            <IconButton onClick={drawerClose}>
-            <ChevronLeftIcon />
-            </IconButton>
-        </div>
-        <Divider />
-        <List>
-            <ListItem button component={Link} to="/">
-                <ListItemIcon>
-                    <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-            </ListItem>  
-            <ListItem component={Link} to="/todos/" button={true} >
-                <ListItemIcon>
-                    <FormatListBulletedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Todos" />
-            </ListItem>
-            <ListItem button={true} >
-                <ListItemIcon>
-                    <DateRangeIcon />
-                </ListItemIcon>
-                <ListItemText primary="Calendar" />
-            </ListItem>
-            <ListItem component={Link} to="/pipelines/" button={true} >
-                <ListItemIcon>
-                    <ViewWeekIcon />
-                </ListItemIcon>
-                <ListItemText primary="Pipelines" />
-            </ListItem>
-        </List>
+            <div className={classes.toolbarIcon}>
+                <span style={{fontStyle: 'italic'}}>Explore!</span>
+                <IconButton onClick={drawerClose}>
+                <ChevronLeftIcon />
+                </IconButton>
+            </div>
+            <Divider />
+            <List>
+                <ListItem button component={Link} to="/">
+                    <ListItemIcon>
+                        <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Dashboard" />
+                </ListItem>  
+                <ListItem component={Link} to="/todos/" button={true} >
+                    <ListItemIcon>
+                        <FormatListBulletedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Todos" />
+                </ListItem>
+                <ListItem button={true} >
+                    <ListItemIcon>
+                        <DateRangeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Calendar" />
+                </ListItem>
+                <ListItem component={Link} to="/pipelines/" button={true} >
+                    <ListItemIcon>
+                        <ViewWeekIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Pipelines" />
+                </ListItem>
+            </List>
         </Drawer>
     );
   }
