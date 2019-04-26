@@ -75,12 +75,12 @@ class App extends Component {
     const muiTheme = createMuiTheme({
       palette: {
         type: darkMode ? 'dark' : 'light',
-        primary: {
-          main: '#1565c0', // blue
-        },
-        secondary: {
-          main: '#ec407a'
-        }
+        // primary: {
+        //   main: '#1565c0', // blue
+        // },
+        // secondary: {
+        //   main: '#ec407a'
+        // }
       },
       typography: { useNextVariants: true },
     });

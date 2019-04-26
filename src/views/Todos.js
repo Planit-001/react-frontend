@@ -62,13 +62,13 @@ class Todos extends React.Component {
           alignItems="flex-start">
           <Grid item sm={12} md={5}>
             <TodoBlock 
-              title="Today's Todos"
+              title="Today's To-dos"
               todos={this.filterTodosToday(todos)} />
           </Grid>
           <Grid item sm={12} md={4}>
             <TodoBlock 
               defaultDueDate={moment().add(1, 'day')}
-              title="Tomorrow's Todos"
+              title="Tomorrow's To-do's"
               todos={this.filterTodosTomorrow(todos)} />
           </Grid>
           <Grid item sm={12} md={3}>
@@ -87,6 +87,7 @@ class Todos extends React.Component {
 
           <Grid item sm={12} md={5}>
             <TodoBlock 
+              sortByDate={true}
               title="Future Todos"
               showDate={true}
               disableCreate={true}
