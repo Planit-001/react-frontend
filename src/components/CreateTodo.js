@@ -20,13 +20,14 @@ class CreateTodo extends React.Component {
   }
 
   createTodo = (input) => {
-      const dueDate = this.props.defaultDueDate
+      const {defaultDueDate, user} = this.props
+      
       const todoBody = {
         title: input,
-        user_id: this.props.user.id
+        user_id: user.id
       }
-      if(dueDate && moment.isMoment(dueDate)){
-        todoBody.due_date = dueDate.format();
+      if(defaultDueDate && moment.isMoment(defaultDueDate)){
+        todoBody.due_date = defaultDueDate.format();
       }
       this.props.createTodo({todo: todoBody});
       this.setState({inputValue: ''});

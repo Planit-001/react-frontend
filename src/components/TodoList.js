@@ -36,6 +36,7 @@ const TodoList = memo(props => {
                     <TodoItem
                       showDate={props.showDate}
                       todo={todo}
+                      user={props.user}
                       key={`TodoItem.${idx}`}
                       divider={idx !== props.todos.length - 1}
                       deleteTodo={props.deleteTodo}

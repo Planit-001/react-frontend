@@ -8,11 +8,18 @@ import {
 import { handleErrors, buildHeaders } from './../../utils/apiHelpers';
 
 export function getTodos() {  
-  return function(dispatch){
-    return fetch("/api/v1/todos")
+  return function(dispatch, getState){
+
+    return fetch("/api/v1/todos", {
+        method: "GET",
+        headers: buildHeaders(getState().auth.token, true)
+      })
       .then(response => response.json())
       .then(json => {
         dispatch({ type: GET_TODOS, payload: json });
+      })
+      .catch(err => {
+        console.log(err)
       });
   }
 };

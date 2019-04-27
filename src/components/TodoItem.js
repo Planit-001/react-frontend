@@ -61,7 +61,11 @@ class TodoItem extends React.Component {
   }
 
   updateTodoTitle = (newTitle, id) => {
-    const todoBody = { todo: {title: newTitle}}
+    const todoBody = { 
+      todo: { 
+        title: newTitle,
+      }
+    }
     this.props.updateTodo(id, todoBody)
   }
 

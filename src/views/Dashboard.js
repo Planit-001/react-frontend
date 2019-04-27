@@ -77,7 +77,6 @@ class Dashboard extends React.Component {
                     <Grid item sm={12} md={5}>
                         <TodoBlock 
                         title="Today's To-dos"
-                        user={this.props.user}
                         todos={todayNullOrBefore(todos)} />
                     </Grid>
                 </Grid>

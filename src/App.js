@@ -64,6 +64,7 @@ class App extends Component {
     this.state = {
       open: false,
       anchorEl: null,
+      devMode: false
     }
     this.logout = this.logout.bind(this);
   }

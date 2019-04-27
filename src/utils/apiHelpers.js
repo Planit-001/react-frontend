@@ -5,7 +5,12 @@ export function handleErrors(response) {
     return response;
 }
 
-export function buildHeaders(token){
+export function buildHeaders(token, tokenOnly=false){
+    if(tokenOnly){
+        return {
+            "Authorization": token
+        }    
+    }
     return {
         "Content-Type": "application/json",
         "Authorization": token
