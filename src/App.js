@@ -211,9 +211,10 @@ const styles = theme => ({
 
 const mapStateToProps = state => {
   return { 
-      darkMode: state.uiReducer.darkMode 
+      darkMode: state.uiReducer.darkMode,
+      user: state.auth.user,
+      token: state.auth.token
   };
 };
 
-// export default withStyles(styles)(App);
 export default withStyles(styles)(connect(mapStateToProps)(App));

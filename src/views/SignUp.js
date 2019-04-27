@@ -13,6 +13,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import { createUser } from './../redux/actions/auth';
+import { connect } from 'react-redux';
+
+
 const styles = theme => ({
   main: {
     width: 'auto',
@@ -45,49 +49,82 @@ const styles = theme => ({
   },
 });
 
-function SignUp(props) {
-  const { classes } = props;
+class SignUp extends React.Component{
+  state = { 
+    email: '',
+    password: '',
+    // password_confirmation: "",
+    error: true
+  }
 
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+  onSubmit(e){
+    console.log('onsubmit')
+    e.preventDefault();
+    const body = {
+      email: this.state.email,
+      password: this.state.password
+    }
+    this.props.createUser(body)
+}
+
+
+  render(){
+
+    const { classes } = this.props;
+  
+    return (
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
             Sign up
-          </Button>
-        </form>
-      </Paper>
-    </main>
-  );
+          </Typography>
+          <form className={classes.form} onSubmit={(e) => this.onSubmit(e)}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <Input 
+                id="email" 
+                name="email" 
+                autoComplete="email" 
+                onChange={(e) => this.setState({email: e.target.value})} 
+                value={this.state.email}
+                autoFocus  />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input 
+                name="password" 
+                type="password" 
+                id="password" 
+                onChange={(e) => this.setState({password: e.target.value})} 
+                value={this.state.password}
+                autoComplete="current-password" />
+            </FormControl>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Sign up
+            </Button>
+          </form>
+        </Paper>
+      </main>
+    );
+  }
 }
 
 SignUp.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(connect(null, {createUser})(SignUp));
