@@ -5,7 +5,12 @@ import moment from 'moment';
 
 function sortTodos(todos){
   if (todos.length >= 1){
-    return todos.sort((a, b) => (a.id < b.id) ? 1 : -1)
+    return todos.sort((a, b) => {
+      if(a.done === b.done){
+        return a.id < b.id ? 1 : -1
+      }
+      return a.done ? 1 : -1 
+    })
   }else{
     return todos
   }
