@@ -57,7 +57,6 @@ class SignIn extends React.Component{
   }
 
   onSubmit(e){
-    console.log('onsubmit')
     e.preventDefault();
     const body = {
       email: this.state.email,

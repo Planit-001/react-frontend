@@ -46,7 +46,6 @@ class Dashboard extends React.Component {
     
     render(){
         const { todos, currentWeather } = this.props
-        console.log('currentWeather: ', currentWeather);
         return (
             <div>
                 <Typography variant="h2" gutterBottom component="h1">
@@ -78,6 +77,7 @@ class Dashboard extends React.Component {
                     <Grid item sm={12} md={5}>
                         <TodoBlock 
                         title="Today's To-dos"
+                        user={this.props.user}
                         todos={todayNullOrBefore(todos)} />
                     </Grid>
                 </Grid>
@@ -91,7 +91,8 @@ const mapStateToProps = state => {
     return { 
         todos: state.todoReducer.todos,
         darkMode: state.uiReducer.darkMode,
-        currentWeather: state.externalReducer.currentWeather
+        currentWeather: state.externalReducer.currentWeather,
+        user: state.auth.user,
     };
 };
 

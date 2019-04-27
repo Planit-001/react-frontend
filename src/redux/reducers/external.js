@@ -17,7 +17,6 @@ function externalReducer(state = initialState, action) {
   }
 
   if (action.type === GET_WEATHER_5_DAYS) {
-        console.log('action: ', action)
         return Object.assign({}, state, {
             weather5Days: state.weather5Days.concat(action.payload)
         })

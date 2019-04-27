@@ -3,5 +3,11 @@ export function handleErrors(response) {
         throw Error(response.statusText);
     }
     return response;
-  }
-  
+}
+
+export function buildHeaders(token){
+    return {
+        "Content-Type": "application/json",
+        "Authorization": token
+    }
+}

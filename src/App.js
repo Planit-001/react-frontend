@@ -69,7 +69,6 @@ class App extends Component {
   }
 
   logout(){
-    console.log('logout')
     this.props.logoutUser();
   }
 
