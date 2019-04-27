@@ -22,8 +22,11 @@ class Header extends Component {
       drawerOpen, 
       anchorEl, 
       handleCalMenuClick, 
-      handleCalMenuClose 
+      handleCalMenuClose,
+      auth
     } = this.props;
+
+    console.log('auth: ', auth)
     
     return (
         <AppBar
@@ -64,12 +67,15 @@ class Header extends Component {
               <MenuItem component={Link} onClick={handleCalMenuClose} to="/calendar-toast">Toast Calendar</MenuItem>
               <MenuItem component={Link} onClick={handleCalMenuClose} to="/calendar-big">Big Calendar</MenuItem>
             </Menu>
-            <Button className={classes.toolbarBtn} component={Link} to="/signin/" color="inherit" variant="outlined">
+            {!auth && <Button className={classes.toolbarBtn} component={Link} to="/signin/" color="inherit" variant="outlined">
               Sign In
-            </Button>
-            <Button component={Link} to="/signup/" color="inherit" variant="outlined">
+            </Button>}
+            {!auth && <Button component={Link} to="/signup/" color="inherit" variant="outlined">
               Sign Up
-            </Button>
+            </Button>}
+            {auth && <Button onClick={this.props.logout} color="inherit" variant="outlined">
+              Sign Out
+            </Button>}
           </Toolbar>
         </AppBar>
     );

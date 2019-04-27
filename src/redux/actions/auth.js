@@ -41,16 +41,6 @@ export function signInUser(payload){
     }
 }
 
-export const setUser = user => ({
-    type: SET_USER,
-    user
-})
-
 export const logoutUser = () => ({
     type: LOGOUT_USER,
-})
-
-export const setToken = token => ({
-    type: SET_TOKEN,
-    payload: token
 });

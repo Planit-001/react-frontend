@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect  } from "react-router-dom";
 import { withStyles } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from "react-redux";
@@ -18,6 +18,8 @@ import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import Todos from './views/Todos'
 import Typography from '@material-ui/core/Typography';
+import { logoutUser} from './redux/actions/auth';
+
 
 function BigCalendar() {
   return <div>
@@ -44,12 +46,35 @@ function ToastCalendar(){
   </div>
 }
 
+const PrivateRoute = ({ component: Component, auth, ...rest}) => (
+  <Route {...rest} render={(props) => (
+    auth === true ? <Component {...props} /> : <Redirect to={{
+      pathname: '/signin',
+      state: {from: props.location}
+    }} />
+  )} />
+);
+
+
 
 
 class App extends Component {
-  state = {
-    open: false,
-    anchorEl: null
+  constructor(props){
+    super(props)
+    this.state = {
+      open: false,
+      anchorEl: null,
+    }
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(){
+    console.log('logout')
+    this.props.logoutUser();
+  }
+
+  isAuthenticated(){
+    return !!this.props.user && !!this.props.token;
   }
 
   handleDrawerOpen = () => {
@@ -69,7 +94,8 @@ class App extends Component {
   }
 
   render() {
-    const { classes, darkMode } = this.props;
+    const { classes, darkMode, user } = this.props;
+    const isAuthenticated =  this.isAuthenticated();
     const { anchorEl } = this.state;
 
     const muiTheme = createMuiTheme({
@@ -85,6 +111,8 @@ class App extends Component {
       typography: { useNextVariants: true },
     });
 
+    console.log('user: ', this.props.user)
+
     return (
       <div className={classes.root}>
       <MuiThemeProvider theme={muiTheme}>
@@ -95,6 +123,8 @@ class App extends Component {
             anchorEl={anchorEl}
             classes={classes}
             open={this.state.open}
+            auth={isAuthenticated}
+            logout={this.logout}
             drawerOpen={this.handleDrawerOpen}
             drawerClose={this.handleDrawerClose}
             handleCalMenuClose={this.handleCalMenuClose}
@@ -108,7 +138,8 @@ class App extends Component {
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
             <Route path="/" exact component={Dashboard} />
-            <Route path="/todos/" component={Todos} />
+            {/* <Route path="/todos/" component={Todos} /> */}
+            <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
             <Route path="/pipelines/" component={PipelineBuilder} />
@@ -217,4 +248,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withStyles(styles)(connect(mapStateToProps)(App));
+export default withStyles(styles)(connect(mapStateToProps, {logoutUser})(App));
