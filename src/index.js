@@ -6,6 +6,11 @@ import * as serviceWorker from './serviceWorker';
 
 import { Provider } from "react-redux";
 import store from "./redux/store/index";
+import { saveState } from './utils/localStorage';
+import throttle from 'lodash/throttle';
+store.subscribe(throttle(() => {
+    saveState(store.getState());
+  }, 1000));
 
 ReactDOM.render(<Provider store={store}>
     <App />
