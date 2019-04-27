@@ -69,4 +69,4 @@ class CreateTodo extends React.Component {
 
 
 
-export default connect(null, { createTodo, })(CreateTodo);
+export default connect(null, { createTodo })(CreateTodo);

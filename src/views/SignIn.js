@@ -56,6 +56,13 @@ class SignIn extends React.Component{
     error: true
   }
 
+
+  componentDidUpdate(){
+    if(this.props.user){
+      this.props.history.push('/');
+    }
+  }
+
   onSubmit(e){
     e.preventDefault();
     const body = {
@@ -118,8 +125,15 @@ class SignIn extends React.Component{
   }
 }
 
+
+const mapStateToProps = state => {
+  return { 
+      user: state.auth.user,
+  };
+};
+
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(connect(null, {signInUser} )(SignIn));
+export default withStyles(styles)(connect(mapStateToProps, {signInUser} )(SignIn));

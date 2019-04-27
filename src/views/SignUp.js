@@ -56,6 +56,12 @@ class SignUp extends React.Component{
     error: true
   }
 
+  componentDidUpdate(){
+    if(this.props.user){
+      this.props.history.push('/');
+    }
+  }
+
   onSubmit(e){
     e.preventDefault();
     const body = {
@@ -63,7 +69,7 @@ class SignUp extends React.Component{
       password: this.state.password
     }
     this.props.createUser(body)
-}
+  }
 
 
   render(){
@@ -123,4 +129,11 @@ SignUp.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(connect(null, {createUser})(SignUp));
+const mapStateToProps = state => {
+  return { 
+      user: state.auth.user,
+  };
+};
+
+
+export default withStyles(styles)(connect(mapStateToProps, {createUser})(SignUp));
