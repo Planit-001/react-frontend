@@ -8,7 +8,6 @@ import {
 import {handleErrors} from './../../utils/apiHelpers';
 
 export function createUser(payload){
-    console.log('create user: ', payload)
     return function(dispatch){
         return fetch("/api/v1/users", {
             method: "POST",
@@ -21,6 +20,23 @@ export function createUser(payload){
         .then(response => response.json())
         .then(json => {
             dispatch({type: CREATE_USER, payload: json});
+        });
+    }
+}
+
+export function signInUser(payload){
+    return function(dispatch){
+        return fetch("/api/v1/auth/login", {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json",        
+            }
+        })
+        .then(handleErrors)
+        .then(response => response.json())
+        .then(json => {
+            dispatch({type: SET_USER, payload: json});
         });
     }
 }

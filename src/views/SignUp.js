@@ -53,7 +53,6 @@ class SignUp extends React.Component{
   state = { 
     email: '',
     password: '',
-    // password_confirmation: "",
     error: true
   }
 
@@ -105,15 +104,13 @@ class SignUp extends React.Component{
             </FormControl>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+              label="Remember me"/>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
-            >
+              className={classes.submit}>
               Sign up
             </Button>
           </form>
