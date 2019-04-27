@@ -1,6 +1,6 @@
 Next steps:
-    - add toasts
     - incorporate 'sign in'
+    - add toasts
 
 Future steps:
     - preserve redux state from refresh

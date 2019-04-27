@@ -13,7 +13,6 @@ function sortTodos(todos){
 
 function sortByDate(todos){
   if (todos.length >= 1){
-    // return todos.sort((a, b) => (a.id < b.id) ? 1 : -1)
     return todos.sort((a,b) => moment(a.due_date).format('YYYYMMDD') - moment(b.due_date).format('YYYYMMDD'))
   }else{
     return todos

@@ -30,7 +30,7 @@ class TodoBlock extends React.Component {
             {title}
         </Typography>
         {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} />} 
-        <TodoList showDate={this.props.showDate} sortByDate={true} todos={todos} />
+        <TodoList showDate={this.props.showDate} sortByDate={this.props.sortByDate} todos={todos} />
       </div>
     );
   }
