@@ -25,8 +25,6 @@ class Header extends Component {
       handleCalMenuClose,
       auth
     } = this.props;
-
-    console.log('auth: ', auth)
     
     return (
         <AppBar

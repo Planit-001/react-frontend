@@ -2,7 +2,6 @@ import {
     SET_USER,
     LOGOUT_USER,
     CREATE_USER,
-    SET_TOKEN,
 } from './../constants/actionTypes';
   
 import {handleErrors} from './../../utils/apiHelpers';

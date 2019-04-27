@@ -111,8 +111,6 @@ class App extends Component {
       typography: { useNextVariants: true },
     });
 
-    console.log('user: ', this.props.user)
-
     return (
       <div className={classes.root}>
       <MuiThemeProvider theme={muiTheme}>
@@ -137,7 +135,7 @@ class App extends Component {
 
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
-            <Route path="/" exact component={Dashboard} />
+            <PrivateRoute path="/" exact component={Dashboard} auth={isAuthenticated} />
             {/* <Route path="/todos/" component={Todos} /> */}
             <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
             <Route path="/signup/" component={SignUp} />
