@@ -7,6 +7,8 @@ import {
 
 import { handleErrors, buildHeaders } from './../../utils/apiHelpers';
 
+import { toastEvent } from './../../utils/uiFuncs';
+
 export function getTodos() {  
   return function(dispatch, getState){
 
@@ -37,6 +39,7 @@ export function createTodo(payload) {
     .then(response => response.json())
     .then(json => {
       dispatch({ type: CREATE_TODO, payload: json })
+      toastEvent("To-do Created!")
     })
     .catch(err => {
       console.log(err)
@@ -55,6 +58,7 @@ export function updateTodo(id, payload){
     .then(response => response.json())
     .then(json => {
       dispatch({ type: UPDATE_TODO, payload: json})
+      toastEvent("To-do Updated!")
     })
     .catch(err => {
       console.log(err)
@@ -73,6 +77,7 @@ export function deleteTodo(id) {
     .then(handleErrors)
     .then(response => {
         dispatch({ type: DELETE_TODO, payload: id })
+        toastEvent("To-do Deleted!")
     })
     .catch(err => {
       console.log(err)

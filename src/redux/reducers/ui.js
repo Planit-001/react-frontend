@@ -1,7 +1,13 @@
-import { DARK_MODE } from "../constants/actionTypes";
+import { 
+    DARK_MODE,
+    
+} from "../constants/actionTypes";
 
 const initialState = {
-  darkMode: false
+  darkMode: false,
+  showToast: false,
+  toastMsg: '',
+  toastType: null,
 };
 
 function uiReducer(state = initialState, action){

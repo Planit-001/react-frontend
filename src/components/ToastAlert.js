@@ -17,41 +17,38 @@ class ToastAlert extends React.Component {
         super(props)
         this.state ={
             open: false,
+            toastMsg: ''
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.sprayMsg = this.sprayMsg.bind(this);
     }
 
   componentDidMount(){
-
-    //   document.addEventListener('showToast', this.handleClick);
-    //   document.addEventListener('hideToast', this.handleClose);
-      document.addEventListener('showToast', this.sprayMsg);
+      window.addEventListener('hideToast', this.handleClose);
+      window.addEventListener('showToast', this.handleClick);
   }
 
   componentWillUnmount(){
-    document.removeEventListener('showToast', this.handleClick);
-    document.removeEventListener('hideToast', this.handleClose);
+    window.removeEventListener('showToast', this.handleClick);
+    window.removeEventListener('hideToast', this.handleClose);
   }
 
 
-  sprayMsg(){
-      console.log('Event listener');
-  }
-
-  handleClick = () => {
-      console.log('event')
-    this.setState({ open: true });
+  handleClick = (e) => {
+    this.setState({ 
+        open: true,
+        toastMsg: e.detail
+    });
   };
 
   handleClose = (event, reason) => {
-    console.log('event close')
     if (reason === 'clickaway') {
       return;
     }
-
-    this.setState({ open: false });
+    this.setState({ 
+        open: false,
+        toastMsg: '',
+    });
   };
 
   render() {
@@ -69,7 +66,7 @@ class ToastAlert extends React.Component {
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">Note archived</span>}
+          message={<span id="message-id">{this.state.toastMsg}</span>}
           action={[
             <IconButton
               key="close"
