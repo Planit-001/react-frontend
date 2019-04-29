@@ -1,5 +1,4 @@
 Next steps:
-    - nest todos under user
     - add toasts
     - add toasts for redux responses (event listener ?)
 

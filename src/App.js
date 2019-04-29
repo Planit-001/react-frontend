@@ -16,6 +16,7 @@ import Sidebar from './components/Sidebar';
 import PipelineBuilder from './views/PipelineBuilder';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
+import ToastAlert from './components/ToastAlert';
 import Todos from './views/Todos'
 import Typography from '@material-ui/core/Typography';
 import { logoutUser} from './redux/actions/auth';
@@ -134,6 +135,7 @@ class App extends Component {
             drawerClose={this.handleDrawerClose} />
 
           <main className={classes.content}>
+            <ToastAlert />
             <div className={classes.appBarSpacer} />
             <PrivateRoute path="/" exact component={Dashboard} auth={isAuthenticated} />
             {/* <Route path="/todos/" component={Todos} /> */}

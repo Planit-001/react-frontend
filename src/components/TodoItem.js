@@ -168,15 +168,15 @@ class TodoItem extends React.Component {
               disableRipple />
           {this.state.editable ? (
             <ClickAwayListener onClickAway={this.handleClickAway}>
-            <ListItem>
-              <TextField
-                label="Update Todo"
-                // className={classes.textField}
-                onKeyPress={this.onEnter}
-                margin="dense"
-                value={this.state.newTitle}
-                onChange={(e) => this.setState({newTitle: e.target.value})}/>
-                </ListItem>
+              {/* <ListItem> */}
+                <TextField
+                  label="Update Todo"
+                  // className={classes.textField}
+                  onKeyPress={this.onEnter}
+                  margin="dense"
+                  value={this.state.newTitle}
+                  onChange={(e) => this.setState({newTitle: e.target.value})}/>
+              {/* </ListItem> */}
             </ClickAwayListener>
           ):(
             <ListItemText
