@@ -23,6 +23,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import { ding } from './../utils/uiFuncs'
+
 class TodoItem extends React.Component {
 
   state = {
@@ -51,7 +53,9 @@ class TodoItem extends React.Component {
 
   updateTodoDone = (e, id) => {
     if(e.target.checked !== undefined){
+
       this.updateTodo({done: e.target.checked}, id)
+      ding();
     }
   }
 

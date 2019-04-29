@@ -40,7 +40,7 @@ export function createTodo(payload) {
     .then(json => {
       dispatch({ type: CREATE_TODO, payload: json })
       ding();
-      toastEvent("To-do Created!")
+      toastEvent("To-do created!")
     })
     .catch(err => {
       console.log(err)
@@ -59,7 +59,7 @@ export function updateTodo(id, payload){
     .then(response => response.json())
     .then(json => {
       dispatch({ type: UPDATE_TODO, payload: json})
-      toastEvent("To-do Updated!")
+      toastEvent("To-do updated!")
     })
     .catch(err => {
       console.log(err)
@@ -78,7 +78,7 @@ export function deleteTodo(id) {
     .then(handleErrors)
     .then(response => {
         dispatch({ type: DELETE_TODO, payload: id })
-        toastEvent("To-do Deleted!")
+        toastEvent("To-do deleted!")
     })
     .catch(err => {
       console.log(err)
