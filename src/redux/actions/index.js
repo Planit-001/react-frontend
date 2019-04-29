@@ -7,7 +7,7 @@ import {
 
 import { handleErrors, buildHeaders } from './../../utils/apiHelpers';
 
-import { toastEvent } from './../../utils/uiFuncs';
+import { toastEvent, ding } from './../../utils/uiFuncs';
 
 export function getTodos() {  
   return function(dispatch, getState){
@@ -39,6 +39,7 @@ export function createTodo(payload) {
     .then(response => response.json())
     .then(json => {
       dispatch({ type: CREATE_TODO, payload: json })
+      ding();
       toastEvent("To-do Created!")
     })
     .catch(err => {
