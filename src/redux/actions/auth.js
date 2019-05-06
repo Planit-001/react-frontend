@@ -4,11 +4,11 @@ import {
     CREATE_USER,
 } from './../constants/actionTypes';
   
-import {handleErrors} from './../../utils/apiHelpers';
+import {handleErrors, apiBase} from './../../utils/apiHelpers';
 
 export function createUser(payload){
     return function(dispatch){
-        return fetch("/api/v1/users", {
+        return fetch(`${apiBase}/api/v1/users`, {
             method: "POST",
             body: JSON.stringify(payload),
             headers: {
@@ -25,7 +25,7 @@ export function createUser(payload){
 
 export function signInUser(payload){
     return function(dispatch){
-        return fetch("/api/v1/auth/login", {
+        return fetch(`${apiBase}/api/v1/auth/login`, {
             method: "POST",
             body: JSON.stringify(payload),
             headers: {

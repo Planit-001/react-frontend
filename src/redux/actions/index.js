@@ -5,14 +5,14 @@ import {
   DELETE_TODO 
 } from "../constants/actionTypes";
 
-import { handleErrors, buildHeaders } from './../../utils/apiHelpers';
+import { handleErrors, buildHeaders, apiBase } from './../../utils/apiHelpers';
 
 import { toastEvent, ding } from './../../utils/uiFuncs';
 
 export function getTodos() {  
   return function(dispatch, getState){
 
-    return fetch("/api/v1/todos", {
+    return fetch(`${apiBase}/api/v1/todos`, {
         method: "GET",
         headers: buildHeaders(getState().auth.token, true)
       })
@@ -30,7 +30,7 @@ export function createTodo(payload) {
   return function(dispatch, getState){
 
     const headers = buildHeaders(getState().auth.token)
-    return fetch("/api/v1/todos", {
+    return fetch(`${apiBase}/api/v1/todos`, {
       method: "POST",
       body: JSON.stringify(payload),
       headers
@@ -50,7 +50,7 @@ export function createTodo(payload) {
 
 export function updateTodo(id, payload){
   return function(dispatch, getState){
-    return fetch(`/api/v1/todos/${id}`, {
+    return fetch(`${apiBase}/api/v1/todos/${id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
       headers: buildHeaders(getState().auth.token)
@@ -69,7 +69,7 @@ export function updateTodo(id, payload){
 
 export function deleteTodo(id) {
   return function(dispatch, getState){
-    return fetch(`/api/v1/todos/${id}`, {
+    return fetch(`${apiBase}/api/v1/todos/${id}`, {
       method: "DELETE",
       headers: {
         "Authorization": getState().auth.token
