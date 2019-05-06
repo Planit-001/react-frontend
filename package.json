@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://134.209.153.124",
   "dependencies": {
     "@date-io/date-fns": "^1.2.0",
     "@date-io/moment": "^1.2.0",
