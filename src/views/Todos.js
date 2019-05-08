@@ -28,9 +28,9 @@ class Todos extends React.Component {
   }
 
   componentDidMount(){
-    if (this.props.todos && this.props.todos.length >=1 ){
-      return
-    }
+    // if (this.props.todos && this.props.todos.length >=1 ){
+    //   return
+    // }
     this.props.getTodos();
   }
 
@@ -60,32 +60,24 @@ class Todos extends React.Component {
           direction="row"
           spacing={32}
           alignItems="flex-start">
-          <Grid item sm={12} md={5}>
+          <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               title="Today's To-dos"
               todos={this.filterTodosToday(todos)} />
           </Grid>
-          <Grid item sm={12} md={4}>
+          <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(1, 'day')}
               title="Tomorrow's To-do's"
               todos={this.filterTodosTomorrow(todos)} />
           </Grid>
-          <Grid item sm={12} md={3}>
+          <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(2, 'day')}
               title="The Day After"
               todos={dayAfterTodos(todos)} />
           </Grid>
-        </Grid>
-        <div className="spacer"></div>
-
-        <Grid
-          container
-          direction="row"
-          spacing={40}>
-
-          <Grid item sm={12} md={5}>
+          <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               sortByDate={true}
               title="Future Todos"
@@ -93,7 +85,13 @@ class Todos extends React.Component {
               disableCreate={true}
               todos={futureTodos(todos)} />
           </Grid>
+          <Grid item sm={12} md={6} lg={4}>
+            <Typography variant="h5" align="center" gutterBottom component="h4">
+              Todo Recent Archives
+            </Typography>
+          </Grid>
         </Grid>
+        <div className="spacer"></div>
       </div>
     );
   }

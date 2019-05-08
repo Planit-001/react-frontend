@@ -22,9 +22,9 @@ class Dashboard extends React.Component {
         // this.props.getWeatherCurrent()
         // this.geoLocate();
         
-        if (this.props.todos && this.props.todos.length >=1 ){
-            return
-        }
+        // if (this.props.todos && this.props.todos.length >=1 ){
+        //     return
+        // }
         this.props.getTodos();
     }
 

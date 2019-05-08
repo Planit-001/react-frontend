@@ -9,25 +9,43 @@ import { handleErrors, buildHeaders, apiBase } from './../../utils/apiHelpers';
 
 import { toastEvent, ding } from './../../utils/uiFuncs';
 
+
+function shouldFetchTodos(state){ 
+  const todoReducer = state.todoReducer
+  if(!todoReducer){
+    return true
+  } else if (todoReducer.isFetching){
+    return false; 
+  } else if ((Date.now() - todoReducer.lastUpdated) >= 600000){
+    return true
+  } else{
+    return todoReducer.didInvalidate;
+  }
+}
+
 export function getTodos() {  
   return function(dispatch, getState){
-
-    return fetch(`${apiBase}/api/v1/todos`, {
-        method: "GET",
-        headers: buildHeaders(getState().auth.token, true)
-      })
-      .then(response => response.json())
-      .then(json => {
-        dispatch({ 
-          type: GET_TODOS, 
-          payload: json,
-          receivedAt: Date.now()
+    if(shouldFetchTodos(getState())){
+      return fetch(`${apiBase}/api/v1/todos`, {
+          method: "GET",
+          headers: buildHeaders(getState().auth.token, true)
+        })
+        .then(response => response.json())
+        .then(json => {
+          dispatch({ 
+            type: GET_TODOS, 
+            payload: json,
+            receivedAt: Date.now()
+          });
+        })
+        .catch(err => {
+          console.log(err)
         });
-      })
-      .catch(err => {
-        console.log(err)
-      });
+    }else{
+      Promise.resolve();
+    }
   }
+
 };
 
 export function createTodo(payload) {

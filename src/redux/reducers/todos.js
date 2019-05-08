@@ -2,6 +2,7 @@ import { GET_TODOS, CREATE_TODO, UPDATE_TODO, DELETE_TODO } from "../constants/a
 
 const initialState = {
   todos: [],
+  isFetching: false,
   didInvalidate: false,
   lastUpdated: null
 };
