@@ -1,10 +1,8 @@
 Next steps:
-    - deploy
-    - add satisfying bell noise when checking todo
+    - expire redux cache
    
 
 Future steps:
-    - refactor weather widget
     - code cleanup
     - error messages for api failing
 

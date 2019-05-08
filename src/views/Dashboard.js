@@ -20,7 +20,7 @@ import {todayNullOrBefore} from './../utils/todoFuncs'
 class Dashboard extends React.Component {
     componentDidMount(){
         // this.props.getWeatherCurrent()
-        this.geoLocate();
+        // this.geoLocate();
         
         if (this.props.todos && this.props.todos.length >=1 ){
             return
