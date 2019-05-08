@@ -10,10 +10,16 @@ const initialState = {
 function todoReducer(state = initialState, action) {
 
   if (action.type === GET_TODOS){
+    // return Object.assign({}, state, {
+    //   todos: state.todos.concat(action.payload),
+    //   lastUpdated: action.receivedAt
+    // });
     return Object.assign({}, state, {
-      todos: state.todos.concat(action.payload),
-      lastUpdated: action.receivedAt
-    })
+        isFetching: false,
+        didInvalidate: false,
+        todos: action.payload,
+        lastUpdated: action.receivedAt
+      });
   }
 
   if (action.type === CREATE_TODO) {
