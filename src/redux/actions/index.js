@@ -18,7 +18,11 @@ export function getTodos() {
       })
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: GET_TODOS, payload: json });
+        dispatch({ 
+          type: GET_TODOS, 
+          payload: json,
+          receivedAt: Date.now()
+        });
       })
       .catch(err => {
         console.log(err)

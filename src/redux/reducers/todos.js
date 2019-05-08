@@ -1,14 +1,17 @@
 import { GET_TODOS, CREATE_TODO, UPDATE_TODO, DELETE_TODO } from "../constants/actionTypes";
 
 const initialState = {
-  todos: []
+  todos: [],
+  didInvalidate: false,
+  lastUpdated: null
 };
 
 function todoReducer(state = initialState, action) {
 
   if (action.type === GET_TODOS){
     return Object.assign({}, state, {
-      todos: state.todos.concat(action.payload)
+      todos: state.todos.concat(action.payload),
+      lastUpdated: action.receivedAt
     })
   }
 
