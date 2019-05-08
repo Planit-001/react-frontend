@@ -12,7 +12,8 @@ import Switch from '@material-ui/core/Switch';
 import TodoBlock from './../components/TodoBlock';
 import Typography from '@material-ui/core/Typography';
 
-import WeatherCard from './../components/widgets/WeatherCard';
+// import WeatherCard from './../components/widgets/WeatherCard';
+import WindyWeatherCard from './../components/widgets/WindyWeatherCard';
 
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
@@ -68,12 +69,15 @@ class Dashboard extends React.Component {
                     justify="space-around"
                     spacing={32}
                     alignItems="flex-start">
-                    {currentWeather && !_.isEmpty(currentWeather) && <Grid item sm={12} md={7} lg={6}>
+                    {/* {currentWeather && !_.isEmpty(currentWeather) && <Grid item sm={12} md={7} lg={6}>
                         <Typography variant="h5" align="center" gutterBottom component="h4">
                             Today's Weather
                         </Typography>
                         <WeatherCard data={currentWeather}/>
-                    </Grid>}
+                    </Grid>} */}
+                    <Grid  item sm={12} md={7} lg={6}>
+                        <WindyWeatherCard />
+                    </Grid>
                     <Grid item sm={12} md={5}>
                         <TodoBlock 
                         title="Today's To-dos"
