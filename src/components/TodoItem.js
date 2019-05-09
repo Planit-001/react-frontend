@@ -23,7 +23,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { ding } from './../utils/uiFuncs'
+import { ding } from './../utils/uiFuncs';
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = {
+  root: {
+    paddingRight: '50px'
+  },
+};
 
 class TodoItem extends React.Component {
 
@@ -117,7 +125,7 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    const { todo } = this.props;
+    const { todo, classes } = this.props;
     const { selectedDate } = this.state;
 
     return (
@@ -187,6 +195,10 @@ class TodoItem extends React.Component {
                 className={todo.done ? 'checkedTodo' : ''}
                 onClick={this.onTodoClick}
                 primary={todo.title}
+                classes={{
+                  root: classes.root,
+                  primary: classes.primary
+                }}
                 secondary={this.props.showDate ? readableDate(todo.due_date) : null} />
           )}
           <ListItemSecondaryAction>
@@ -207,4 +219,4 @@ class TodoItem extends React.Component {
 }
 
 
-export default connect(null, {updateTodo, deleteTodo})(TodoItem);
+export default withStyles(styles)(connect(null, {updateTodo, deleteTodo})(TodoItem));
