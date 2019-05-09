@@ -30,6 +30,7 @@ export function getTodos() {
           method: "GET",
           headers: buildHeaders(getState().auth.token, true)
         })
+        .then(handleErrors)
         .then(response => response.json())
         .then(json => {
           dispatch({ 

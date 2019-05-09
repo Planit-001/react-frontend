@@ -22,7 +22,7 @@ export function dayAfter(dateString){
 }
 
 export function future(dateString){
-    return moment(dateString).diff(moment(), 'days') > 2
+    return moment(dateString).diff(moment().startOf('day'), 'days') > 2
 }
 
 
