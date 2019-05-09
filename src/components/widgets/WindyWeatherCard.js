@@ -6,7 +6,11 @@ import React, {Component} from 'react';
 import moment from 'moment';
 
 class WindyWeatherCard extends Component {
- 
+    
+    shouldComponentUpdate() {
+      return false;
+    }
+
     render() {
       return (
           <Card>

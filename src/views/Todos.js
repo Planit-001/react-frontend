@@ -52,7 +52,7 @@ class Todos extends React.Component {
     return (
       <div>
         <Typography variant="h3" gutterBottom component="h1">
-          Daily Todos
+          Daily To-do's
         </Typography>
         <div className="spacer"></div>
         <Grid
@@ -62,7 +62,7 @@ class Todos extends React.Component {
           alignItems="flex-start">
           <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
-              title="Today's To-dos"
+              title="Today's To-do's"
               todos={this.filterTodosToday(todos)} />
           </Grid>
           <Grid item sm={12} md={6} lg={4}>
@@ -80,7 +80,7 @@ class Todos extends React.Component {
           <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               sortByDate={true}
-              title="Future Todos"
+              title="Future To-do's"
               showDate={true}
               disableCreate={true}
               todos={futureTodos(todos)} />
