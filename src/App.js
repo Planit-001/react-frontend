@@ -95,7 +95,7 @@ class App extends Component {
   }
 
   render() {
-    const { classes, darkMode, user } = this.props;
+    const { classes, darkMode } = this.props;
     const isAuthenticated =  this.isAuthenticated();
     const { anchorEl } = this.state;
 
@@ -103,7 +103,7 @@ class App extends Component {
       palette: {
         type: darkMode ? 'dark' : 'light',
         // primary: {
-        //   main: '#1565c0', // blue
+        //   main: blue
         // },
         // secondary: {
         //   main: '#ec407a'

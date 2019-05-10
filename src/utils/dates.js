@@ -129,6 +129,8 @@ let dates = {
         div *= 60
       case 'seconds':
         div *= 1000
+      default:
+        div *= 7
     }
 
     return ms / div
