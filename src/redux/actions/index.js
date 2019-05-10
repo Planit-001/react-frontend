@@ -1,5 +1,6 @@
 import { 
   GET_TODOS, 
+  GET_TODOS_ARCHIVED,
   CREATE_TODO, 
   UPDATE_TODO,
   DELETE_TODO 
@@ -20,6 +21,19 @@ function shouldFetchTodos(state){
     return true
   } else{
     return todoReducer.didInvalidate;
+  }
+}
+
+function shouldFetchArchived(state){
+  const todoReducer = state.todoReducer
+  if(!todoReducer || !todoReducer.todosArchived || !todoReducer.todosArchived.items){
+    return true
+  } else if (todoReducer.todosArchived.isFetching){
+    return false; 
+  } else if ((Date.now() - todoReducer.todosArchived.lastUpdated) >= 600000){
+    return true
+  } else{
+    return todoReducer.todosArchived.didInvalidate;
   }
 }
 
@@ -46,8 +60,34 @@ export function getTodos() {
       Promise.resolve();
     }
   }
-
 };
+
+export function getArchived() {  
+  return function(dispatch, getState){
+    if(shouldFetchArchived(getState())){
+      return fetch(`${apiBase}/api/v1/todos/last_archived`, {
+          method: "GET",
+          headers: buildHeaders(getState().auth.token, true)
+        })
+        .then(handleErrors)
+        .then(response => response.json())
+        .then(json => {
+          console.log('json: ', json)
+          dispatch({ 
+            type: GET_TODOS_ARCHIVED,
+            payload: json,
+            receivedAt: Date.now()
+          });
+        })
+        .catch(err => {
+          console.log(err)
+        });
+    }else{
+      Promise.resolve();
+    }
+  }
+};
+
 
 export function createTodo(payload) {
   return function(dispatch, getState){

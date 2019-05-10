@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { getTodos } from "../redux/actions/index";
+import { getTodos, getArchived } from "../redux/actions/index";
 import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -32,6 +32,7 @@ class Todos extends React.Component {
     //   return
     // }
     this.props.getTodos();
+    this.props.getArchived();
   }
 
   sameYear(date){
@@ -102,7 +103,10 @@ Todos.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { todos: state.todoReducer.todos };
+  return { 
+    todos: state.todoReducer.todos,
+    todosArchived: state.todoReducer.todosArchived.items
+  };
 };
 
-export default connect(mapStateToProps, { getTodos })(withStyles(styles)(Todos));
+export default connect(mapStateToProps, { getTodos, getArchived })(withStyles(styles)(Todos));

@@ -7,7 +7,7 @@ const appID = "0cd42bcc4f754e0ef7a6ad882863c51c"
 export function getWeatherCurrent(lat, long) {
 
     const url = `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${long}&APPID=${appID}&units=metric&cnt=8`
-    const daily = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${appID}&units=metric`
+    // const daily = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${appID}&units=metric`
     return function(dispatch){
         return fetch(url)
             .then(response => response.json())

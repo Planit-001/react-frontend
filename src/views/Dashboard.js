@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from "react-redux";
-import _ from 'lodash';
 import { getTodos } from "../redux/actions/index";
 import { getWeatherCurrent } from "../redux/actions/external";
 
@@ -46,7 +45,7 @@ class Dashboard extends React.Component {
     }
     
     render(){
-        const { todos, currentWeather } = this.props
+        const { todos } = this.props
         return (
             <div>
                 <Typography variant="h2" gutterBottom component="h1">
