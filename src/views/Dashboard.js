@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { getTodos } from "../redux/actions/index";
+import { getTodos } from "../redux/actions/todo";
 import { getWeatherCurrent } from "../redux/actions/external";
 
 import { changeDarkMode } from "../redux/actions/ui";
@@ -91,9 +91,9 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => {
     return { 
-        todos: state.todoReducer.todos,
-        darkMode: state.uiReducer.darkMode,
-        currentWeather: state.externalReducer.currentWeather,
+        todos: state.todo.todos,
+        darkMode: state.ui.darkMode,
+        currentWeather: state.external.currentWeather,
         user: state.auth.user,
     };
 };

@@ -6,9 +6,9 @@ import {
   DELETE_TODO 
 } from "../constants/actionTypes";
 
-import { handleErrors, buildHeaders, apiBase } from './../../utils/apiHelpers';
+import { handleErrors, buildHeaders, apiBase } from '../../utils/apiHelpers';
 
-import { toastEvent, ding } from './../../utils/uiFuncs';
+import { toastEvent, ding } from '../../utils/uiFuncs';
 
 
 function shouldFetchTodos(state){ 
@@ -72,7 +72,6 @@ export function getArchived() {
         .then(handleErrors)
         .then(response => response.json())
         .then(json => {
-          console.log('json: ', json)
           dispatch({ 
             type: GET_TODOS_ARCHIVED,
             payload: json,

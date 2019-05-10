@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField, Paper, Button, Grid } from "@material-ui/core";
-import { createTodo } from "../redux/actions/index";
+import { createTodo } from "../redux/actions/todo";
 import { connect } from "react-redux";
 import moment from 'moment';
 

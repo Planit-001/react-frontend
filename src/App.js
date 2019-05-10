@@ -242,7 +242,7 @@ const styles = theme => ({
 
 const mapStateToProps = state => {
   return { 
-      darkMode: state.uiReducer.darkMode,
+      darkMode: state.ui.darkMode,
       user: state.auth.user,
       token: state.auth.token
   };

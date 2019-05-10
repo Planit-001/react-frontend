@@ -2,7 +2,7 @@ import React from 'react';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import { connect } from "react-redux";
-import { updateTodo, deleteTodo } from "../redux/actions/index";
+import { updateTodo, deleteTodo } from "../redux/actions/todo";
 import moment from 'moment';
 import {readableDate} from './../utils/dateFuncs';
 

@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux'
 import uiReducer from './ui';
-import todoReducer from './todos';
+import todo from './todos';
 import externalReducer from './external';
 import authReducer from './auth';
 
 const rootReducer = combineReducers({
-  externalReducer,
-  todoReducer,
-  uiReducer,
+  external: externalReducer,
+  todo,
+  ui: uiReducer,
   auth: authReducer
 })
 

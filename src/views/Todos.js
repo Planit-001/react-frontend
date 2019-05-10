@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { getTodos, getArchived } from "../redux/actions/index";
+import { getTodos, getArchived } from "../redux/actions/todo";
 import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -104,8 +104,8 @@ Todos.propTypes = {
 
 const mapStateToProps = state => {
   return { 
-    todos: state.todoReducer.todos,
-    todosArchived: state.todoReducer.todosArchived.items
+    todos: state.todo.todos,
+    todosArchived: state.todo.todosArchived.items
   };
 };
 

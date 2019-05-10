@@ -5,7 +5,7 @@ import CreateTodo from './../components/CreateTodo';
 import TodoList from './../components/TodoList';
 
 import { connect } from "react-redux";
-import { updateTodo, deleteTodo } from "../redux/actions/index";
+import { updateTodo, deleteTodo } from "../redux/actions/todo";
 
 class TodoBlock extends React.Component {
   
