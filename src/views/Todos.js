@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { getTodos, getArchived } from "../redux/actions/todo";
 import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
-
 import { withStyles } from '@material-ui/core/styles';
+
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TodoBlock from './../components/TodoBlock';
+import RecentArchived from './../components/todo/RecentArchived';
 
 const styles = theme => ({
   root: {
@@ -48,7 +49,7 @@ class Todos extends React.Component {
   }
 
   render() {
-    const { todos } = this.props;
+    const { todos, todosArchived } = this.props;
 
     return (
       <div>
@@ -90,6 +91,7 @@ class Todos extends React.Component {
             <Typography variant="h5" align="center" gutterBottom component="h4">
               Todo Recent Archives
             </Typography>
+            <RecentArchived todos={todosArchived} />
           </Grid>
         </Grid>
         <div className="spacer"></div>
