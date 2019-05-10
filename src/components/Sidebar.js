@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import classNames from 'classnames';
 import '../App.scss';
+
+
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-
+import Tooltip from '@material-ui/core/Tooltip';
 import ViewWeekIcon from '@material-ui/icons/ViewWeek';
 
 class Sidebar extends Component {
@@ -29,7 +29,6 @@ class Sidebar extends Component {
                 paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose),
             }}
             open={open}>
-
             <div className={classes.toolbarIcon}>
                 <span style={{fontStyle: 'italic'}}>Explore!</span>
                 <IconButton onClick={drawerClose}>
@@ -39,27 +38,35 @@ class Sidebar extends Component {
             <Divider />
             <List>
                 <ListItem button component={Link} to="/">
-                    <ListItemIcon>
-                        <DashboardIcon />
-                    </ListItemIcon>
+                    <Tooltip title="Dashboard" disableHoverListener={open} placement="right-start">
+                        <ListItemIcon>
+                            <DashboardIcon />
+                        </ListItemIcon>
+                    </Tooltip>
                     <ListItemText primary="Dashboard" />
                 </ListItem>  
                 <ListItem component={Link} to="/todos/" button={true} >
-                    <ListItemIcon>
-                        <FormatListBulletedIcon />
-                    </ListItemIcon>
+                    <Tooltip title="Todos" disableHoverListener={open} placement="right-start">
+                        <ListItemIcon>
+                            <FormatListBulletedIcon />
+                        </ListItemIcon>
+                    </Tooltip>
                     <ListItemText primary="Todos" />
                 </ListItem>
                 <ListItem component={Link} to="/calendar-full" button={true}>
-                    <ListItemIcon>
-                        <DateRangeIcon />
-                    </ListItemIcon>
+                    <Tooltip title="Calendar" disableHoverListener={open} placement="right-start">
+                        <ListItemIcon>
+                            <DateRangeIcon />
+                        </ListItemIcon>
+                    </Tooltip>
                     <ListItemText primary="Calendar" />
                 </ListItem>
                 <ListItem component={Link} to="/pipelines/" button={true} >
-                    <ListItemIcon>
-                        <ViewWeekIcon />
-                    </ListItemIcon>
+                    <Tooltip title="Pipelines" disableHoverListener={open} placement="right-start">
+                        <ListItemIcon>
+                            <ViewWeekIcon />
+                        </ListItemIcon>
+                    </Tooltip>
                     <ListItemText primary="Pipelines" />
                 </ListItem>
             </List>
