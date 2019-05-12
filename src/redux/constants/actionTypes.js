@@ -25,3 +25,14 @@ export const RECEIVE_USER = 'RECEIVE_USER';
 // UI
 export const DARK_MODE = "DARK_MODE";
 export const REMEMBER_ME = "REMEMBER_ME";
+
+// Pipeline
+export const GET_PIPELINES = "GET_PIPELINES";
+export const CREATE_PIPELINE = "CREATE_PIPELINE";
+export const UPDATE_PIPELINE = "UPDATE_PIPELINE";
+export const DELETE_PIPELINE = "DELETE_PIPELINE";
+
+export const GET_LISTS = "GET_LISTS";
+export const CREATE_LIST = "CREATE_LIST";
+export const UPDATE_LIST = "UPDATE_LIST";
+export const DELETE_LIST = "DELETE_LIST";

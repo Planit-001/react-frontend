@@ -2,8 +2,8 @@ import {
     CREATE_SUGGESTION
   } from "../constants/actionTypes";
   
-  import { handleErrors, buildHeaders, apiBase } from '../../utils/apiHelpers';
-  import { toastEvent, ding } from '../../utils/uiFuncs';
+import { handleErrors, buildHeaders, apiBase } from '../../utils/apiHelpers';
+import { toastEvent } from '../../utils/uiFuncs';
 
 export function createSuggestion(payload) {
     console.log('payload: ', payload)

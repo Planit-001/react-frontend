@@ -14,6 +14,7 @@ import Dashboard from './views/Dashboard';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import PipelineBuilder from './views/PipelineBuilder';
+import Pipeline from './views/Pipeline';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import ToastAlert from './components/ToastAlert';
@@ -142,7 +143,7 @@ class App extends Component {
             <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
-            <Route path="/pipelines/" component={PipelineBuilder} />
+            <Route path="/pipelines/" component={Pipeline} />
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
             <Route path="/calendar-big/" component={BigCalendar} />
