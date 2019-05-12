@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from "react-redux";
 import { getTodos } from "../redux/actions/todo";
 import { getWeatherCurrent } from "../redux/actions/external";
-
 import { changeDarkMode } from "../redux/actions/ui";
+
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';

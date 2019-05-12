@@ -901,6 +901,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.3.tgz#6310a047f12d21a1036fb031317219892440416f"
   integrity sha512-4zAPlpDEh2VwXswwr/t8xGNDGg8RQiPxtxZ3qQEXyQsBV39ptTdESCjuBvGze1nLMVrxmTIKmnO/nAV8Tqjjzg==
 
+"@fullcalendar/bootstrap@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/bootstrap/-/bootstrap-4.1.0.tgz#489aabfddd4b82d72616f5acbdf109df27bc95be"
+  integrity sha512-mfgs8hg2Uo+P+fQQ/de3r9/VTezgiPH0KO01dM2sqN7Bi7jetyBxI97bl1EEF2fhkoDRMMv28pfsoY3saUP64Q==
+
 "@fullcalendar/core@^4.0.2":
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/@fullcalendar/core/-/core-4.0.2.tgz#59ef822ba0c4bda60609d8b2d9f71bee8875505b"
