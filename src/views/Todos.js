@@ -89,7 +89,7 @@ class Todos extends React.Component {
           </Grid>
           <Grid item sm={12} md={6} lg={4}>
             <Typography variant="h5" align="center" gutterBottom component="h4">
-              Todo Recent Archives
+              To-do Recent Archives
             </Typography>
             <RecentArchived todos={todosArchived} />
           </Grid>

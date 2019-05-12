@@ -200,8 +200,7 @@ class PipelineBuilder extends React.Component {
 
 const mapStateToProps = state => {
     return { 
-        todos: state.todoReducer.todos,
-        darkMode: state.uiReducer.darkMode 
+        
     };
 };
 
