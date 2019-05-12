@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 // import { DragDropContext, Droppable} from 'react-beautiful-dnd';
 import PipelineList from './../components/pipeline/PipelineList'
 import { connect } from "react-redux";
-
+import PipelineActionBtn from './../components/pipeline/PipelineActionBtn';
 
 class Pipeline extends React.Component {
     state = {
@@ -20,6 +20,7 @@ class Pipeline extends React.Component {
                 </Typography>
                 <div style={styles.listContainer}>
                     {lists.map((list , i) => <PipelineList key={`list-${i}`} title={list.title} cards={list.cards} />)}
+                    <PipelineActionBtn list />
                 </div>
             </div>
         )
