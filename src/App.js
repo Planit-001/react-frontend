@@ -113,8 +113,8 @@ class App extends Component {
     });
 
     return (
-      <div className={classes.root}>
       <MuiThemeProvider theme={muiTheme}>
+      <div className={classes.root}>
 
         <CssBaseline />
         <Router>
@@ -150,8 +150,8 @@ class App extends Component {
 
 
         </Router>
-      </MuiThemeProvider>
       </div>
+      </MuiThemeProvider>
     );
   }
 }

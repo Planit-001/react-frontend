@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 // import WeatherCard from './../components/widgets/WeatherCard';
 import WindyWeatherCard from './../components/widgets/WindyWeatherCard';
+import SuggestionWizard from './../components/suggestion/SuggestionWizard';
 
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
@@ -79,8 +80,9 @@ class Dashboard extends React.Component {
                     </Grid>
                     <Grid item sm={12} md={5}>
                         <TodoBlock 
-                        title="Today's To-do's"
-                        todos={todayNullOrBefore(todos)} />
+                            title="Today's To-do's"
+                            todos={todayNullOrBefore(todos)} />
+                        <SuggestionWizard />
                     </Grid>
                 </Grid>
             </div>

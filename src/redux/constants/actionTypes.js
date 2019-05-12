@@ -5,6 +5,9 @@ export const UPDATE_TODO = "UPDATE_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const GET_TODOS_ARCHIVED = "GET_TODOS_ARCHIVED";
 
+// Suggestions
+export const CREATE_SUGGESTION = "CREATE_SUGGESTION";
+
 // Weather API
 export const GET_WEATHER_CURRENT = "GET_WEATHER_CURRENT";
 export const GET_WEATHER_5_DAYS = "GET_WEATHER_5_DAYS";

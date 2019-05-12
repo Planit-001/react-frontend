@@ -10,7 +10,6 @@ import { handleErrors, buildHeaders, apiBase } from '../../utils/apiHelpers';
 
 import { toastEvent, ding } from '../../utils/uiFuncs';
 
-
 function shouldFetchTodos(state){ 
   const todoReducer = state.todoReducer
   if(!todoReducer){
