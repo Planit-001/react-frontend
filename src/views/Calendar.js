@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { getCalEvents, createCalEvent, updateCalEvent } from "../redux/actions/calEvent";
+import { getCalEvents, createCalEvent, updateCalEvent, deleteCalEvent } from "../redux/actions/calEvent";
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = BigCalendar.momentLocalizer(moment)
@@ -151,6 +151,8 @@ class Calendar extends React.Component {
         updateEventDescription: '',
         openUpdateDialogue: false
     };
+    this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount(){
@@ -198,13 +200,7 @@ class Calendar extends React.Component {
       };
 
       this.props.createCalEvent(payload).then(() => {
-          this.setState({
-              newEventStart: '',
-              newEventEnd: '',
-              newEventTitle: '',
-              newEventDescription: '',
-              openDialogue: false
-          });
+          this.handleClose()
       });
   }
 
@@ -225,18 +221,19 @@ class Calendar extends React.Component {
     };
 
     this.props.updateCalEvent(updateEventId, payload).then(() => {
-        this.setState({
-            updateEventStart: '',
-            updateEventEnd: '',
-            updateEventTitle: '',
-            updateEventDescription: '',
-            openUpdateDialogue: false
-        });
+        this.handleClose()
     });
   }
 
   handleDelete(){
-    console.log('delete!');
+    const test = window.confirm("Are you sure?")
+    if(test){  
+        this.props.deleteCalEvent(this.state.updateEventId).then(() => {
+            this.handleClose();
+        })
+    }else{
+        this.handleClose();
+    }
   }
 
 
@@ -382,4 +379,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { getCalEvents , createCalEvent, updateCalEvent })(Calendar);
+export default connect(mapStateToProps, { getCalEvents , createCalEvent, updateCalEvent, deleteCalEvent })(Calendar);
