@@ -121,7 +121,7 @@ class App extends Component {
 
         
       },
-      // typography: { useNextVariants: true },
+      typography: { useNextVariants: true },
     });
 
     return (
@@ -150,12 +150,11 @@ class App extends Component {
             <ToastAlert />
             <div className={classes.appBarSpacer} />
             <PrivateRoute path="/" exact component={Dashboard} auth={isAuthenticated} />
-            {/* <Route path="/todos/" component={Todos} /> */}
             <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
             <Route path="/pipelines/" component={Pipeline} />
-            <Route path="/calendar/" component={Calendar} />
+            <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
             <Route path="/calendar-big/" component={BigCalendar} />

@@ -11,7 +11,7 @@ import { handleErrors, buildHeaders, apiBase } from '../../utils/apiHelpers';
 import { toastEvent, ding } from '../../utils/uiFuncs';
 
 function shouldFetchTodos(state){ 
-  const todoReducer = state.todoReducer
+  const todoReducer = state.todo
   if(!todoReducer){
     return true
   } else if (todoReducer.isFetching){
@@ -24,7 +24,7 @@ function shouldFetchTodos(state){
 }
 
 function shouldFetchArchived(state){
-  const todoReducer = state.todoReducer
+  const todoReducer = state.todo
   if(!todoReducer || !todoReducer.todosArchived || !todoReducer.todosArchived.items){
     return true
   } else if (todoReducer.todosArchived.isFetching){

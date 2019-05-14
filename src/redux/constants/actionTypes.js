@@ -5,6 +5,13 @@ export const UPDATE_TODO = "UPDATE_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const GET_TODOS_ARCHIVED = "GET_TODOS_ARCHIVED";
 
+// Calendar Events
+export const GET_CALEVENTS = "GET_CALEVENTS";
+export const CREATE_CALEVENT = "CREATE_CALEVENT";
+export const UPDATE_CALEVENT = "UPDATE_CALEVENT";
+export const DELETE_CALEVENT = "DELETE_CALEVENT";
+
+
 // Suggestions
 export const CREATE_SUGGESTION = "CREATE_SUGGESTION";
 
