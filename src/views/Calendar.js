@@ -1,13 +1,20 @@
 import React from 'react';
 import { connect } from "react-redux";
-import PropTypes from 'prop-types';
-
 import Typography from '@material-ui/core/Typography';
 
-
-import BigCalendar from 'react-big-calendar'
 import moment from 'moment';
-import dates from './../utils/dates'
+import BigCalendar from 'react-big-calendar'
+
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+import { getCalEvents, createCalEvent } from "../redux/actions/calEvent";
+
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = BigCalendar.momentLocalizer(moment)
 
@@ -131,29 +138,121 @@ class Calendar extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+        newEventTitle: '',
+        newEventStart: '',
+        newEventEnd: '',
+        // newEventDescription: '',
+        openDialogue: false
     };
   }
 
   componentDidMount(){
+    this.props.getCalEvents();
+  }
+
+  handleClickOpen = () => {
+    this.setState({ openDialogue: true });
+  };
+
+  handleClose = () => {
+    this.setState({ 
+        openDialogue: false,
+        newEventEnd: '',
+        newEventStart: '',
+        newEventTitle: ''
+    });
+  };
+
+
+  handleSelect = ({ start, end }) => {
+    this.setState({
+        newEventStart: start,
+        newEventEnd: end,
+        openDialogue: true
+    });
+  }
+
+  handleSubmit = () => {
+      const { newEventStart, newEventEnd, newEventTitle } = this.state;
+      const payload = {
+          end_time: newEventEnd,
+          start_time: newEventStart,
+          title: newEventTitle,
+          user_id: this.props.user.id
+      };
+
+      this.props.createCalEvent(payload).then(() => {
+          this.setState({
+              newEventStart: '',
+              newEventEnd: '',
+              newEventTitle: '',
+              openDialogue: false
+          });
+      });
+  }
+
+  eventsMutator(events){
+      return events.map((item, index) => {
+          return {
+              ...item,
+              end_time: moment(item.end_time).toDate(),
+              start_time: moment(item.start_time).toDate()
+          }
+      })
   }
 
 
   render() {
-
+    const { calEvents } = this.props;
     return (
       <div>
         <Typography variant="h3" gutterBottom component="h1">
           Calendar
         </Typography>
+        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+          Open form dialog
+        </Button>
+
+        <Dialog
+          open={this.state.openDialogue}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title">
+            <DialogTitle>
+              Event title
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Please enter a brief title of this event
+                </DialogContentText>
+                <TextField
+                    autoFocus
+                    margin="dense"
+                    label="Event title"
+                    fullWidth
+                    value={this.state.newEventTitle}
+                    onChange={e => this.setState({newEventTitle: e.target.value})}/>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                    Cancel
+                </Button>
+                <Button onClick={this.handleSubmit} color="primary">
+                    Create
+                </Button>
+            </DialogActions>
+        </Dialog>
         <BigCalendar
             defaultView="month"    
-            events={events}
+            events={this.eventsMutator(calEvents)}
+            selectable
+            startAccessor="start_time"
+            endAccessor="end_time"
+            allDayAccessor="all_day"
             views={["month", "week", "day", "agenda"]}
-            step={60}
             style={{minHeight: '600px'}}
-            showMultiDayTimes
-            max={dates.add(dates.endOf(new Date(2015, 17, 1), 'day'), -1, 'hours')}
-            defaultDate={new Date(2015, 3, 1)}
+            // onSelectEvent={event => alert(event.title)}
+            onSelectSlot={this.handleSelect}
+            // showMultiDayTimes
             localizer={localizer} />
         <div className="spacer"></div>
       </div>
@@ -163,8 +262,9 @@ class Calendar extends React.Component {
 
 const mapStateToProps = state => {
   return { 
-      todos: state.todo.todos 
+      calEvents: state.calEvent.calEvents,
+      user: state.auth.user
     };
 };
 
-export default connect(mapStateToProps)(Calendar);
+export default connect(mapStateToProps, { getCalEvents , createCalEvent })(Calendar);
