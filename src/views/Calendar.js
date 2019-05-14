@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { getCalEvents, createCalEvent } from "../redux/actions/calEvent";
+import { getCalEvents, createCalEvent, updateCalEvent } from "../redux/actions/calEvent";
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = BigCalendar.momentLocalizer(moment)
@@ -141,8 +141,15 @@ class Calendar extends React.Component {
         newEventTitle: '',
         newEventStart: '',
         newEventEnd: '',
-        // newEventDescription: '',
-        openDialogue: false
+        newEventDescription: '',
+        openDialogue: false,
+
+        updateEventId: null,
+        updateEventTitle: '',
+        updateEventStart: '',
+        updateEventEnd: '',
+        updateEventDescription: '',
+        openUpdateDialogue: false
     };
   }
 
@@ -159,9 +166,17 @@ class Calendar extends React.Component {
         openDialogue: false,
         newEventEnd: '',
         newEventStart: '',
-        newEventTitle: ''
+        newEventTitle: '',
+        newEventDescription: '',
+        updateEventTitle: '',
+        updateEventStart: '',
+        updateEventEnd: '',
+        updateEventDescription: '',
+        openUpdateDialogue: false
     });
   };
+
+
 
 
   handleSelect = ({ start, end }) => {
@@ -173,11 +188,12 @@ class Calendar extends React.Component {
   }
 
   handleSubmit = () => {
-      const { newEventStart, newEventEnd, newEventTitle } = this.state;
+      const { newEventStart, newEventEnd, newEventTitle, newEventDescription } = this.state;
       const payload = {
           end_time: newEventEnd,
           start_time: newEventStart,
           title: newEventTitle,
+          description: newEventDescription,
           user_id: this.props.user.id
       };
 
@@ -186,10 +202,43 @@ class Calendar extends React.Component {
               newEventStart: '',
               newEventEnd: '',
               newEventTitle: '',
+              newEventDescription: '',
               openDialogue: false
           });
       });
   }
+
+  handleUpdate = () => {
+    const { 
+        // updateEventStart, 
+        // updateEventEnd, 
+        updateEventId,
+        updateEventTitle, 
+        updateEventDescription 
+    } = this.state;
+
+    const payload = {
+        // end_time: updateEventEnd,
+        // start_time: updateEventStart,
+        title: updateEventTitle,
+        description: updateEventDescription,
+    };
+
+    this.props.updateCalEvent(updateEventId, payload).then(() => {
+        this.setState({
+            updateEventStart: '',
+            updateEventEnd: '',
+            updateEventTitle: '',
+            updateEventDescription: '',
+            openUpdateDialogue: false
+        });
+    });
+  }
+
+  handleDelete(){
+    console.log('delete!');
+  }
+
 
   eventsMutator(events){
       return events.map((item, index) => {
@@ -199,6 +248,99 @@ class Calendar extends React.Component {
               start_time: moment(item.start_time).toDate()
           }
       })
+  }
+
+  onEventSelect(event){
+    this.setState({
+        updateEventId: event.id,
+        updateEventTitle: event.title,
+        updateEventStart: event.start_time,
+        updateEventEnd: event.end_time,
+        updateEventDescription: event.description || '',
+        openUpdateDialogue: true
+    })
+
+  }
+
+  renderCreateDialogue(){
+      return <Dialog
+        open={this.state.openDialogue}
+        onClose={this.handleClose}
+        aria-labelledby="form-dialog-title">
+            <DialogTitle>
+            Describe this event
+            </DialogTitle>
+            <DialogContent>
+                {/* <DialogContentText>
+                    Event Title
+                </DialogContentText> */}
+                <TextField
+                    autoFocus
+                    margin="normal"
+                    label="Event title"
+                    fullWidth
+                    value={this.state.newEventTitle}
+                    onChange={e => this.setState({newEventTitle: e.target.value})}/>
+                <TextField
+                    label="Description"
+                    placeholder="Add a description to the Event (optional)"
+                    value={this.state.newEventDescription}
+                    multiline
+                    fullWidth
+                    onChange={(e) => this.setState({newEventDescription: e.target.value})}
+                    rows="4"
+                    margin="normal"/>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={this.handleClose} color="default">
+                    Cancel
+                </Button>
+                <Button onClick={this.handleSubmit} color="primary">
+                    Create
+                </Button>
+            </DialogActions>
+        </Dialog>
+  }
+
+  renderUpdateDialogue(){
+
+      return <Dialog
+                open={this.state.openUpdateDialogue}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title">
+                <DialogTitle>
+                    Update or Delete this Event
+                </DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="normal"
+                        label="Event title"
+                        fullWidth
+                        value={this.state.updateEventTitle}
+                        onChange={e => this.setState({updateEventTitle: e.target.value})}/>
+                    <TextField
+                        label="Description"
+                        placeholder="Add a description to the Event (optional)"
+                        value={this.state.updateEventDescription}
+                        multiline
+                        fullWidth
+                        onChange={(e) => this.setState({updateEventDescription: e.target.value})}
+                        rows="4"
+                        margin="normal"/>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.handleClose} color="default">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.handleUpdate} color="primary">
+                        Update
+                    </Button>
+                    <Button onClick={this.handleDelete} color="secondary">
+                        Delete event
+                    </Button>
+                </DialogActions>
+            </Dialog>
   }
 
 
@@ -212,35 +354,8 @@ class Calendar extends React.Component {
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
           Open form dialog
         </Button>
-
-        <Dialog
-          open={this.state.openDialogue}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title">
-            <DialogTitle>
-              Event title
-            </DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-                    Please enter a brief title of this event
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    label="Event title"
-                    fullWidth
-                    value={this.state.newEventTitle}
-                    onChange={e => this.setState({newEventTitle: e.target.value})}/>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                    Cancel
-                </Button>
-                <Button onClick={this.handleSubmit} color="primary">
-                    Create
-                </Button>
-            </DialogActions>
-        </Dialog>
+        {this.renderCreateDialogue()}
+        {this.renderUpdateDialogue()}
         <BigCalendar
             defaultView="month"    
             events={this.eventsMutator(calEvents)}
@@ -250,7 +365,7 @@ class Calendar extends React.Component {
             allDayAccessor="all_day"
             views={["month", "week", "day", "agenda"]}
             style={{minHeight: '600px'}}
-            // onSelectEvent={event => alert(event.title)}
+            onSelectEvent={event => this.onEventSelect(event)}
             onSelectSlot={this.handleSelect}
             // showMultiDayTimes
             localizer={localizer} />
@@ -267,4 +382,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { getCalEvents , createCalEvent })(Calendar);
+export default connect(mapStateToProps, { getCalEvents , createCalEvent, updateCalEvent })(Calendar);
