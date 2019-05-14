@@ -18,7 +18,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Dashboard from './views/Dashboard';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import PipelineBuilder from './views/PipelineBuilder';
+// import PipelineBuilder from './views/PipelineBuilder';
 import Pipeline from './views/Pipeline';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';

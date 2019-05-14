@@ -348,23 +348,22 @@ class Calendar extends React.Component {
         <Typography variant="h3" gutterBottom component="h1">
           Calendar
         </Typography>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Open form dialog
-        </Button>
+
         {this.renderCreateDialogue()}
         {this.renderUpdateDialogue()}
+        
         <BigCalendar
-            defaultView="month"    
-            events={this.eventsMutator(calEvents)}
             selectable
             startAccessor="start_time"
             endAccessor="end_time"
             allDayAccessor="all_day"
+            defaultView="month"
             views={["month", "week", "day", "agenda"]}
             style={{minHeight: '600px'}}
+            popup={true}
+            events={this.eventsMutator(calEvents)}
             onSelectEvent={event => this.onEventSelect(event)}
             onSelectSlot={this.handleSelect}
-            // showMultiDayTimes
             localizer={localizer} />
         <div className="spacer"></div>
       </div>

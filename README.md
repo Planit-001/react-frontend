@@ -1,5 +1,8 @@
 Next steps:
-    - begin calendar
+    - add sidebar view for calendar that displays selected calendar information with options:
+      - title, description, start and end times
+      - ability to download .ics file
+      - edit/delete (which will bring up the dialogue)
     - finish pipeline (front-end)
     - feed dynamic coordinates into windy widget
     - delete redux state when user logouts: 
@@ -20,4 +23,4 @@ Name/brand ideas:
   - 'planner' - something related to 'planning'
 
 Issues:
-  <!-- - Todo recent archives isn't showing archives of today -->
+  - prevent creation of events if no title
