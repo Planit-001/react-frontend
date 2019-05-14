@@ -50,7 +50,7 @@ Lists.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { todos: state.todoReducer.todos };
+  return { todos: state.todo.todos };
 };
 
 export default connect(mapStateToProps)(Lists);

@@ -47,7 +47,7 @@ class Header extends Component {
               color="inherit"
               noWrap
               className={classes.title}>
-              Small Business
+              Simple Planner
             </Typography>
             <Button
               aria-owns={anchorEl ? 'simple-menu' : undefined}

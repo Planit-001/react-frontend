@@ -4,8 +4,13 @@ import { BrowserRouter as Router, Route, Redirect  } from "react-router-dom";
 import { withStyles } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from "react-redux";
-import blue from '@material-ui/core/colors/blue';
 
+import blue from '@material-ui/core/colors/blue';
+// import indigo from '@material-ui/core/colors/indigo';
+import pink from '@material-ui/core/colors/pink';
+import red from '@material-ui/core/colors/red';
+
+import Calendar from './views/Calendar';
 import CalendarFull from './components/CalendarFull';
 import CalendarToast from './components/CalendarToast';
 import CalendarBig from './components/CalendarBig';
@@ -103,14 +108,20 @@ class App extends Component {
     const muiTheme = createMuiTheme({
       palette: {
         type: darkMode ? 'dark' : 'light',
-        // primary: {
-        //   main: blue
-        // },
-        // secondary: {
-        //   main: '#ec407a'
-        // }
+        primary: blue, 
+        secondary: pink,
+        error: red,
+        // Used by `getContrastText()` to maximize the contrast between the background and
+        // the text.
+        contrastThreshold: 3,
+        // Used to shift a color's luminance by approximately
+        // two indexes within its tonal palette.
+        // E.g., shift from Red 500 to Red 300 or Red 700.
+        tonalOffset: 0.2,
+
+        
       },
-      typography: { useNextVariants: true },
+      // typography: { useNextVariants: true },
     });
 
     return (
@@ -144,6 +155,7 @@ class App extends Component {
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
             <Route path="/pipelines/" component={Pipeline} />
+            <Route path="/calendar/" component={Calendar} />
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
             <Route path="/calendar-big/" component={BigCalendar} />

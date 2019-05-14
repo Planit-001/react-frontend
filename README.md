@@ -1,14 +1,15 @@
 Next steps:
-    - add 'suggestions' on dashboard
+    - begin calendar
+    - finish pipeline (front-end)
     - feed dynamic coordinates into windy widget
     - delete redux state when user logouts: 
       - https://stackoverflow.com/questions/54199540/resetting-redux-state-on-logout
       - https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store/35641992#35641992
 
 Future steps:
-    - use material-ui 'stepper' for 'Suggestions'
     - error messages for api failing in toasts
-    - 'lists' page
+    - 'lists' page (like todos, but no date)
+    - truncate long messages (on todo list item)
 
 Ideas:
   - make a 'notes' page (like a bulleten board), where I can leave notes
@@ -17,3 +18,6 @@ Ideas:
 
 Name/brand ideas:
   - 'planner' - something related to 'planning'
+
+Issues:
+  <!-- - Todo recent archives isn't showing archives of today -->

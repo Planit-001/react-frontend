@@ -53,7 +53,7 @@ class Sidebar extends Component {
                     </Tooltip>
                     <ListItemText primary="Todos" />
                 </ListItem>
-                <ListItem component={Link} to="/calendar-full" button={true}>
+                <ListItem component={Link} to="/calendar" button={true}>
                     <Tooltip title="Calendar" disableHoverListener={open} placement="right-start">
                         <ListItemIcon>
                             <DateRangeIcon />
