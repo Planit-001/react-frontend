@@ -1,6 +1,7 @@
 #App To-do's
 
 Next steps:
+    - display calendar events (see: calendar 'agenda') on dashboard
     - add sidebar view for calendar that displays selected calendar information with options:
       - title, description, start and end times
       - ability to download .ics file
@@ -32,7 +33,7 @@ Meta ideas:
     - Text editor could be a medium-like tool leveraging draftjs.
     - Save in db as a JSON blob
     - see: bitwiser.in or megadraft.io
-  - gamify dashboard icon by showing a different https://fontawesome.com/icons?d=gallery&q=dashboard depending on how many todos are made (?)
+  - gamify dashboard icon by showing a different https://fontawesome.com/icons?d=gallery&q=dashboard based on todos count (?)
   - add user settings page
 
 Name/brand ideas:

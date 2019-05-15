@@ -7,9 +7,17 @@ import PipelineList from './../components/pipeline/PipelineList'
 import { connect } from "react-redux";
 import PipelineActionBtn from './../components/pipeline/PipelineActionBtn';
 import { sort } from './../redux/actions/pipeline';
+import  styled  from 'styled-components';
+
+const ListContainer = styled.div`
+    display: flex;
+    flex-direction: row,
+`
 
 class Pipeline extends React.Component {
+
     state = {
+    
     }
 
     handleDragEnd = (result) => {
@@ -39,22 +47,16 @@ class Pipeline extends React.Component {
                     Pipeline 
                 </Typography>
                 <DragDropContext onDragEnd={this.handleDragEnd}>
-                    <div style={styles.listContainer}>
+                    <ListContainer>
                         {lists.map((col , i) => <PipelineList colId={col.id} key={`col-${i}`} title={col.title} cards={col.cards} />)}
                         <PipelineActionBtn list />
-                    </div>
+                    </ListContainer>
                 </DragDropContext>
             </div>
         )
     }
 }
 
-const styles = {
-    listContainer: {
-        display: "flex",
-        flexDirection: "row",
-    }
-}
 
 const mapStateToProps = state => {
     return { 
