@@ -1,3 +1,5 @@
+#App To-do's
+
 Next steps:
     - add sidebar view for calendar that displays selected calendar information with options:
       - title, description, start and end times
@@ -10,17 +12,32 @@ Next steps:
       - https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store/35641992#35641992
 
 Future steps:
-    - error messages for api failing in toasts
+    - add a 'create future todo' feature
     - 'lists' page (like todos, but no date)
-    - truncate long messages (on todo list item)
+    - add a 'bulletin board' page. That imitates a bulletin board
 
-Ideas:
+Design improvements: 
+  - disapear drawer on mobile
+  - improve header on mobile
+  - make 'snackbar'/toasts themed according to success or error (green, red, etc.)
+  - add a bottom navbar for mobile view? ( <BottomNavigation />)
+
+Issues:
+  - prevent creation of events if no title
+  - error messages for api failing in toasts
+
+Meta ideas:
   - make a 'notes' page (like a bulleten board), where I can leave notes
+    - Text editor could be a medium-like tool leveraging draftjs.
+    - Save in db as a JSON blob
+    - see: bitwiser.in or megadraft.io
   - gamify dashboard icon by showing a different https://fontawesome.com/icons?d=gallery&q=dashboard depending on how many todos are made (?)
-  - add user settings page 
+  - add user settings page
 
 Name/brand ideas:
   - 'planner' - something related to 'planning'
 
-Issues:
-  - prevent creation of events if no title
+Paid Features:
+  - collaborative notes where users can collaborate on documents (using medium clone package) 
+    - also see https://firepad.io/ for real-time collaboration (requires firebase)
+    - and etherpad (truely open source but complicated)

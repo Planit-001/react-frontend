@@ -39,6 +39,18 @@ export const CREATE_PIPELINE = "CREATE_PIPELINE";
 export const UPDATE_PIPELINE = "UPDATE_PIPELINE";
 export const DELETE_PIPELINE = "DELETE_PIPELINE";
 
+export const GET_CARDS = "GET_CARDS";
+export const CREATE_CARD = "CREATE_CARD";
+export const UPDATE_CARD = "UPDATE_CARD";
+export const DELETE_CARD = "DELETE_CARD";
+
+export const GET_COLUMNS = "GET_COLUMNS";
+export const CREATE_COLUMN = "CREATE_COLUMN";
+export const UPDATE_COLUMN = "UPDATE_COLUMN";
+export const DELETE_COLUMN = "DELETE_COLUMN";
+
+
+// Lists
 export const GET_LISTS = "GET_LISTS";
 export const CREATE_LIST = "CREATE_LIST";
 export const UPDATE_LIST = "UPDATE_LIST";

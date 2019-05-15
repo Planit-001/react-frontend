@@ -5,6 +5,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextareaAutosize from 'react-textarea-autosize';
 import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
+
+import { createColumn, createCard } from './../../redux/actions/pipeline';
 
 class PipelineActionBtn extends React.Component{
     state = {
@@ -55,6 +58,35 @@ class PipelineActionBtn extends React.Component{
         })
     }
 
+    handleCreateColumn = () => {
+        const { dispatch } = this.props;
+        const { text } = this.state;
+
+        if(text){
+            dispatch(createColumn(text));
+            this.setState({
+                text: ''
+            });
+        }
+
+        return;
+    }
+
+    handleCreateCard = () => {
+        const { dispatch, colId } = this.props;
+        const { text } = this.state;
+
+        if(text){
+            dispatch(createCard(colId, text));
+            this.setState({
+                text: ''
+            });
+        }
+
+        return;
+
+    }
+
     renderForm = () => {
         const { list } = this.props;
         const placeholder = list ? "Column title" : "Item title"
@@ -80,7 +112,10 @@ class PipelineActionBtn extends React.Component{
                     }}/>
             </Card>
             <div style={styles.formBtnGroup}>
-                <Button variant="contained" style={{color: "white", backgroundColor: '#5aac44'}}>
+                <Button 
+                    onMouseDown={list ? this.handleCreateColumn : this.handleCreateCard}
+                    variant="contained" 
+                    style={{color: "white", backgroundColor: '#5aac44'}}>
                     {btnTitle}
                 </Button>
                 <Icon style={{marginLeft: 8, cursor: "pointer" }} >
@@ -115,4 +150,4 @@ const styles = {
     }
 }
 
-export default PipelineActionBtn;
+export default connect()(PipelineActionBtn);

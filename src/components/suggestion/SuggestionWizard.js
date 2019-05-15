@@ -173,7 +173,6 @@ class SuggestionWizard extends React.Component {
           onChange={(e) => this.setState({body: e.target.value})}
           rows="4"
           margin="normal"
-          variant="filled"
           InputLabelProps={{
             shrink: true,
           }}/>

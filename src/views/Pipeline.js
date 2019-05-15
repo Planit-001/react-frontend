@@ -19,7 +19,7 @@ class Pipeline extends React.Component {
                     Pipeline 
                 </Typography>
                 <div style={styles.listContainer}>
-                    {lists.map((list , i) => <PipelineList key={`list-${i}`} title={list.title} cards={list.cards} />)}
+                    {lists.map((col , i) => <PipelineList colId={col.id} key={`col-${i}`} title={col.title} cards={col.cards} />)}
                     <PipelineActionBtn list />
                 </div>
             </div>

@@ -29,7 +29,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   root: {
-    paddingRight: '50px'
+    paddingRight: '50px',
+    wordBreak: "break-word"
   },
 };
 

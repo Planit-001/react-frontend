@@ -1,6 +1,11 @@
 import { 
-    
-} from "../constants/actionTypes";
+   CREATE_COLUMN,
+   CREATE_CARD,
+} from "./../constants/actionTypes";
+
+
+let listId = 2;
+let cardId = 5;
 
 const initialState = [
   {
@@ -42,6 +47,31 @@ const initialState = [
   
   function listReducer(state = initialState, action) {
     switch(action.type){
+        case CREATE_COLUMN:
+          const newColumn = {
+            title: action.payload,
+            cards: [],
+            id: listId
+          }
+          listId += 1;
+          return [...state, newColumn]
+        case CREATE_CARD:
+          const newCard = {
+            text: action.payload.text,
+            id: cardId
+          }
+          cardId += 1;
+          const newState = state.map(col => {
+            if(col.id === action.payload.colId){
+              return {
+                ...col,
+                cards: [...col.cards, newCard]
+              }
+            }else{
+              return col;
+            }
+          });
+          return newState;
         default: 
             return state;
     }
