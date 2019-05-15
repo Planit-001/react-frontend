@@ -17,13 +17,14 @@ Future steps:
     - add a 'bulletin board' page. That imitates a bulletin board
 
 Design improvements: 
+  - add a question mark icon button that reveals a popup that describes the page function
   - disapear drawer on mobile
   - improve header on mobile
   - make 'snackbar'/toasts themed according to success or error (green, red, etc.)
   - add a bottom navbar for mobile view? ( <BottomNavigation />)
 
 Issues:
-  - prevent creation of events if no title
+  - prevent creation of cal events if no title
   - error messages for api failing in toasts
 
 Meta ideas:
@@ -41,3 +42,5 @@ Paid Features:
   - collaborative notes where users can collaborate on documents (using medium clone package) 
     - also see https://firepad.io/ for real-time collaboration (requires firebase)
     - and etherpad (truely open source but complicated)
+  - the 'pipeline' builder, could be a paid feature
+  - donation page (later)

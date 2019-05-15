@@ -2,13 +2,17 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 // import Column from './../components/pipeline/Column';
 // import styled from 'styled-components'
-// import { DragDropContext, Droppable} from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import PipelineList from './../components/pipeline/PipelineList'
 import { connect } from "react-redux";
 import PipelineActionBtn from './../components/pipeline/PipelineActionBtn';
 
 class Pipeline extends React.Component {
     state = {
+    }
+
+    handleDragEnd(){
+        console.log("handleDragEnd");
     }
 
     render(){
@@ -18,10 +22,12 @@ class Pipeline extends React.Component {
                 <Typography variant="h2" gutterBottom component="h1">
                     Pipeline 
                 </Typography>
-                <div style={styles.listContainer}>
-                    {lists.map((col , i) => <PipelineList colId={col.id} key={`col-${i}`} title={col.title} cards={col.cards} />)}
-                    <PipelineActionBtn list />
-                </div>
+                <DragDropContext onDragEnd={this.handleDragEnd}>
+                    <div style={styles.listContainer}>
+                        {lists.map((col , i) => <PipelineList colId={col.id} key={`col-${i}`} title={col.title} cards={col.cards} />)}
+                        <PipelineActionBtn list />
+                    </div>
+                </DragDropContext>
             </div>
         )
     }
