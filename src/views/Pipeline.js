@@ -6,12 +6,28 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import PipelineList from './../components/pipeline/PipelineList'
 import { connect } from "react-redux";
 import PipelineActionBtn from './../components/pipeline/PipelineActionBtn';
+import { sort } from './../redux/actions/pipeline';
 
 class Pipeline extends React.Component {
     state = {
     }
 
-    handleDragEnd(){
+    handleDragEnd = (result) => {
+        const { destination, source, draggableId, type } = result;
+
+        if(!destination){
+            return
+        }
+
+        this.props.dispatch(sort(
+            source.droppableId,
+            destination.droppableId,
+            source.index,
+            destination.index,
+            draggableId,
+            type
+        ))
+        
         console.log("handleDragEnd");
     }
 

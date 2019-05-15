@@ -1,6 +1,7 @@
 import { 
    CREATE_COLUMN,
    CREATE_CARD,
+   DRAGGED,
 } from "./../constants/actionTypes";
 
 
@@ -55,7 +56,7 @@ const initialState = [
           }
           listId += 1;
           return [...state, newColumn]
-        case CREATE_CARD:
+        case CREATE_CARD: {
           const newCard = {
             text: action.payload.text,
             id: cardId
@@ -72,6 +73,28 @@ const initialState = [
             }
           });
           return newState;
+        }
+        case DRAGGED:
+          const newState = [...state];
+          const {
+            droppableIdStart,
+            droppableIdEnd,
+            droppableIndexEnd,
+            droppableIndexStart,    
+            type
+          } = action.payload;
+
+          console.log(action.payload)
+
+          // in same column
+          if (droppableIdStart === droppableIdEnd){
+            const col = state.find(col => String(col.id) === droppableIdStart)
+            const card = col.cards.splice(droppableIndexStart, 1)
+            col.cards.splice(droppableIndexEnd, 0, ...card);
+          }
+
+          return newState;
+
         default: 
             return state;
     }
