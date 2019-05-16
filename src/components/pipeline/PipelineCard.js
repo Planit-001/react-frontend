@@ -12,9 +12,14 @@ const CardContainer = styled.div`
 `
 const PipelineCard = ({text, id, index}) => {
     return (
-        <Draggable draggableId={String(id)} index={index}>
+        <Draggable 
+            draggableId={String(id)} 
+            index={index}>
             {provided => (
-                <CardContainer ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                <CardContainer 
+                    ref={provided.innerRef} 
+                    {...provided.draggableProps} 
+                    {...provided.dragHandleProps} >
                     <Card>
                         <CardContent>
                             <Typography gutterBottom>

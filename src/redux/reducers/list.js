@@ -5,20 +5,20 @@ import {
 } from "./../constants/actionTypes";
 
 
-let listId = 2;
-let cardId = 5;
+let listId = 3;
+let cardId = 6;
 
 const initialState = [
   {
     title: 'Last Episode',
-    id: 0,
+    id: 1,
     cards: [
       {
-        id: 0,
+        id: 1,
         text: "We created a static list and static card"
       },
       {
-        id: 1,
+        id: 2,
         text: "we used a mix between material ui and styled components"
       }
     ]
@@ -26,18 +26,18 @@ const initialState = [
   },
   {
     title: 'This Episode',
-    id: 1,
+    id: 2,
     cards: [
       {
-        id: 2,
+        id: 3,
         text: "We will create our first reducer"
       },
       {
-        id: 3,
+        id: 4,
         text: "and render cards on our list with static data"
       },
       {
-        id: 4,
+        id: 5,
         text: "and make some small cleanup changes"
       }
     ]
@@ -84,13 +84,26 @@ const initialState = [
             type
           } = action.payload;
 
-          console.log(action.payload)
+          if(type === "list"){
+            const col = newState.splice(droppableIndexStart, 1);
+            newState.splice(droppableIndexEnd, 0, ...col);
+            return newState;
+          }
 
           // in same column
           if (droppableIdStart === droppableIdEnd){
             const col = state.find(col => String(col.id) === droppableIdStart)
             const card = col.cards.splice(droppableIndexStart, 1)
             col.cards.splice(droppableIndexEnd, 0, ...card);
+          }
+
+          // in different column
+          if (droppableIdStart !== droppableIdEnd){
+            const colStart = state.find(col => String(col.id) === droppableIdStart)
+
+            const card = colStart.cards.splice(droppableIndexStart, 1)
+            const colEnd = state.find(col => String(col.id) === droppableIdEnd)
+            colEnd.cards.splice(droppableIndexEnd, 0, ...card);
           }
 
           return newState;
