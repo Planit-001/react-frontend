@@ -6,6 +6,8 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { addList, addCard } from "./../../redux/actions/pipeline";
 
+import TextField from '@material-ui/core/TextField';
+
 class PipelineActionBtn extends React.Component {
   state = {
     formOpen: false,
@@ -109,9 +111,24 @@ class PipelineActionBtn extends React.Component {
               width: "100%",
               overflow: "hidden",
               outline: "none",
+              fontFamily: "inherit",
               border: "none"
             }}
           />
+        {/* <TextField
+            label="Card title"
+            placeholder={placeholder}
+            value={this.state.text}
+            onChange={this.handleInputChange}
+            onBlur={this.closeForm}
+            autoFocus
+            multiline
+            fullWidth
+            rows="4"
+            margin="normal"
+            InputLabelProps={{
+                shrink: true,
+            }}/> */}
         </Card>
         <div style={styles.formButtonGroup}>
           <Button
