@@ -4,7 +4,6 @@ Next steps:
     - display calendar events (see: calendar 'agenda') on dashboard
     - add sidebar view for calendar that displays selected calendar information with options:
       - title, description, start and end times
-      - ability to download .ics file
       - edit/delete (which will bring up the dialogue)
     - finish pipeline (front-end)
     - feed dynamic coordinates into windy widget
@@ -15,14 +14,16 @@ Next steps:
 Future steps:
     - add a 'create future todo' feature
     - 'lists' page (like todos, but no date)
+    - drag and drop on calendar
+    - ability to download .ics file
     - add a 'bulletin board' page. That imitates a bulletin board
 
 Design improvements: 
   - add a question mark icon button that reveals a popup that describes the page function
-  - disapear drawer on mobile
+  - disappear drawer on mobile
   - improve header on mobile
   - make 'snackbar'/toasts themed according to success or error (green, red, etc.)
-  - add a bottom navbar for mobile view? ( <BottomNavigation />)
+  - add a bottom navbar for mobile view (?) ( <BottomNavigation />)
 
 Issues:
   - prevent creation of cal events if no title

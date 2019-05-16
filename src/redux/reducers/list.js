@@ -1,117 +1,133 @@
-import { 
-   CREATE_COLUMN,
-   CREATE_CARD,
-   DRAGGED,
-} from "./../constants/actionTypes";
+import {
+  CREATE_COLUMN, 
+  CREATE_CARD,
+  DRAGGED
+} from './../constants/actionTypes'
 
-
-let listId = 3;
-let cardId = 6;
+let listID = 2;
+let cardID = 6;
 
 const initialState = [
   {
-    title: 'Last Episode',
-    id: 1,
+    title: "Last Episode",
+    id: `list-${0}`,
     cards: [
       {
-        id: 1,
-        text: "We created a static list and static card"
+        id: `card-${0}`,
+        text: "we created a static list and a static card"
       },
       {
-        id: 2,
-        text: "we used a mix between material ui and styled components"
+        id: `card-${1}`,
+        text: "we used a mix between material UI React and styled components"
       }
     ]
-
   },
   {
-    title: 'This Episode',
-    id: 2,
+    title: "This Episode",
+    id: `list-${1}`,
     cards: [
       {
-        id: 3,
-        text: "We will create our first reducer"
+        id: `card-${2}`,
+        text: "we will create our first reducer"
       },
       {
-        id: 4,
-        text: "and render cards on our list with static data"
+        id: `card-${3}`,
+        text: "and render many cards on our list with static data"
       },
       {
-        id: 5,
-        text: "and make some small cleanup changes"
+        id: `card-${4}`,
+        text:
+          "we will also make some little changes I forgot in the last episode (link tags for roboto font and icons,..)"
+      },
+      {
+        id: `card-${5}`,
+        text:
+          "we will also make some little changes I forgot in the last episode (link tags for roboto font and icons,..)"
       }
     ]
-
   }
-]
+];
 
-  
-  function listReducer(state = initialState, action) {
-    switch(action.type){
-        case CREATE_COLUMN:
-          const newColumn = {
-            title: action.payload,
-            cards: [],
-            id: listId
-          }
-          listId += 1;
-          return [...state, newColumn]
-        case CREATE_CARD: {
-          const newCard = {
-            text: action.payload.text,
-            id: cardId
-          }
-          cardId += 1;
-          const newState = state.map(col => {
-            if(col.id === action.payload.colId){
-              return {
-                ...col,
-                cards: [...col.cards, newCard]
-              }
-            }else{
-              return col;
-            }
-          });
-          return newState;
+const listsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case CREATE_COLUMN:
+      const newList = {
+        title: action.payload,
+        cards: [],
+        id: `list-${listID}`
+      };
+      listID += 1;
+      return [...state, newList];
+
+    case CREATE_CARD: {
+      const newCard = {
+        text: action.payload.text,
+        id: `card-${cardID}`
+      };
+      cardID += 1;
+
+      console.log("action received", action);
+
+      const newState = state.map(list => {
+        if (list.id === action.payload.listID) {
+          return {
+            ...list,
+            cards: [...list.cards, newCard]
+          };
+        } else {
+          return list;
         }
-        case DRAGGED:
-          const newState = [...state];
-          const {
-            droppableIdStart,
-            droppableIdEnd,
-            droppableIndexEnd,
-            droppableIndexStart,    
-            type
-          } = action.payload;
+      });
 
-          if(type === "list"){
-            const col = newState.splice(droppableIndexStart, 1);
-            newState.splice(droppableIndexEnd, 0, ...col);
-            return newState;
-          }
-
-          // in same column
-          if (droppableIdStart === droppableIdEnd){
-            const col = state.find(col => String(col.id) === droppableIdStart)
-            const card = col.cards.splice(droppableIndexStart, 1)
-            col.cards.splice(droppableIndexEnd, 0, ...card);
-          }
-
-          // in different column
-          if (droppableIdStart !== droppableIdEnd){
-            const colStart = state.find(col => String(col.id) === droppableIdStart)
-
-            const card = colStart.cards.splice(droppableIndexStart, 1)
-            const colEnd = state.find(col => String(col.id) === droppableIdEnd)
-            colEnd.cards.splice(droppableIndexEnd, 0, ...card);
-          }
-
-          return newState;
-
-        default: 
-            return state;
+      return newState;
     }
+
+    case DRAGGED:
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexEnd,
+        droppableIndexStart,
+        draggableId,
+        type
+      } = action.payload;
+      const newState = [...state];
+      console.log(type);
+      // dragging lists around
+      if (type === "list") {
+        const list = newState.splice(droppableIndexStart, 1);
+        newState.splice(droppableIndexEnd, 0, ...list);
+        return newState;
+      }
+
+      // in the same list
+      if (droppableIdStart === droppableIdEnd) {
+        const list = state.find(list => droppableIdStart === list.id);
+        const card = list.cards.splice(droppableIndexStart, 1);
+        list.cards.splice(droppableIndexEnd, 0, ...card);
+      }
+
+      // other list
+
+      if (droppableIdStart !== droppableIdEnd) {
+        // find the list where drag happened
+        const listStart = state.find(list => droppableIdStart === list.id);
+
+        // pull out the card from this list
+        const card = listStart.cards.splice(droppableIndexStart, 1);
+
+        // find the list where drag ended
+        const listEnd = state.find(list => droppableIdEnd === list.id);
+
+        // put the card in the new list
+        listEnd.cards.splice(droppableIndexEnd, 0, ...card);
+      }
+
+      return newState;
+
+    default:
+      return state;
   }
-  
-  
-  export default listReducer;
+};
+
+export default listsReducer;

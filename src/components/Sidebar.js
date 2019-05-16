@@ -21,7 +21,7 @@ import ViewWeekIcon from '@material-ui/icons/ViewWeek';
 class Sidebar extends Component {
  
   render() {
-    const { classes, drawerClose, open } = this.props;
+    const { classes, drawerClose, open, devMode } = this.props;
     return (
         <Drawer
             variant="permanent"
@@ -61,14 +61,14 @@ class Sidebar extends Component {
                     </Tooltip>
                     <ListItemText primary="Calendar" />
                 </ListItem>
-                <ListItem component={Link} to="/pipelines/" button={true} >
+                {devMode && <ListItem component={Link} to="/pipelines/" button={true} >
                     <Tooltip title="Pipelines" disableHoverListener={open} placement="right-start">
                         <ListItemIcon>
                             <ViewWeekIcon />
                         </ListItemIcon>
                     </Tooltip>
                     <ListItemText primary="Pipelines" />
-                </ListItem>
+                </ListItem>}
             </List>
         </Drawer>
     );

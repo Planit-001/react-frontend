@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect  } from "react-router-dom";
 import { withStyles } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from "react-redux";
+import { devMode } from './utils/constants';
 
 import blue from '@material-ui/core/colors/blue';
 // import indigo from '@material-ui/core/colors/indigo';
@@ -141,7 +142,8 @@ class App extends Component {
             handleCalMenuClose={this.handleCalMenuClose}
             handleCalMenuClick={this.handleCalMenuClick} />
           <Sidebar 
-            classes={classes} 
+            classes={classes}
+            devMode={devMode}
             open={this.state.open} 
             drawerOpen={this.handleDrawerOpen} 
             drawerClose={this.handleDrawerClose} />
@@ -153,7 +155,7 @@ class App extends Component {
             <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
-            <Route path="/pipelines/" component={Pipeline} />
+            {devMode && <Route path="/pipelines/" component={Pipeline} />}
             <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
