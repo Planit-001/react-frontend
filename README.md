@@ -1,19 +1,15 @@
 #App To-do's
 
 Next steps:
-    - display calendar events (see: calendar 'agenda') on dashboard
-    - add sidebar view for calendar that displays selected calendar information with options:
-      - title, description, start and end times
-      - edit/delete (which will bring up the dialogue)
-    - finish pipeline (front-end)
+    - add a 'create future todo' feature
+    - 'lists' page (like todos, but no date)
     - feed dynamic coordinates into windy widget
     - delete redux state when user logouts: 
       - https://stackoverflow.com/questions/54199540/resetting-redux-state-on-logout
       - https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store/35641992#35641992
 
 Future steps:
-    - add a 'create future todo' feature
-    - 'lists' page (like todos, but no date)
+    - finish pipeline (front-end) 
     - drag and drop on calendar
     - ability to download .ics file
     - add a 'bulletin board' page. That imitates a bulletin board
