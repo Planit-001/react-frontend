@@ -17,7 +17,6 @@ const ListContainer = styled.div`
 class Pipeline extends React.Component {
     onDragEnd = result => {
         const { destination, source, draggableId, type } = result;
-        console.log("hi from func", type);
         if (!destination) {
           return;
         }
@@ -38,7 +37,9 @@ class Pipeline extends React.Component {
         const { lists } = this.props;
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-              <h2>Hello Youtube</h2>
+              <Typography variant="h3" gutterBottom component="h1">
+                Pipeline builder
+              </Typography>
               <Droppable droppableId="all-lists" direction="horizontal" type="list">
                 {provided => (
                   <ListContainer {...provided.droppableProps} ref={provided.innerRef}>
@@ -58,40 +59,6 @@ class Pipeline extends React.Component {
               </Droppable>
             </DragDropContext>
         );
-        return (
-            <div>
-                <Typography variant="h2" gutterBottom component="h1">
-                    Pipeline 
-                </Typography>
-                <DragDropContext 
-                    onDragEnd={this.handleDragEnd}>
-                    <h2>Hello Youtube</h2>
-
-                    <Droppable 
-                        droppableId="all-cols" 
-                        direction="horizontal" 
-                        type="list">
-                        {provided => (
-                            <ListContainer 
-                                {...provided.droppableProps} 
-                                ref={provided.innerRef}>
-
-                                {lists.map((col , i) => (
-                                    <PipelineList 
-                                        colId={col.id} 
-                                        index={i} 
-                                        key={col.id} 
-                                        title={col.title} 
-                                        cards={col.cards} />
-                                ))}
-                                {provided.placeholder}
-                                <PipelineActionBtn list />
-                            </ListContainer>
-                        )}
-                    </Droppable>
-                </DragDropContext>
-            </div>
-        )
     }
 }
 
