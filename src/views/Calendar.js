@@ -10,12 +10,14 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
+import Grid from '@material-ui/core/Grid';
 // import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
 import { getCalEvents, createCalEvent, updateCalEvent, deleteCalEvent } from "../redux/actions/calEvent";
-
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import InfoBox from './../components/calendar/InfoBox';
+
+
 const localizer = BigCalendar.momentLocalizer(moment)
 
 class Calendar extends React.Component {
@@ -61,9 +63,6 @@ class Calendar extends React.Component {
         openUpdateDialogue: false
     });
   };
-
-
-
 
   handleSelect = ({ start, end }) => {
     this.setState({
@@ -138,7 +137,7 @@ class Calendar extends React.Component {
         updateEventStart: event.start_time,
         updateEventEnd: event.end_time,
         updateEventDescription: event.description || '',
-        openUpdateDialogue: true
+        // openUpdateDialogue: true
     })
 
   }
@@ -235,20 +234,34 @@ class Calendar extends React.Component {
 
         {this.renderCreateDialogue()}
         {this.renderUpdateDialogue()}
+
+        <Grid container spacing={32}>
+            <Grid item sm={12} md={9}>
+                <BigCalendar
+                    selectable
+                    startAccessor="start_time"
+                    endAccessor="end_time"
+                    allDayAccessor="all_day"
+                    defaultView="month"
+                    views={["month", "week", "day", "agenda"]}
+                    style={{minHeight: '600px'}}
+                    popup={true}
+                    events={this.eventsMutator(calEvents)}
+                    onSelectEvent={event => this.onEventSelect(event)}
+                    onSelectSlot={this.handleSelect}
+                    localizer={localizer} />
+            </Grid>
+            <Grid item sm={12} md={3}>
+                <InfoBox 
+                    eventId={this.state.updateEventId}
+                    eventTitle={this.state.updateEventTitle}
+                    eventStart={this.state.updateEventStart}
+                    eventEnd={this.state.updateEventEnd}
+                    eventDescription={this.state.updateEventDescription}
+                />
+            </Grid>
+        </Grid>
         
-        <BigCalendar
-            selectable
-            startAccessor="start_time"
-            endAccessor="end_time"
-            allDayAccessor="all_day"
-            defaultView="month"
-            views={["month", "week", "day", "agenda"]}
-            style={{minHeight: '600px'}}
-            popup={true}
-            events={this.eventsMutator(calEvents)}
-            onSelectEvent={event => this.onEventSelect(event)}
-            onSelectSlot={this.handleSelect}
-            localizer={localizer} />
         <div className="spacer"></div>
       </div>
     );

@@ -10,13 +10,12 @@ import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
 import TodoBlock from './../components/TodoBlock';
 import Typography from '@material-ui/core/Typography';
-
-// import WeatherCard from './../components/widgets/WeatherCard';
 import WindyWeatherCard from './../components/widgets/WindyWeatherCard';
 import SuggestionWizard from './../components/suggestion/SuggestionWizard';
 
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
+import MiniCal from './../components/calendar/MiniCal';
 class Dashboard extends React.Component {
     componentDidMount(){
         // this.props.getWeatherCurrent()
@@ -65,17 +64,14 @@ class Dashboard extends React.Component {
                 </FormGroup>
                 <Grid
                     container
-                    direction="row"
-                    justify="space-around"
-                    spacing={32}
-                    alignItems="flex-start">
+                    spacing={32}>
                     {/* {currentWeather && !_.isEmpty(currentWeather) && <Grid item sm={12} md={7} lg={6}>
                         <Typography variant="h5" align="center" gutterBottom component="h4">
                             Today's Weather
                         </Typography>
                         <WeatherCard data={currentWeather}/>
                     </Grid>} */}
-                    <Grid  item sm={12} md={7} lg={6}>
+                    <Grid item sm={12} md={7} lg={6}>
                         <WindyWeatherCard />
                     </Grid>
                     <Grid item sm={12} md={5}>
@@ -83,6 +79,10 @@ class Dashboard extends React.Component {
                             title="Today's To-do's"
                             todos={todayNullOrBefore(todos)} />
                         <SuggestionWizard />
+                    </Grid>
+                    <Grid item sm={12} md={5}>
+                        <MiniCal title="This week's calendar events" />
+
                     </Grid>
                 </Grid>
             </div>
