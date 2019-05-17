@@ -22,7 +22,6 @@ Design improvements:
   - add a bottom navbar for mobile view (?) ( <BottomNavigation />)
 
 Issues:
-  - prevent creation of cal events if no title
   - error messages for api failing in toasts
 
 Meta ideas:

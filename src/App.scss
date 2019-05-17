@@ -1,6 +1,7 @@
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 
+$theme: #2196f3;
 
 .checkedTodo {
 	text-decoration: line-through;
@@ -14,11 +15,11 @@
 	}
 }
 
-.rbc-week-view .rbc-event {
-	background-color: #2196f3;
+.rbc-month-view .rbc-event {
+	background-color: $theme;
 }
 
 .rbc-time-view .rbc-event {
-	background-color: #2196f3;
+	background-color: $theme;
 }
 

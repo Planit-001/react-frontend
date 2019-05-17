@@ -88,6 +88,9 @@ class Calendar extends React.Component {
 
   handleSubmit = () => {
       const { newEventStart, newEventEnd, newEventTitle, newEventDescription } = this.state;
+      if(!newEventTitle.trim()){
+          return
+      }
       const payload = {
           end_time: newEventEnd,
           start_time: newEventStart,
