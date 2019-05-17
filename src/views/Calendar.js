@@ -39,6 +39,7 @@ class Calendar extends React.Component {
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
   }
 
   componentDidMount(){
@@ -56,6 +57,7 @@ class Calendar extends React.Component {
         newEventStart: '',
         newEventTitle: '',
         newEventDescription: '',
+        updateEventId: null,
         updateEventTitle: '',
         updateEventStart: '',
         updateEventEnd: '',
@@ -63,6 +65,18 @@ class Calendar extends React.Component {
         openUpdateDialogue: false
     });
   };
+
+  handleSmallClose = () => {
+    this.setState({
+        openDialogue: false,
+        newEventEnd: '',
+        newEventStart: '',
+        newEventTitle: '',
+        newEventDescription: '',
+        openUpdateDialogue: false
+        
+    })
+  }
 
   handleSelect = ({ start, end }) => {
     this.setState({
@@ -104,7 +118,8 @@ class Calendar extends React.Component {
     };
 
     this.props.updateCalEvent(updateEventId, payload).then(() => {
-        this.handleClose()
+        this.handleSmallClose()
+        
     });
   }
 
@@ -115,7 +130,7 @@ class Calendar extends React.Component {
             this.handleClose();
         })
     }else{
-        this.handleClose();
+        this.handleSmallClose()
     }
   }
 
@@ -139,7 +154,12 @@ class Calendar extends React.Component {
         updateEventDescription: event.description || '',
         // openUpdateDialogue: true
     })
+  }
 
+  onUpdateBtnClick(){
+      this.setState({
+          openUpdateDialogue: true
+      })
   }
 
   renderCreateDialogue(){
@@ -210,14 +230,11 @@ class Calendar extends React.Component {
                         margin="normal"/>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.handleClose} color="default">
+                    <Button onClick={this.handleSmallClose} color="default">
                         Cancel
                     </Button>
                     <Button onClick={this.handleUpdate} color="primary">
                         Update
-                    </Button>
-                    <Button onClick={this.handleDelete} color="secondary">
-                        Delete event
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -258,6 +275,8 @@ class Calendar extends React.Component {
                     eventStart={this.state.updateEventStart}
                     eventEnd={this.state.updateEventEnd}
                     eventDescription={this.state.updateEventDescription}
+                    onUpdate={this.onUpdateBtnClick}
+                    onDelete={this.handleDelete}
                 />
             </Grid>
         </Grid>
