@@ -14,6 +14,14 @@ import ComponentTitle from './../ComponentTitle';
 
 const localizer = BigCalendar.momentLocalizer(moment)
 
+function EventAgenda({ event }) {
+    return (
+      <span>
+        <em>{event.title}</em>
+        <p>{event.desc}</p>
+      </span>
+    )
+  }
 
 class MiniCal extends React.Component{
 
@@ -34,6 +42,11 @@ class MiniCal extends React.Component{
                     toolbar={false}
                     style={{minHeight: '600px'}}
                     events={eventsApiMutator(calEvents)}
+                    components={{
+                        agenda: {
+                          event: EventAgenda,
+                        }
+                    }}                  
                     localizer={localizer} />
             </div>
         )

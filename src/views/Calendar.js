@@ -263,6 +263,13 @@ class Calendar extends React.Component {
                     views={["month", "week", "day", "agenda"]}
                     style={{minHeight: '600px'}}
                     popup={true}
+                    // eventPropGetter={event => ({
+                    //     style: {
+                    //         backgroundColor: '#2196f3'
+                    //     }
+                    // })}
+                    // // step={15}
+                    // timeslots={8}
                     events={this.eventsMutator(calEvents)}
                     onSelectEvent={event => this.onEventSelect(event)}
                     onSelectSlot={this.handleSelect}
