@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TodoBlock from './../components/TodoBlock';
 import RecentArchived from './../components/todo/RecentArchived';
+import ComponentTitle from './../components/ComponentTitle';
+import FutureTodoCreate from './../components/todo/FutureTodoCreate';
 
 const styles = theme => ({
   root: {
@@ -64,35 +66,38 @@ class Todos extends React.Component {
           alignItems="flex-start">
           <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
-              title="Today's To-do's"
+              title="Today's to-do's"
               todos={this.filterTodosToday(todos)} />
           </Grid>
           <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(1, 'day')}
-              title="Tomorrow's To-do's"
+              title="Tomorrow's to-do's"
               todos={this.filterTodosTomorrow(todos)} />
           </Grid>
           <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(2, 'day')}
-              title="The Day After"
+              title="The day after"
               todos={dayAfterTodos(todos)} />
+          </Grid>
+          <Grid item sm={12} md={6} lg={4}>
+            <ComponentTitle title="Create future to-do" />
+            <FutureTodoCreate user={this.props.user}  />
           </Grid>
           <Grid item sm={12} md={6} lg={4}>
             <TodoBlock 
               sortByDate={true}
-              title="Future To-do's"
+              title="Future to-do's"
               showDate={true}
               disableCreate={true}
               todos={futureTodos(todos)} />
           </Grid>
           <Grid item sm={12} md={6} lg={4}>
-            <Typography variant="h5" align="center" gutterBottom component="h4">
-              To-do Recent Archives
-            </Typography>
+            <ComponentTitle title="To-do recent archives" />
             <RecentArchived todos={todosArchived} />
           </Grid>
+          
         </Grid>
         <div className="spacer"></div>
       </div>
@@ -107,7 +112,8 @@ Todos.propTypes = {
 const mapStateToProps = state => {
   return { 
     todos: state.todo.todos,
-    todosArchived: state.todo.todosArchived.items
+    todosArchived: state.todo.todosArchived.items,
+    user: state.auth.user
   };
 };
 
