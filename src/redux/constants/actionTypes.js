@@ -5,6 +5,11 @@ export const UPDATE_TODO = "UPDATE_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const GET_TODOS_ARCHIVED = "GET_TODOS_ARCHIVED";
 
+export const GET_LISTS = "GET_LISTS";
+export const CREATE_LIST = "CREATE_LIST";
+export const UPDATE_LIST = "UPDATE_LIST";
+export const DELETE_LIST = "DELETE_LIST";
+
 // Calendar Events
 export const GET_CALEVENTS = "GET_CALEVENTS";
 export const CREATE_CALEVENT = "CREATE_CALEVENT";
@@ -50,9 +55,3 @@ export const UPDATE_COLUMN = "UPDATE_COLUMN";
 export const DELETE_COLUMN = "DELETE_COLUMN";
 
 export const DRAGGED = "DRAGGED";
-
-// Lists
-export const GET_LISTS = "GET_LISTS";
-export const CREATE_LIST = "CREATE_LIST";
-export const UPDATE_LIST = "UPDATE_LIST";
-export const DELETE_LIST = "DELETE_LIST";

@@ -4,14 +4,14 @@ import todo from './todos';
 import externalReducer from './external';
 import authReducer from './auth';
 import suggestion from './suggestion';
-import list from './list';
+import pipeline from './pipeline';
 import calEvent from './calEvent';
 
 const rootReducer = combineReducers({
   external: externalReducer,
   todo,
   suggestion,
-  list,
+  pipeline,
   calEvent,
   ui: uiReducer,
   auth: authReducer

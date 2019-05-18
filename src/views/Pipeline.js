@@ -65,7 +65,7 @@ class Pipeline extends React.Component {
 
 const mapStateToProps = state => {
     return { 
-        lists: state.list
+        lists: state.pipeline
     };
 };
 

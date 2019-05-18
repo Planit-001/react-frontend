@@ -45,12 +45,10 @@ class Lists extends React.Component {
   }
 }
 
-Lists.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = state => {
-  return { todos: state.todo.todos };
+  return { 
+    todos: state.todo.todos 
+  };
 };
 
 export default connect(mapStateToProps)(Lists);
