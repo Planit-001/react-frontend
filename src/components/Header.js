@@ -54,7 +54,7 @@ class Header extends Component {
               <IconButton
                   onClick={() => changeDarkMode(!darkMode)}
                   color="inherit">
-                  {darkMode ? <Brightness3Icon /> : <WbSunnyIcon /> }
+                  {darkMode ? <WbSunnyIcon /> : <Brightness3Icon /> }
                   {/* {darkMode ? <Brightness4Icon /> : <Brightness7Icon /> } */}
               </IconButton>
             </Tooltip>

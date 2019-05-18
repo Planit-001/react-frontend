@@ -4,14 +4,12 @@ import { getTodos } from "../redux/actions/todo";
 import { getWeatherCurrent } from "../redux/actions/external";
 import { changeDarkMode } from "../redux/actions/ui";
 
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import Switch from '@material-ui/core/Switch';
 import TodoBlock from './../components/TodoBlock';
 import Typography from '@material-ui/core/Typography';
 import WindyWeatherCard from './../components/widgets/WindyWeatherCard';
 import SuggestionWizard from './../components/suggestion/SuggestionWizard';
+import CalEventList from './../components/calendar/CalEventList';
 
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
@@ -41,7 +39,7 @@ class Dashboard extends React.Component {
     }
     
     render(){
-        const { todos } = this.props
+        const { todos, calEvents } = this.props
         return (
             <div>
                 <Typography variant="h2" gutterBottom component="h1">
@@ -58,6 +56,8 @@ class Dashboard extends React.Component {
                     </Grid>} */}
                     <Grid item sm={12} md={7} lg={6}>
                         <WindyWeatherCard />
+                        {/* <div className="spacer"></div> */}
+                        {/* <CalEventList events={calEvents} /> */}
                     </Grid>
                     <Grid item sm={12} md={5}>
                         <TodoBlock 
@@ -65,9 +65,8 @@ class Dashboard extends React.Component {
                             todos={todayNullOrBefore(todos)} />
                         <SuggestionWizard />
                     </Grid>
-                    <Grid item sm={12} md={5}>
-                        <MiniCal title="This week's calendar events" />
-
+                    <Grid item sm={12} md={8}>
+                        <CalEventList events={calEvents} />
                     </Grid>
                 </Grid>
             </div>
@@ -82,6 +81,7 @@ const mapStateToProps = state => {
         darkMode: state.ui.darkMode,
         currentWeather: state.external.currentWeather,
         user: state.auth.user,
+        calEvents: state.calEvent.calEvents,
     };
 };
 
