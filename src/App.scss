@@ -23,3 +23,17 @@ $theme: #2196f3;
 	background-color: $theme;
 }
 
+.darkMode{
+	.rbc-toolbar{
+		color: #fff;
+		button{
+			color: inherit;
+		}
+		button.rbc-active{
+			color: #000;
+		}
+	}
+	.rbc-agenda-view{
+		color: indianred;
+	}
+}

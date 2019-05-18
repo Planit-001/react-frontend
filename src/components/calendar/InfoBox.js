@@ -11,9 +11,9 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
     return (
         <Card>
             <CardContent>
-                <Typography color="textSecondary" gutterBottom>
+                {!eventId && <Typography color="textSecondary" gutterBottom>
                     Click an event to view
-                </Typography>
+                </Typography>}
                 {eventId && <div>
                     <Typography variant="h5" component="h2">
                         {eventTitle}

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 import moment from 'moment';
 import BigCalendar from 'react-big-calendar'
-
+import { Paper } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -245,7 +245,7 @@ class Calendar extends React.Component {
 
 
   render() {
-    const { calEvents } = this.props;
+    const { calEvents, darkMode } = this.props;
     return (
       <div>
         <Typography variant="h3" gutterBottom component="h1">
@@ -257,26 +257,29 @@ class Calendar extends React.Component {
 
         <Grid container spacing={32}>
             <Grid item sm={12} md={9}>
-                <BigCalendar
-                    selectable
-                    startAccessor="start_time"
-                    endAccessor="end_time"
-                    allDayAccessor="all_day"
-                    defaultView="month"
-                    views={["month", "week", "day", "agenda"]}
-                    style={{minHeight: '600px'}}
-                    popup={true}
-                    // eventPropGetter={event => ({
-                    //     style: {
-                    //         backgroundColor: '#2196f3'
-                    //     }
-                    // })}
-                    // // step={15}
-                    // timeslots={8}
-                    events={this.eventsMutator(calEvents)}
-                    onSelectEvent={event => this.onEventSelect(event)}
-                    onSelectSlot={this.handleSelect}
-                    localizer={localizer} />
+                <Paper style={{padding: 15}}>
+                    <BigCalendar
+                        className={darkMode ? 'darkMode' : ''}
+                        selectable
+                        startAccessor="start_time"
+                        endAccessor="end_time"
+                        allDayAccessor="all_day"
+                        defaultView="month"
+                        views={["month", "week", "day", "agenda"]}
+                        style={{minHeight: '600px'}}
+                        popup={true}
+                        // eventPropGetter={event => ({
+                        //     style: {
+                        //         backgroundColor: '#2196f3'
+                        //     }
+                        // })}
+                        // // step={15}
+                        // timeslots={8}
+                        events={this.eventsMutator(calEvents)}
+                        onSelectEvent={event => this.onEventSelect(event)}
+                        onSelectSlot={this.handleSelect}
+                        localizer={localizer} />
+                </Paper>
             </Grid>
             <Grid item sm={12} md={3}>
                 <InfoBox 
@@ -300,7 +303,8 @@ class Calendar extends React.Component {
 const mapStateToProps = state => {
   return { 
       calEvents: state.calEvent.calEvents,
-      user: state.auth.user
+      user: state.auth.user,
+      darkMode: state.ui.darkMode,
     };
 };
 
