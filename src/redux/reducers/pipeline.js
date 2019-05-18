@@ -2,7 +2,7 @@ import {
   CREATE_COLUMN, 
   CREATE_CARD,
   DRAGGED
-} from './../constants/actionTypes'
+} from '../constants/actionTypes'
 
 let listID = 2;
 let cardID = 6;

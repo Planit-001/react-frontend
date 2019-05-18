@@ -15,7 +15,6 @@ Future steps:
     - react native app
 
 Design improvements: 
-  - adapt calendar components styling for night mode
   - add a question mark icon button that reveals a popup that describes the page function
   - disappear drawer on mobile
   - improve header on mobile
@@ -30,8 +29,8 @@ Meta ideas:
     - Text editor could be a medium-like tool leveraging draftjs.
     - Save in db as a JSON blob
     - see: bitwiser.in or megadraft.io
-  - gamify dashboard icon by showing a different https://fontawesome.com/icons?d=gallery&q=dashboard based on todos count (?)
-  - add user settings page
+    - gamify dashboard icon by showing a different https://fontawesome.com/icons?d=gallery&q=dashboard based on todos count (?)
+    - add user settings page
 
 Name/brand ideas:
   - 'planner' - something related to 'planning'

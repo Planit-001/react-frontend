@@ -19,6 +19,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Dashboard from './views/Dashboard';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import List from './views/Lists';
 // import PipelineBuilder from './views/PipelineBuilder';
 import Pipeline from './views/Pipeline';
 import SignIn from './views/SignIn';
@@ -156,6 +157,7 @@ class App extends Component {
             <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
+            {devMode && <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />}
             {devMode && <Route path="/pipelines/" component={Pipeline} />}
             <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
             <Route path="/calendar-full/" component={FullCalendar} />

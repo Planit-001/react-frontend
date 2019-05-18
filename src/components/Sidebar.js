@@ -7,6 +7,9 @@ import '../App.scss';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRangeIcon from '@material-ui/icons/DateRange';
+
+import ListAltIcon from '@material-ui/icons/ListAlt';
+
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
@@ -48,11 +51,19 @@ class Sidebar extends Component {
                 <ListItem component={Link} to="/todos/" button={true} >
                     <Tooltip title="Todos" disableHoverListener={open} placement="right-start">
                         <ListItemIcon>
-                            <FormatListBulletedIcon />
+                            <ListAltIcon />
                         </ListItemIcon>
                     </Tooltip>
                     <ListItemText primary="Todos" />
                 </ListItem>
+                {devMode && <ListItem component={Link} to="/lists/" button={true} >
+                    <Tooltip title="Lists" disableHoverListener={open} placement="right-start">
+                        <ListItemIcon>
+                            <FormatListBulletedIcon />                            
+                        </ListItemIcon>
+                    </Tooltip>
+                    <ListItemText primary="Lists" />
+                </ListItem>}
                 <ListItem component={Link} to="/calendar" button={true}>
                     <Tooltip title="Calendar" disableHoverListener={open} placement="right-start">
                         <ListItemIcon>
