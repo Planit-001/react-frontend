@@ -12,8 +12,8 @@ import SuggestionWizard from './../components/suggestion/SuggestionWizard';
 import CalEventList from './../components/calendar/CalEventList';
 
 import {todayNullOrBefore} from './../utils/todoFuncs'
+// import MiniCal from './../components/calendar/MiniCal';
 
-import MiniCal from './../components/calendar/MiniCal';
 class Dashboard extends React.Component {
     componentDidMount(){
         // this.props.getWeatherCurrent()

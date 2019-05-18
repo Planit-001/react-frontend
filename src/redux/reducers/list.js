@@ -19,6 +19,7 @@ import {
   ){
     switch(action.type){
       case CREATE_LIST_ITEM:
+        debugger;
         return Object.assign({}, state, {
           isFetching: false,
           didInvalidate: false,
@@ -87,6 +88,11 @@ import {
       return Object.assign({}, state, {
         lists: newState.lists.filter(item => item.id !== action.payload)
       });
+    }
+
+    if([CREATE_LIST_ITEM, UPDATE_LIST_ITEM, DELETE_LIST_ITEM].includes(action.type)){
+      debugger;
+      listItem(action);
     }
 
     

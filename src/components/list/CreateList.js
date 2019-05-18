@@ -52,7 +52,6 @@ class CreateList extends React.Component {
             <Grid sm={12} container item justify="center">
               <Button
                   color="primary"
-
                   variant="contained"
                   onClick={() => this.createList(this.state.inputValue)}>
                   Create

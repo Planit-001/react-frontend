@@ -3,6 +3,9 @@ import {
     CREATE_LIST,
     UPDATE_LIST,
     DELETE_LIST,
+    CREATE_LIST_ITEM,
+    UPDATE_LIST_ITEM,
+    DELETE_LIST_ITEM,
 } from '../constants/actionTypes'
 
 import { handleErrors, buildHeaders, apiBase } from '../../utils/apiHelpers';
@@ -104,5 +107,28 @@ export function createList(payload) {
       .catch(err => {
         console.log(err)
       })
+    }
+  };
+
+  export function createListItem(listId, payload) {
+    return function(dispatch, getState){
+  
+      const headers = buildHeaders(getState().auth.token)
+      return fetch(`${apiBase}/api/v1/lists/${listId}/list_items`, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers
+      })
+      .then(handleErrors)
+      .then(response => response.json())
+      .then(json => {
+        console.log('created list item: ', json);
+        dispatch({ type: CREATE_LIST_ITEM, payload: json });
+        ding();
+        toastEvent("List item created!");
+      })
+      .catch(err => {
+        console.log(err)
+      });
     }
   };
