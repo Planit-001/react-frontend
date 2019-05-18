@@ -1,7 +1,6 @@
 #App To-do's
 
 Next steps:
-    - fix styling of create future todos
     - remove top text of event info card when event selected
     - 'lists' page (like todos, but no date)
     - feed dynamic coordinates into windy widget
@@ -17,6 +16,7 @@ Future steps:
     - react native app
 
 Design improvements: 
+  - add lightbulb to toggle dark mode in header
   - adapt calendar components styling for night mode
   - add a question mark icon button that reveals a popup that describes the page function
   - disappear drawer on mobile

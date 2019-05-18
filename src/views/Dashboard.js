@@ -27,10 +27,6 @@ class Dashboard extends React.Component {
         this.props.getTodos();
     }
 
-    handleChange = name => event => {
-        this.props.changeDarkMode(event.target.checked)
-    };
-
     geoLocate(){
         const {getWeatherCurrent} = this.props;
         function showPosition(position) {
@@ -51,17 +47,6 @@ class Dashboard extends React.Component {
                 <Typography variant="h2" gutterBottom component="h1">
                     Dashboard
                 </Typography>
-                <FormGroup row>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={this.props.darkMode}
-                                onChange={this.handleChange('checked')}
-                                value="checked"
-                                color="primary"/>
-                        }
-                        label="Dark Mode"/>
-                </FormGroup>
                 <Grid
                     container
                     spacing={32}>

@@ -27,6 +27,7 @@ import ToastAlert from './components/ToastAlert';
 import Todos from './views/Todos'
 import Typography from '@material-ui/core/Typography';
 import { logoutUser} from './redux/actions/auth';
+import { changeDarkMode } from "./redux/actions/ui";
 
 
 function BigCalendar() {
@@ -102,7 +103,7 @@ class App extends Component {
   }
 
   render() {
-    const { classes, darkMode } = this.props;
+    const { classes, darkMode, changeDarkMode } = this.props;
     const isAuthenticated =  this.isAuthenticated();
     const { anchorEl } = this.state;
 
@@ -119,8 +120,6 @@ class App extends Component {
         // two indexes within its tonal palette.
         // E.g., shift from Red 500 to Red 300 or Red 700.
         tonalOffset: 0.2,
-
-        
       },
       typography: { useNextVariants: true },
     });
@@ -132,6 +131,8 @@ class App extends Component {
         <CssBaseline />
         <Router>
           <Header
+            darkMode={darkMode}
+            changeDarkMode={changeDarkMode}
             anchorEl={anchorEl}
             classes={classes}
             open={this.state.open}
@@ -262,4 +263,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withStyles(styles)(connect(mapStateToProps, {logoutUser})(App));
+export default withStyles(styles)(connect(mapStateToProps, {logoutUser, changeDarkMode })(App));
