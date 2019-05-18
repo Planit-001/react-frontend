@@ -130,7 +130,7 @@ class TodoItem extends React.Component {
     const { selectedDate } = this.state;
 
     return (
-        <ListItem>
+        <ListItem button disableRipple>
           <Dialog
             onClose={this.handleClose}
             open={this.state.timeModal}>
