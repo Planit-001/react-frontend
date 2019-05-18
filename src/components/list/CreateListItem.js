@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ListItem from '@material-ui/core/ListItem';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -8,6 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import { createListItem } from "./../../redux/actions/list";

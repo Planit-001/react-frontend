@@ -132,3 +132,24 @@ export function createList(payload) {
       });
     }
   };
+
+  export function updateListItem(listId, listItemId, payload) {
+    return function(dispatch, getState){
+      const headers = buildHeaders(getState().auth.token)
+      return fetch(`${apiBase}/api/v1/lists/${listId}/list_items/${listItemId}`, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers
+      })
+      .then(handleErrors)
+      .then(response => response.json())
+      .then(json => {
+        console.log('updated list item: ', json);
+        dispatch({ type: UPDATE_LIST_ITEM, payload: json });
+        toastEvent("List item updated!");
+      })
+      .catch(err => {
+        console.log(err)
+      });
+    }
+  };

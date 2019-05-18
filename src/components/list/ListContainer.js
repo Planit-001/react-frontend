@@ -7,7 +7,9 @@ import Paper from "@material-ui/core/Paper";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import CreateListItem from './CreateListItem';
-
+// import ListItem from '@material-ui/core/ListItem';
+import ListItemEditable from './ListItemEditable';
+import ListItemText from '@material-ui/core/ListItemText';
 
 class ListContainer extends React.Component {
 
@@ -34,7 +36,7 @@ class ListContainer extends React.Component {
 
   render() {
     const { list } = this.props;
-
+    const listItems = list.list_items
     return (
       
         <Paper>
@@ -42,6 +44,9 @@ class ListContainer extends React.Component {
 
                 <ComponentTitle title={list.title} />
                 <List>
+                    {list.list_items.map((item, index) => {
+                      return <ListItemEditable key={index} listItem={item} listId={list.id} />
+                    })}
                     <Divider />
                     <CreateListItem listId={list.id} />
                 </List>
