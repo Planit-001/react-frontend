@@ -5,7 +5,6 @@ import {
     DELETE_LIST,
 } from '../constants/actionTypes'
 
-
 import { handleErrors, buildHeaders, apiBase } from '../../utils/apiHelpers';
 
 import { toastEvent, ding } from '../../utils/uiFuncs';

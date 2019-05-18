@@ -5,6 +5,7 @@ import externalReducer from './external';
 import authReducer from './auth';
 import suggestion from './suggestion';
 import pipeline from './pipeline';
+import list from './list';
 import calEvent from './calEvent';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   todo,
   suggestion,
   pipeline,
+  list,
   calEvent,
   ui: uiReducer,
   auth: authReducer
