@@ -5,10 +5,16 @@ export const UPDATE_TODO = "UPDATE_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const GET_TODOS_ARCHIVED = "GET_TODOS_ARCHIVED";
 
+// Lists
 export const GET_LISTS = "GET_LISTS";
 export const CREATE_LIST = "CREATE_LIST";
 export const UPDATE_LIST = "UPDATE_LIST";
 export const DELETE_LIST = "DELETE_LIST";
+
+// List items
+export const CREATE_LIST_ITEM = "CREATE_LIST_ITEM";
+export const UPDATE_LIST_ITEM = "UPDATE_LIST_ITEM";
+export const DELETE_LIST_ITEM = "DELETE_LIST_ITEM";
 
 // Calendar Events
 export const GET_CALEVENTS = "GET_CALEVENTS";

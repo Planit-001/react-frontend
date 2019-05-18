@@ -10,7 +10,6 @@ import {
     isFetching: false,
     didInvalidate: false,
     lastUpdated: null,
-    todosArchived: {}
   };
   
   function calEventReducer(state = initialState, action) {
