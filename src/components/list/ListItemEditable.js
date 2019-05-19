@@ -28,9 +28,9 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
             const listItemBody = {
                 title: listTitle,
             };
-        
-            console.log('create list item');
-            dispatch(updateListItem(listId, listItem.id, listItemBody))
+            dispatch(updateListItem(listId, listItem.id, listItemBody)).then(() => {
+                setEditable(false);
+            })
         }
     }
 

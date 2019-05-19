@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { 
     GET_LISTS, 
     CREATE_LIST, 
@@ -7,16 +9,15 @@ import {
     UPDATE_LIST_ITEM, 
     DELETE_LIST_ITEM ,
   } from "../constants/actionTypes";
-  
+
+  import update from 'immutability-helper';
+
   function listItem( state, action ){
     
     switch(action.type){
       case CREATE_LIST_ITEM:
           const { payload, listId } = action
-
-          // const list = state.list.find((item => item.id === listId));
-          
-          const newState = {
+          return {
             ...state,
             lists: state.lists.map((list) => {
               if(list.id === listId){
@@ -30,22 +31,26 @@ import {
               }
             })
           }
-          return newState
-        // return Object.assign({}, state, {
-        //   items: state.items.concat(action.payload),
-        // });
-      case UPDATE_LIST_ITEM:
-          return Object.assign({}, state, {
-            items: state.items.map((item) => {     
-              if(item.id !== action.payload.id){
-                return item
+          
+      case UPDATE_LIST_ITEM:{
+        const _payload = action.payload
+        const listItemId = action.listItemId
+        const _list = state.lists.find(list => list.id === action.listId);
+        const _listIndex = state.lists.findIndex(list => list.id === action.listId);
+
+        const _listItemIndex = _list.list_items.findIndex(item => item.id === listItemId);
+
+        return update(state, {
+          lists: {
+            [_listIndex]: {
+              list_items: {
+                [_listItemIndex]: {$merge: _payload}
               }
-              return {
-                ...item,
-                ...action.payload
-              }
-            })
-          });
+            }
+          }
+        })
+        
+      }
       case DELETE_LIST_ITEM: {
         let newState = {...state}
         return Object.assign({}, state, {
@@ -83,7 +88,7 @@ import {
 
     if(action.type === UPDATE_LIST){
         return Object.assign({}, state, {
-          lists: state.lists.map((item, index) => {     
+          lists: state.lists.map((item) => {     
             if(item.id !== action.payload.id){
               return item
             }

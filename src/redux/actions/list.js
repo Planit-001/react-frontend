@@ -123,7 +123,6 @@ export function createList(payload) {
       .then(handleErrors)
       .then(response => response.json())
       .then(json => {
-        console.log('created list item: ', json);
         dispatch({ 
           type: CREATE_LIST_ITEM, 
           payload: json,
@@ -149,8 +148,12 @@ export function createList(payload) {
       .then(handleErrors)
       .then(response => response.json())
       .then(json => {
-        console.log('updated list item: ', json);
-        dispatch({ type: UPDATE_LIST_ITEM, payload: json });
+        dispatch({ 
+          type: UPDATE_LIST_ITEM, 
+          payload: json,
+          listId,
+          listItemId
+        });
         toastEvent("List item updated!");
       })
       .catch(err => {
