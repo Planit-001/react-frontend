@@ -157,7 +157,7 @@ class App extends Component {
             <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
-            {devMode && <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />}
+            <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
             {devMode && <Route path="/pipelines/" component={Pipeline} />}
             <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
             <Route path="/calendar-full/" component={FullCalendar} />
