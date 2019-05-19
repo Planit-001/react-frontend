@@ -10,7 +10,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import { updateListItem } from "../../redux/actions/list";
+import { updateListItem, deleteListItem } from "../../redux/actions/list";
 import { ding } from './../../utils/uiFuncs';
 
 
@@ -53,8 +53,9 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
         }
     }
 
-    const deleteListItem = () => {
+    const handleDelete = () => {
         console.log('delete')
+        dispatch(deleteListItem(listId, listItem.id))
     }
 
 
@@ -86,7 +87,7 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
             )}
             <ListItemSecondaryAction>
                 <Tooltip title="Delete list item">
-                    <IconButton onClick={deleteListItem} aria-label="Delete">
+                    <IconButton onClick={handleDelete} aria-label="Delete">
                         <DeleteIcon />
                     </IconButton>
 

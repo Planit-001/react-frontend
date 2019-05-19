@@ -161,3 +161,26 @@ export function createList(payload) {
       });
     }
   };
+
+  export function deleteListItem(listId, listItemId) {
+    return function(dispatch, getState){
+      return fetch(`${apiBase}/api/v1/lists/${listId}/list_items/${listItemId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": getState().auth.token
+        }
+      })
+      .then(handleErrors)
+      .then(response => {
+          dispatch({ 
+            type: DELETE_LIST_ITEM, 
+            listId,
+            listItemId
+          });
+          toastEvent("List item deleted!");
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  };

@@ -49,13 +49,23 @@ import {
             }
           }
         })
-        
       }
       case DELETE_LIST_ITEM: {
-        let newState = {...state}
-        return Object.assign({}, state, {
-          items: newState.items.filter(item => item.id !== action.payload)
-        });
+        // let newState = {...state}
+        const listIndex = state.lists.findIndex(list => list.id === action.listId);
+        const listItemIndex = state.lists[listIndex].list_items.findIndex(listItem => listItem.id === action.listItemId);
+
+        // let newList = _.cloneDeep(state.lists[listIndex])
+        // newList.list_items = newList.list_items.filter(item => item.id !== action.listItemId)
+        // newState.lists[listIndex].list_items = newState.lists[listIndex].list_items.filter(item => item.id !== action.listItemId);
+        
+        return update(state, {
+          lists: {
+            [listIndex]: {
+              list_items: {$splice: [[listItemIndex, 1]]}
+            }
+          }
+        })
       }
       default: 
         return state
