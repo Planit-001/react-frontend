@@ -20,10 +20,14 @@ class Lists extends React.Component {
     this.props.getLists();
   }
 
+  filterLists(lists){
+    return lists ? lists.filter((list) => list.archived !== true) : []
+  }
+
 
   render() {
 
-    const { lists } = this.props;
+    const lists = this.filterLists(this.props.lists);
 
     return (
       <div>

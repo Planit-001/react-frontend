@@ -9,6 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import CreateListItem from './CreateListItem';
 // import ListItem from '@material-ui/core/ListItem';
 import ListItemEditable from './ListItemEditable';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Card from '@material-ui/core/Card';
@@ -24,6 +26,19 @@ class ListContainer extends React.Component {
 
   
   updateList = (e, id) => {
+
+  }
+
+  archiveList = () => {
+
+    const test = window.confirm("Are you sure you want to archive this list?")
+    if(test){  
+      const _payload = {
+        archived: true
+      }
+      this.props.updateList(this.props.list.id, _payload)
+    }
+
 
   }
 
@@ -52,13 +67,15 @@ class ListContainer extends React.Component {
               <CardHeader 
                 title={list.title}
                 action={
-                  <IconButton>
-                    <ArchiveIcon />
-                  </IconButton>
+                  <Tooltip title="Archive list">
+                    <IconButton onClick={this.archiveList}>
+                      <ArchiveIcon />
+                    </IconButton>
+                  </Tooltip>
                 } />
                 <CardContent style={{paddingBottom: 0}}>
                   <List>
-                      {list.list_items.map((item, index) => {
+                      {list && list.list_items && list.list_items.map((item, index) => {
                         return <ListItemEditable key={index} listItem={item} listId={list.id} />
                       })}
                       <Divider />

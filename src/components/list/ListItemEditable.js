@@ -5,12 +5,18 @@ import { connect } from 'react-redux';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import { updateListItem } from "../../redux/actions/list";
+import { ding } from './../../utils/uiFuncs';
 
 
 const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
     const [editable, setEditable] = useState(false);
+    
     const [listTitle, setListTitle] = useState(listItem.title);
   
     const handleClickAway = () => {
@@ -34,9 +40,31 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
         }
     }
 
+    const updateListItemDone = (e) => {
+        if(e.target.checked !== undefined){
+            const listItemBody = {
+                done: e.target.checked
+            }
+
+            dispatch(updateListItem(listId, listItem.id, listItemBody)).then(() => {
+                setEditable(false);
+                ding();
+            })
+        }
+    }
+
+    const deleteListItem = () => {
+        console.log('delete')
+    }
+
 
    return (
         <ListItem button disableRipple onClick={() => setEditable(true)}>
+             <Checkbox
+              checked={listItem.done || false}
+              tabIndex={-1}
+              onClick={(e) => updateListItemDone(e)}
+              disableRipple />
             {editable ? (
                 <ClickAwayListener onClickAway={handleClickAway}>
                     <TextField
@@ -51,8 +79,17 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
                     
                 </ClickAwayListener>
             ):(
-                <ListItemText primary={listItem.title} />
+                <ListItemText className={listItem.done ? 'checkedTodo' : ''} primary={listItem.title} />
             )}
+            <ListItemSecondaryAction>
+                <Tooltip title="Delete list item">
+                    <IconButton onClick={deleteListItem} aria-label="Delete">
+                        <DeleteIcon />
+                    </IconButton>
+
+                </Tooltip>
+
+            </ListItemSecondaryAction>
         </ListItem>
    )
   });
