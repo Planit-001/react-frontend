@@ -57,6 +57,19 @@ class ListContainer extends React.Component {
     // this.props.deleteList(id);
   }
 
+  sortedListItems = (listItems) => {
+    if (listItems.length >= 1){
+      return listItems.sort((a, b) => {
+        if(a.done === b.done){
+          return a.id < b.id ? 1 : -1
+        }
+        return a.done ? 1 : -1 
+      })
+    }else{
+      return listItems
+    }
+  }
+
 
   render() {
     const { list } = this.props;
@@ -75,7 +88,7 @@ class ListContainer extends React.Component {
                 } />
                 <CardContent style={{paddingBottom: 0}}>
                   <List>
-                      {list && list.list_items && list.list_items.map((item, index) => {
+                      {list && list.list_items && this.sortedListItems(list.list_items).map((item, index) => {
                         return <ListItemEditable key={index} listItem={item} listId={list.id} />
                       })}
                       <Divider />

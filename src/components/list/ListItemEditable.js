@@ -59,7 +59,7 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
 
 
    return (
-        <ListItem button disableRipple onClick={() => setEditable(true)}>
+        <ListItem button disableRipple >
              <Checkbox
               checked={listItem.done || false}
               tabIndex={-1}
@@ -79,7 +79,10 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
                     
                 </ClickAwayListener>
             ):(
-                <ListItemText className={listItem.done ? 'checkedTodo' : ''} primary={listItem.title} />
+                <ListItemText 
+                    className={listItem.done ? 'checkedTodo' : ''} 
+                    onClick={() => setEditable(true)}
+                    primary={listItem.title} />
             )}
             <ListItemSecondaryAction>
                 <Tooltip title="Delete list item">
