@@ -33,9 +33,12 @@ class Lists extends React.Component {
       <div>
         <PageTitle title="Lists" />
 
-        <div style={{maxWidth: 400}}>
-          <CreateList />
-        </div>
+        <Grid container spacing={32}>
+          <Grid xs={12} md={6} lg={4} item>
+            <CreateList />
+          </Grid>
+        </Grid>
+        
         <div className="spacer"></div>
         <Grid container spacing={32} >
           {lists && lists.map((item, index) => {

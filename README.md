@@ -1,21 +1,20 @@
 #App To-do's
 
 Next steps:
-    - 'lists' page (like todos, but no date)
     - feed dynamic coordinates into windy widget
+    - add a question mark icon button that reveals a popup that describes the page function
     - delete redux state when user logouts: 
       - https://stackoverflow.com/questions/54199540/resetting-redux-state-on-logout
       - https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store/35641992#35641992
 
 Future steps:
     - ability to download .ics file
+    - finish pipeline (front-end)
     - drag and drop on calendar
-    - finish pipeline (front-end) 
     - add a 'bulletin board' page. That imitates a bulletin board
     - react native app
 
 Design improvements: 
-  - add a question mark icon button that reveals a popup that describes the page function
   - disappear drawer on mobile
   - improve header on mobile
   - make 'snackbar'/toasts themed according to success or error (green, red, etc.)

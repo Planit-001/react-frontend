@@ -51,19 +51,19 @@ class Sidebar extends Component {
                 <ListItem component={Link} to="/todos/" button={true} >
                     <Tooltip title="Todos" disableHoverListener={open} placement="right-start">
                         <ListItemIcon>
-                            <ListAltIcon />
+                            <FormatListBulletedIcon />
                         </ListItemIcon>
                     </Tooltip>
                     <ListItemText primary="Todos" />
                 </ListItem>
-                {devMode && <ListItem component={Link} to="/lists/" button={true} >
+                <ListItem component={Link} to="/lists/" button={true} >
                     <Tooltip title="Lists" disableHoverListener={open} placement="right-start">
                         <ListItemIcon>
-                            <FormatListBulletedIcon />                            
+                            <ListAltIcon />
                         </ListItemIcon>
                     </Tooltip>
                     <ListItemText primary="Lists" />
-                </ListItem>}
+                </ListItem>
                 <ListItem component={Link} to="/calendar" button={true}>
                     <Tooltip title="Calendar" disableHoverListener={open} placement="right-start">
                         <ListItemIcon>
