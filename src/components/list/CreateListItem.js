@@ -32,9 +32,11 @@ const CreateListItem = React.memo(({listId, dispatch }) => {
             const listItemBody = {
                 title: listItem,
             };
-        
-            console.log('create list item');
-            dispatch(createListItem(listId, listItemBody))
+
+            dispatch(createListItem(listId, listItemBody)).then(() => {
+                setListItem('');
+                setCreatable(false);
+            })
         }
     }
 

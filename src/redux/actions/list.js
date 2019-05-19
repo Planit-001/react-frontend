@@ -27,7 +27,8 @@ function shouldFetchLists(state){
 
 export function getLists() {  
   return function(dispatch, getState){
-    if(shouldFetchLists(getState())){
+    const shouldFetch = shouldFetchLists(getState());
+    if(true){
       return fetch(`${apiBase}/api/v1/lists`, {
           method: "GET",
           headers: buildHeaders(getState().auth.token, true)
@@ -123,7 +124,11 @@ export function createList(payload) {
       .then(response => response.json())
       .then(json => {
         console.log('created list item: ', json);
-        dispatch({ type: CREATE_LIST_ITEM, payload: json });
+        dispatch({ 
+          type: CREATE_LIST_ITEM, 
+          payload: json,
+          listId
+        });
         ding();
         toastEvent("List item created!");
       })

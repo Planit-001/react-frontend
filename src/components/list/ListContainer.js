@@ -11,6 +11,15 @@ import CreateListItem from './CreateListItem';
 import ListItemEditable from './ListItemEditable';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+
+import ArchiveIcon from '@material-ui/icons/Archive';
+import IconButton from '@material-ui/core/IconButton';
+
+
 class ListContainer extends React.Component {
 
   
@@ -36,27 +45,35 @@ class ListContainer extends React.Component {
 
   render() {
     const { list } = this.props;
-    const listItems = list.list_items
+
     return (
-      
-        <Paper>
-          <Grid container direction="column" justify="center">
+        <Grid container direction="column" justify="center">
+            <Card>
+              <CardHeader 
+                title={list.title}
+                action={
+                  <IconButton>
+                    <ArchiveIcon />
+                  </IconButton>
+                } />
+                <CardContent style={{paddingBottom: 0}}>
+                  <List>
+                      {list.list_items.map((item, index) => {
+                        return <ListItemEditable key={index} listItem={item} listId={list.id} />
+                      })}
+                      <Divider />
+                      <CreateListItem listId={list.id} />
+                  </List>
+                </CardContent>
+            </Card>
 
-                <ComponentTitle title={list.title} />
-                <List>
-                    {list.list_items.map((item, index) => {
-                      return <ListItemEditable key={index} listItem={item} listId={list.id} />
-                    })}
-                    <Divider />
-                    <CreateListItem listId={list.id} />
-                </List>
 
-          </Grid>
-          {/* {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} user={user} />}  */}
-          {/* <TodoList showDate={this.props.showDate} sortByDate={this.props.sortByDate} todos={todos} user={user} /> */}
-        </Paper>
+              {/* <ComponentTitle title={list.title} /> */}
+              
 
-      
+              {/* {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} user={user} />}  */}
+              {/* <TodoList showDate={this.props.showDate} sortByDate={this.props.sortByDate} todos={todos} user={user} /> */}
+        </Grid>
     );
   }
 }

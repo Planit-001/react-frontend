@@ -8,38 +8,50 @@ import {
     DELETE_LIST_ITEM ,
   } from "../constants/actionTypes";
   
-  function listItem(
-    state = {
-      isFetching: false,
-      didInvalidate: false,
-      lastUpdated: null,
-      item: {}
-    },
-    action
-  ){
+  function listItem( state, action ){
+    
     switch(action.type){
       case CREATE_LIST_ITEM:
-        debugger;
-        return Object.assign({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          items: action.payload,
-          lastUpdated: action.receivedAt
-        });
+          const { payload, listId } = action
+
+          // const list = state.list.find((item => item.id === listId));
+          
+          const newState = {
+            ...state,
+            lists: state.lists.map((list) => {
+              if(list.id === listId){
+                const items = list.list_items ? [...list.list_items] : []
+                return {
+                  ...list,
+                  list_items: items.concat(payload)
+                }
+              }else{
+                return list
+              }
+            })
+          }
+          return newState
+        // return Object.assign({}, state, {
+        //   items: state.items.concat(action.payload),
+        // });
       case UPDATE_LIST_ITEM:
+          return Object.assign({}, state, {
+            items: state.items.map((item) => {     
+              if(item.id !== action.payload.id){
+                return item
+              }
+              return {
+                ...item,
+                ...action.payload
+              }
+            })
+          });
+      case DELETE_LIST_ITEM: {
+        let newState = {...state}
         return Object.assign({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          items: action.payload,
-          lastUpdated: action.receivedAt
+          items: newState.items.filter(item => item.id !== action.payload)
         });
-      case DELETE_LIST_ITEM:
-        return Object.assign({}, state, {
-          isFetching: false,
-          didInvalidate: false,
-          items: action.payload,
-          lastUpdated: action.receivedAt
-        });
+      }
       default: 
         return state
     }
@@ -90,11 +102,10 @@ import {
       });
     }
 
-    if([CREATE_LIST_ITEM, UPDATE_LIST_ITEM, DELETE_LIST_ITEM].includes(action.type)){
-      debugger;
-      listItem(action);
-    }
 
+    if([CREATE_LIST_ITEM, UPDATE_LIST_ITEM, DELETE_LIST_ITEM].includes(action.type)){
+      return listItem(state, action);
+    }
     
     return state;
   }
