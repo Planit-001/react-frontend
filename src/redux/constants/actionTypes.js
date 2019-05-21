@@ -43,6 +43,8 @@ export const RECEIVE_USER = 'RECEIVE_USER';
 // UI
 export const DARK_MODE = "DARK_MODE";
 export const REMEMBER_ME = "REMEMBER_ME";
+export const GET_COORDINATES = "GET_COORDINATES";
+export const INVALIDATE_COORDINATES = "INVALIDATE_COORDINATES";
 
 // Pipeline
 export const GET_PIPELINES = "GET_PIPELINES";

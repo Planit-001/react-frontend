@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { getTodos } from "../redux/actions/todo";
 import { getWeatherCurrent } from "../redux/actions/external";
-import { changeDarkMode } from "../redux/actions/ui";
+import { changeDarkMode, getCurrentCoordinates } from "../redux/actions/ui";
 
 import Grid from '@material-ui/core/Grid';
 import TodoBlock from './../components/TodoBlock';
@@ -12,32 +12,14 @@ import SuggestionWizard from './../components/suggestion/SuggestionWizard';
 import CalEventList from './../components/calendar/CalEventList';
 
 import {todayNullOrBefore} from './../utils/todoFuncs'
-// import MiniCal from './../components/calendar/MiniCal';
+
 
 class Dashboard extends React.Component {
     componentDidMount(){
-        // this.props.getWeatherCurrent()
-        // this.geoLocate();
-        
-        // if (this.props.todos && this.props.todos.length >=1 ){
-        //     return
-        // }
         this.props.getTodos();
+        this.props.getCurrentCoordinates();
     }
 
-    geoLocate(){
-        const {getWeatherCurrent} = this.props;
-        function showPosition(position) {
-            getWeatherCurrent(position.coords.latitude, position.coords.longitude);
-        }
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-
-    }
-    
     render(){
         const { todos, calEvents } = this.props
         return (
@@ -88,4 +70,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {changeDarkMode, getTodos, getWeatherCurrent})(Dashboard);
+export default connect(mapStateToProps, {changeDarkMode, getTodos, getWeatherCurrent, getCurrentCoordinates})(Dashboard);

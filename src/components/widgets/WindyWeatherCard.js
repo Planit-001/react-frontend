@@ -2,6 +2,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 
 import moment from 'moment';
 
@@ -12,8 +13,8 @@ class WindyWeatherCard extends Component {
     }
 
     render() {
-      const lat = "43.749";
-      const lng = "-79.202";
+      const lat = this.props.lat ? this.props.lat : "43.749";
+      const lng = this.props.lng ? this.props.lng : "-79.202";
       return (
           <Card>
             <CardHeader            
@@ -45,5 +46,11 @@ class WindyWeatherCard extends Component {
       )
     }
 }
+const mapStateToProps = state => {
+  return { 
+      lat: state.ui.coordinates.lat,
+      lng: state.ui.coordinates.lng,
+  };
+};
 
-export default WindyWeatherCard;
+export default connect(mapStateToProps)(WindyWeatherCard);
