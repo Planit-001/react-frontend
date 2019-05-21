@@ -216,6 +216,7 @@ const styles = theme => ({
   },
   title: {
     flexGrow: 1,
+    marginLeft: 5
   },
   drawerPaper: {
     position: 'relative',
