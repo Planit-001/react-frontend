@@ -48,8 +48,8 @@ class WindyWeatherCard extends Component {
 }
 const mapStateToProps = state => {
   return { 
-      lat: state.ui.coordinates.lat,
-      lng: state.ui.coordinates.lng,
+      lat: (state.ui.coordinates && state.ui.coordinates.lat) ? state.ui.coordinates.lat : null,
+      lng: (state.ui.coordinates && state.ui.coordinates.lng) ? state.ui.coordinates.lng : null,
   };
 };
 
