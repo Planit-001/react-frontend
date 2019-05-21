@@ -54,7 +54,8 @@ class Dashboard extends React.Component {
                         </Typography>
                         <WeatherCard data={currentWeather}/>
                     </Grid>} */}
-                    <Grid item sm={12} md={7} lg={6}>
+                    
+                    <Grid item xs={12} sm={12} md={7} lg={6}>
                         <WindyWeatherCard />
                         {/* <div className="spacer"></div> */}
                         {/* <CalEventList events={calEvents} /> */}
@@ -65,9 +66,11 @@ class Dashboard extends React.Component {
                             todos={todayNullOrBefore(todos)} />
                         <SuggestionWizard />
                     </Grid>
-                    <Grid item sm={12} md={8}>
+
+                    <Grid item xs={12} sm={12} md={8}>
                         <CalEventList events={calEvents} />
                     </Grid>
+                    
                 </Grid>
             </div>
 

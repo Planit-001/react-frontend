@@ -1,5 +1,6 @@
 import { logoutUser} from './../redux/actions/auth';
 import store from './../redux/store';
+import {devMode } from './constants';
 
 export function handleErrors(response) {
     if (!response.ok) {
@@ -27,5 +28,4 @@ export function buildHeaders(token, tokenOnly=false){
     }
 }
 
-export const apiBase = "http://134.209.153.124"
-// export const apiBase = "http://localhost:3000"
+export const apiBase = devMode ? "http://localhost:3000" : "http://134.209.153.124";

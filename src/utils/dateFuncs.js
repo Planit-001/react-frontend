@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export function readableDate(dateString){
     if (moment(dateString)){
-        return moment(dateString).format("ddd MMM Do")
+        return moment(dateString).format("ddd, MMM Do")
     }
     return;
 }

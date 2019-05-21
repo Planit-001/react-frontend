@@ -9,19 +9,33 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {readableDate, readableTime } from './../../utils/dateFuncs';
 
+import { withStyles } from '@material-ui/core/styles';
+
 function sortedEvents(events){
     return events.sort(function(a, b){
         return moment(a.start_time).format('X')-moment(b.start_time).format('X')
     })
 }
 
-function CalEventList({events}){
+const styles = theme => ({
+    root: {
+    //   display: 'flex',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'scroll',
+    },
+    table: {
+      minWidth: 340,
+      height: '100%'
+    },
+  });
+
+function CalEventList({events, classes}){
     
     return (
         <div>
             <ComponentTitle title="Calendar event list (5)" />
-            <Paper>
-                <Table>
+            <Paper className={classes.root}>
+                <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
                             <TableCell colSpan={2}>
@@ -62,4 +76,5 @@ function CalEventList({events}){
     )
 }
 
-export default CalEventList
+
+export default withStyles(styles)(CalEventList);

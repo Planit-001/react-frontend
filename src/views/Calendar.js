@@ -256,7 +256,7 @@ class Calendar extends React.Component {
         {this.renderUpdateDialogue()}
 
         <Grid container spacing={32}>
-            <Grid item sm={12} md={9}>
+            <Grid item xs={12} md={9}>
                 <Paper style={{padding: 15}}>
                     <BigCalendar
                         className={darkMode ? 'darkMode' : ''}
@@ -281,7 +281,7 @@ class Calendar extends React.Component {
                         localizer={localizer} />
                 </Paper>
             </Grid>
-            <Grid item sm={12} md={3}>
+            <Grid item xs={12} md={3}>
                 <InfoBox 
                     eventId={this.state.updateEventId}
                     eventTitle={this.state.updateEventTitle}
