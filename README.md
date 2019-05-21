@@ -1,7 +1,6 @@
 #App To-do's
 
 Next steps:
-    - feed dynamic coordinates into windy widget
     - add a question mark icon button that reveals a popup that describes the page function
     - delete redux state when user logouts: 
       - https://stackoverflow.com/questions/54199540/resetting-redux-state-on-logout

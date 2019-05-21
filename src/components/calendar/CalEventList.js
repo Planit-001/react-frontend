@@ -21,7 +21,7 @@ const styles = theme => ({
     root: {
     //   display: 'flex',
       marginTop: theme.spacing.unit * 3,
-      overflowX: 'scroll',
+      overflowX: 'auto',
     },
     table: {
       minWidth: 340,

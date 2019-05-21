@@ -10,11 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import WindyWeatherCard from './../components/widgets/WindyWeatherCard';
 import SuggestionWizard from './../components/suggestion/SuggestionWizard';
 import CalEventList from './../components/calendar/CalEventList';
-
+import Spacer from './../components/Spacer';
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
 
 class Dashboard extends React.Component {
+
     componentDidMount(){
         this.props.getTodos();
         this.props.getCurrentCoordinates();
@@ -39,18 +40,23 @@ class Dashboard extends React.Component {
                     
                     <Grid item xs={12} sm={12} md={7} lg={6}>
                         <WindyWeatherCard />
-                        {/* <div className="spacer"></div> */}
+                        
                         {/* <CalEventList events={calEvents} /> */}
                     </Grid>
-                    <Grid item sm={12} md={5}>
+                    <Grid item sm={12} md={5} lg={6}>
                         <TodoBlock 
                             title="Today's To-do's"
                             todos={todayNullOrBefore(todos)} />
-                        <SuggestionWizard />
+                        {/* <SuggestionWizard /> */}
                     </Grid>
 
-                    <Grid item xs={12} sm={12} md={8}>
+                    <Grid item xs={12} sm={12} md={7} lg={6}>
                         <CalEventList events={calEvents} />
+                    </Grid>
+
+                    <Grid item xs={12} md={5} lg={6}>
+                        <Spacer height={40} />
+                        <SuggestionWizard />
                     </Grid>
                     
                 </Grid>
