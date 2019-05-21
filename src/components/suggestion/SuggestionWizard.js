@@ -214,7 +214,7 @@ class SuggestionWizard extends React.Component {
     const { activeStep, open } = this.state;
 
     return (
-      <div style={{margin: 16}}>
+      <div>
          <ExpansionPanel expanded={open} onChange={() => this.setState({open: !open})}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>

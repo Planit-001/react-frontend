@@ -1,11 +1,17 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import pageInfo from './../utils/pageInfo';
+import PageHelper from './PageHelper';
 
-function PageTitle({title}){
+function PageTitle({page, helper}){
     return (
-        <Typography variant="h3" gutterBottom component="h1">
-            {title}
-        </Typography>
+        <Grid container justify="space-between">
+            <Typography variant="h2" gutterBottom component="h1">
+                {pageInfo[page].title}
+            </Typography>
+            {helper && <PageHelper page={page} />}
+        </Grid>
     )
 }
 

@@ -31,7 +31,7 @@ class Lists extends React.Component {
 
     return (
       <div>
-        <PageTitle title="Lists" />
+        <PageTitle page="lists" helper={true} />
 
         <Grid container spacing={32}>
           <Grid xs={12} md={6} lg={4} item>

@@ -7,11 +7,11 @@ import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from '.
 import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import TodoBlock from './../components/TodoBlock';
 import RecentArchived from './../components/todo/RecentArchived';
 import ComponentTitle from './../components/ComponentTitle';
 import FutureTodoCreate from './../components/todo/FutureTodoCreate';
+import PageTitle from './../components/PageTitle';
 
 const styles = theme => ({
   root: {
@@ -55,10 +55,7 @@ class Todos extends React.Component {
 
     return (
       <div>
-        <Typography variant="h3" gutterBottom component="h1">
-          Daily To-do's
-        </Typography>
-        <div className="spacer"></div>
+        <PageTitle page="todos" helper={true} />
         <Grid
           container
           direction="row"

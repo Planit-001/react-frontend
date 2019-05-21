@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import PipelineList from './../components/pipeline/PipelineList'
 import { connect } from "react-redux";
 
@@ -7,6 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import PipelineActionBtn from './../components/pipeline/PipelineActionBtn';
 import { sort } from './../redux/actions/pipeline';
 import  styled  from 'styled-components';
+import PageTitle from './../components/PageTitle';
 
 const ListContainer = styled.div`
   display: flex;
@@ -37,9 +37,7 @@ class Pipeline extends React.Component {
         const { lists } = this.props;
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
-              <Typography variant="h3" gutterBottom component="h1">
-                Pipeline builder
-              </Typography>
+              <PageTitle page="pipeline" helper={true} />
               <Droppable droppableId="all-lists" direction="horizontal" type="list">
                 {provided => (
                   <ListContainer {...provided.droppableProps} ref={provided.innerRef}>

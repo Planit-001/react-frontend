@@ -16,7 +16,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { getCalEvents, createCalEvent, updateCalEvent, deleteCalEvent } from "../redux/actions/calEvent";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import InfoBox from './../components/calendar/InfoBox';
-
+import PageTitle from './../components/PageTitle';
 
 const localizer = BigCalendar.momentLocalizer(moment)
 
@@ -248,9 +248,7 @@ class Calendar extends React.Component {
     const { calEvents, darkMode } = this.props;
     return (
       <div>
-        <Typography variant="h3" gutterBottom component="h1">
-          Calendar
-        </Typography>
+        <PageTitle page={"calendar"} helper={true} />
 
         {this.renderCreateDialogue()}
         {this.renderUpdateDialogue()}

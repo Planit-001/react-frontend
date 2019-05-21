@@ -6,11 +6,13 @@ import { changeDarkMode, getCurrentCoordinates } from "../redux/actions/ui";
 
 import Grid from '@material-ui/core/Grid';
 import TodoBlock from './../components/TodoBlock';
-import Typography from '@material-ui/core/Typography';
+
 import WindyWeatherCard from './../components/widgets/WindyWeatherCard';
 import SuggestionWizard from './../components/suggestion/SuggestionWizard';
 import CalEventList from './../components/calendar/CalEventList';
 import Spacer from './../components/Spacer';
+import PageTitle from './../components/PageTitle';
+
 import {todayNullOrBefore} from './../utils/todoFuncs'
 
 
@@ -25,29 +27,17 @@ class Dashboard extends React.Component {
         const { todos, calEvents } = this.props
         return (
             <div>
-                <Typography variant="h2" gutterBottom component="h1">
-                    Dashboard
-                </Typography>
-                <Grid
-                    container
-                    spacing={32}>
-                    {/* {currentWeather && !_.isEmpty(currentWeather) && <Grid item sm={12} md={7} lg={6}>
-                        <Typography variant="h5" align="center" gutterBottom component="h4">
-                            Today's Weather
-                        </Typography>
-                        <WeatherCard data={currentWeather}/>
-                    </Grid>} */}
-                    
+                <Grid container justify="space-between">
+                    <PageTitle title="Dashboard" page="dashboard" />
+                </Grid>
+                <Grid container spacing={32}>
                     <Grid item xs={12} sm={12} md={7} lg={6}>
                         <WindyWeatherCard />
-                        
-                        {/* <CalEventList events={calEvents} /> */}
                     </Grid>
                     <Grid item sm={12} md={5} lg={6}>
                         <TodoBlock 
                             title="Today's To-do's"
                             todos={todayNullOrBefore(todos)} />
-                        {/* <SuggestionWizard /> */}
                     </Grid>
 
                     <Grid item xs={12} sm={12} md={7} lg={6}>
@@ -55,7 +45,7 @@ class Dashboard extends React.Component {
                     </Grid>
 
                     <Grid item xs={12} md={5} lg={6}>
-                        <Spacer height={40} />
+                        <Spacer height={54} />
                         <SuggestionWizard />
                     </Grid>
                     
