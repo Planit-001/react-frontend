@@ -27,6 +27,7 @@ import SignUp from './views/SignUp';
 import ToastAlert from './components/ToastAlert';
 import Todos from './views/Todos'
 import Typography from '@material-ui/core/Typography';
+import BottomNav from './components/BottomNav';
 import { logoutUser} from './redux/actions/auth';
 import { changeDarkMode } from "./redux/actions/ui";
 
@@ -163,8 +164,8 @@ class App extends Component {
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
             <Route path="/calendar-big/" component={BigCalendar} />
+            <BottomNav />
           </main>
-
 
         </Router>
       </div>

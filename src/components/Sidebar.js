@@ -7,18 +7,18 @@ import '../App.scss';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRangeIcon from '@material-ui/icons/DateRange';
-
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+
 import Hidden from '@material-ui/core/Hidden';
 
 
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import ViewWeekIcon from '@material-ui/icons/ViewWeek';

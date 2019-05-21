@@ -14,6 +14,7 @@ import Brightness3Icon from '@material-ui/icons/Brightness3';
 import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
 
 class Header extends Component {
 
@@ -32,16 +33,19 @@ class Header extends Component {
           position="absolute"
           className={classNames(classes.appBar, open && classes.appBarShift)}>
           <Toolbar disableGutters={!open} className={classes.toolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={drawerOpen}
-              className={classNames(
-                classes.menuButton,
-                open && classes.menuButtonHidden,
-              )}>
-              <MenuIcon />
-            </IconButton>
+            <Hidden only="xs" >
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={drawerOpen}
+                className={classNames(
+                  classes.menuButton,
+                  open && classes.menuButtonHidden,
+                )}>
+                <MenuIcon />
+              </IconButton>
+
+            </Hidden>
             <Typography
               component="h1"
               variant="h6"

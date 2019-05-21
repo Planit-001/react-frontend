@@ -61,28 +61,28 @@ class Todos extends React.Component {
           direction="row"
           spacing={32}
           alignItems="flex-start">
-          <Grid item sm={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               title="Today's to-do's"
               todos={this.filterTodosToday(todos)} />
           </Grid>
-          <Grid item sm={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(1, 'day')}
               title="Tomorrow's to-do's"
               todos={this.filterTodosTomorrow(todos)} />
           </Grid>
-          <Grid item sm={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(2, 'day')}
               title="The day after"
               todos={dayAfterTodos(todos)} />
           </Grid>
-          <Grid item sm={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <ComponentTitle title="Create future to-do" />
             <FutureTodoCreate user={this.props.user}  />
           </Grid>
-          <Grid item sm={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               sortByDate={true}
               title="Future to-do's"
@@ -90,7 +90,7 @@ class Todos extends React.Component {
               disableCreate={true}
               todos={futureTodos(todos)} />
           </Grid>
-          <Grid item sm={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <ComponentTitle title="To-do recent archives" />
             <RecentArchived todos={todosArchived} />
           </Grid>
