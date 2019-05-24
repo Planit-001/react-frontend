@@ -21,7 +21,7 @@ class RecentArchived extends React.Component {
         return (
             <div>
                 {todos && todos.length > 0 && (
-                    <Paper style={{ margin: 16 }}>
+                    <Paper style={{ marginBottom: 16 }}>
                         <List dense={true}>
                             {todos.map((item, index) => (
                             <ListItem key={`todo-${index}`}>

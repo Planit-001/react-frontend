@@ -1,12 +1,12 @@
 #App To-do's
 
 Next steps:
-    - add a question mark icon button that reveals a popup that describes the page function
+    - Write accurate and helpful page descriptions
+    - donations page
     - delete redux state when user logouts: 
       - https://stackoverflow.com/questions/54199540/resetting-redux-state-on-logout
       - https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store/35641992#35641992
     - add a redux cache file (for time expiry)
-    - donations page
 
 Future steps:
     - ability to download .ics file
@@ -16,10 +16,8 @@ Future steps:
     - add a 'bulletin board' page. That imitates a bulletin board
 
 Design improvements: 
-  - disappear drawer on mobile
   - improve header on mobile
   - make 'snackbar'/toasts themed according to success or error (green, red, etc.)
-  - add a bottom navbar for mobile view (?) ( <BottomNavigation />)
 
 Issues:
   - error messages for api failing in toasts

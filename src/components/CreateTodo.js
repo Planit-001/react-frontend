@@ -39,7 +39,7 @@ class CreateTodo extends React.Component {
 
   render() {
     return (
-        <Paper style={{ margin: 16, padding: 16 }}>
+        <Paper style={{ marginBottom: 16, padding: 16 }}>
           <Grid container spacing={8} justify="space-around">
             
             <Grid sm={12} md={9} item>

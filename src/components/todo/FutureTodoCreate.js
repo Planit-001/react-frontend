@@ -50,7 +50,13 @@ class FutureTodoCreate extends React.Component {
   render() {
       const { selectedDate } = this.state;
     return (
-        <Paper style={{ margin: 16, padding: 16, display: 'flex', flexDirection: "column", justifyContent: 'center' }}>
+        <Paper style={{ 
+            marginBottom: 16, 
+            padding: 16, 
+            display: 'flex', 
+            flexDirection: "column", 
+            justifyContent: 'center' 
+          }}>
           <Grid container spacing={8} justify="space-around">
             <MuiPickersUtilsProvider utils={MomentUtils}>
                 <DatePicker

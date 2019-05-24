@@ -30,7 +30,7 @@ const TodoList = memo(props => {
     return (
     <div>
         {props.todos && props.todos.length > 0 && (
-          <Paper style={{ margin: 16 }}>
+          <Paper >
               <List dense={true}>
                 {sorted.map((todo, idx) => (
                     <TodoItem

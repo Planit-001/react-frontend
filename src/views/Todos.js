@@ -61,6 +61,7 @@ class Todos extends React.Component {
           direction="row"
           spacing={32}
           alignItems="flex-start">
+            
           <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               title="Today's to-do's"

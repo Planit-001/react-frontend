@@ -1,9 +1,7 @@
 import React from 'react';
-import ComponentTitle from './../ComponentTitle';
 import { connect } from "react-redux";
 import { updateList, deleteList, createListItem } from "./../../redux/actions/list";
 import Grid from '@material-ui/core/Grid';
-import Paper from "@material-ui/core/Paper";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import CreateListItem from './CreateListItem';
@@ -11,12 +9,10 @@ import CreateListItem from './CreateListItem';
 import ListItemEditable from './ListItemEditable';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import ListItemText from '@material-ui/core/ListItemText';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
 
 import ArchiveIcon from '@material-ui/icons/Archive';
 import IconButton from '@material-ui/core/IconButton';
@@ -87,7 +83,7 @@ class ListContainer extends React.Component {
                   </Tooltip>
                 } />
                 <CardContent style={{paddingBottom: 0}}>
-                  <List>
+                  <List dense={true}>
                       {list && list.list_items && this.sortedListItems(list.list_items).map((item, index) => {
                         return <ListItemEditable key={index} listItem={item} listId={list.id} />
                       })}
