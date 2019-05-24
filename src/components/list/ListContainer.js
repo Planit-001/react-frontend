@@ -154,13 +154,15 @@ class ListContainer extends React.Component {
                     </IconButton>
                   </Tooltip>
                 } />
-                <CardContent style={{paddingBottom: 0}}>
+                <CardContent>
                   <List dense={true}>
+                    <Divider />
                     <CreateListItem listId={list.id} />
                     <Divider />
                     {list && list.list_items && this.sortedListItems(list.list_items).map((item, index) => {
                       return <ListItemEditable key={index} listItem={item} listId={list.id} />
                     })}  
+                    {/* <Divider /> */}
                   </List>
                 </CardContent>
                 <CardActions className={classes.actions}>

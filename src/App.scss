@@ -23,7 +23,7 @@ $theme: #2196f3;
 	background-color: $theme;
 }
 
-.darkMode{
+.darkModeCal{
 	.rbc-toolbar{
 		color: #fff;
 		button{
@@ -35,5 +35,26 @@ $theme: #2196f3;
 	}
 	.rbc-agenda-view{
 		color: indianred;
+	}
+	.rbc-date-cell{
+		color: #fff;
+	}
+	.rbc-off-range{
+		color: #999;
+	}
+	.rbc-date-cell.rbc-now.rbc-current{
+		color: #000;
+	}
+	.rbc-month-header{
+		color: #fff;
+	}
+	.rbc-time-header-cell{
+		color: #fff;
+		.rbc-today{
+			color: #000;
+		}
+	}
+	.rbc-time-column{
+		color: #fff;
 	}
 }

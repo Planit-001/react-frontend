@@ -43,7 +43,7 @@ const CreateListItem = React.memo(({listId, dispatch }) => {
 
    return (
         <ListItem 
-            style={{marginBottom: 15, padding: 10}} 
+            style={{ padding: 10}} 
             button 
             disableRipple 
             onClick={() => setCreatable(true)}>

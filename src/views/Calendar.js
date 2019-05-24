@@ -257,7 +257,7 @@ class Calendar extends React.Component {
             <Grid item xs={12} md={9}>
                 <Paper style={{padding: 15}}>
                     <BigCalendar
-                        className={darkMode ? 'darkMode' : ''}
+                        className={darkMode ? 'darkModeCal' : ''}
                         selectable
                         startAccessor="start_time"
                         endAccessor="end_time"
