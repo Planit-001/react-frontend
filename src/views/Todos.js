@@ -58,9 +58,7 @@ class Todos extends React.Component {
         <PageTitle page="todos" helper={true} />
         <Grid
           container
-          direction="row"
-          spacing={32}
-          alignItems="flex-start">
+          spacing={32} >
             
           <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 

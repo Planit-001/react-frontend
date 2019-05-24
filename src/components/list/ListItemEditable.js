@@ -15,10 +15,11 @@ import { ding } from './../../utils/uiFuncs';
 
 
 const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
+
     const [editable, setEditable] = useState(false);
     
-    const [listTitle, setListTitle] = useState(listItem.title);
-  
+    let [listTitle, setListTitle] = useState(listItem.title);
+
     const handleClickAway = () => {
         setEditable(false);
     }
@@ -38,6 +39,11 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
                 setEditable(false);
             })
         }
+    }
+
+    const onTextClick = () => {
+        setListTitle(listItem.title);
+        setEditable(true)
     }
 
     const updateListItemDone = (e) => {
@@ -82,7 +88,7 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
             ):(
                 <ListItemText 
                     className={listItem.done ? 'checkedTodo' : ''} 
-                    onClick={() => setEditable(true)}
+                    onClick={() => onTextClick()}
                     primary={listItem.title} />
             )}
             <ListItemSecondaryAction>
@@ -96,6 +102,6 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
             </ListItemSecondaryAction>
         </ListItem>
    )
-  });
+});
   
   export default connect()(ListItemEditable);
