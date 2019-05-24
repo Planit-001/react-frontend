@@ -57,4 +57,10 @@ $theme: #2196f3;
 	.rbc-time-column{
 		color: #fff;
 	}
+	.rbc-time-content > div.rbc-day-slot.rbc-time-column.rbc-now.rbc-today{
+		background-color: inherit;
+	}
+	.rbc-time-header > div.rbc-time-header-content > div.rbc-allday-cell > div.rbc-row-bg > .rbc-day-bg{
+		background-color: inherit;
+	}
 }
