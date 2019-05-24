@@ -20,13 +20,18 @@ function sortedEvents(events){
 const styles = theme => ({
     root: {
     //   display: 'flex',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
+    //   marginTop: theme.spacing.unit * 3,
+        width: '100%',
+        overflowX: 'auto',
     },
     table: {
-      minWidth: 340,
-      height: '100%'
+      minWidth: 650,
+    //   height: '100%'
     },
+    cell: {
+        paddingRight: 20,
+        // width: 150
+    }
   });
 
 function CalEventList({events, classes}){
@@ -38,16 +43,16 @@ function CalEventList({events, classes}){
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            <TableCell colSpan={2}>
+                            <TableCell style={{width:140}}>
                                 Date
                             </TableCell>
-                            <TableCell>
+                            <TableCell style={{width:100}}>
                                 Time
                             </TableCell>
-                            <TableCell>
+                            <TableCell style={{width: 160}}>
                                 Event
                             </TableCell>
-                            <TableCell>
+                            <TableCell style={{width: 250}}>
                                 Description
                             </TableCell>
                         </TableRow>
@@ -55,16 +60,16 @@ function CalEventList({events, classes}){
                     <TableBody>
                     {sortedEvents(events).slice(0,5).map(event => (
                         <TableRow key={event.id}>
-                            <TableCell colSpan={2} component="th" scope="row">
-                                {readableDate(event.start_time)}
+                            <TableCell className={classes.cell} style={{width: 140}} >
+                                    {readableDate(event.start_time)}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className={classes.cell} style={{width: 100}}>
                                 {readableTime(event.start_time)}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className={classes.cell} style={{width: 160}}>
                                 {event.title} <br />
                             </TableCell>
-                            <TableCell>
+                            <TableCell className={classes.cell} style={{width: 250}}>
                                 {event.description ? event.description : ' - '}
                             </TableCell>
                         </TableRow>
