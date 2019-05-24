@@ -185,6 +185,7 @@ class TodoItem extends React.Component {
                 <TextField
                   label="Update Todo"
                   // className={classes.textField}
+                  autoFocus
                   onKeyPress={this.onEnter}
                   margin="dense"
                   value={this.state.newTitle}

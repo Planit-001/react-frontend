@@ -8,50 +8,89 @@ import CreateListItem from './CreateListItem';
 // import ListItem from '@material-ui/core/ListItem';
 import ListItemEditable from './ListItemEditable';
 import Tooltip from '@material-ui/core/Tooltip';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
 
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 
 import ArchiveIcon from '@material-ui/icons/Archive';
+import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 
+import { withStyles } from '@material-ui/core';
+
+const styles = theme => ({
+  actions: {
+      display: 'flex',
+  },
+  expand: {
+      marginLeft: 'auto',
+  },
+});
 
 class ListContainer extends React.Component {
+  state = {
+    editable: false,
+    listTitle: '',
+  }
 
+  componentDidMount(){
+    this.setState({
+      listTitle: this.props.list.title
+    })
+  }
   
-  updateList = (e, id) => {
+  updateList = () => {
+    const { listTitle } = this.state;
 
+    if(listTitle){
+      const payload = {
+        title: this.state.listTitle
+      }
+      this.props.updateList(this.props.list.id, payload).then(() => {
+        this.setState({editable: false})
+      });
+    }
+  }
+
+  onEditClick = () => {
+    this.setState({
+      editable: true
+    });
+  }
+
+  handleClose = () => {
+    this.setState({
+      editable: false,
+      listTitle: this.props.list.title
+    })
   }
 
   archiveList = () => {
-
     const test = window.confirm("Are you sure you want to archive this list?")
     if(test){  
       const _payload = {
         archived: true
       }
-      this.props.updateList(this.props.list.id, _payload)
+      this.props.updateList(this.props.list.id, _payload).then(() => {
+        this.setState({editable: false})
+      })
     }
-
-
   }
 
   deleteList = (id) => {
     this.props.deleteList(id);
   }
 
-  updateListItem = (e, id) => {
-    // if(e.target.checked !== undefined){
-    //   const listBody = {list: {done: e.target.checked}};
-    //   this.props.updatelist(id, todoBody);
-    // }
-  }
-
-  deleteListItem = (id) => {
-    // this.props.deleteList(id);
-  }
 
   sortedListItems = (listItems) => {
     if (listItems.length >= 1){
@@ -66,31 +105,76 @@ class ListContainer extends React.Component {
     }
   }
 
+  renderEditDialogue(){
+
+    const {listTitle, editable} = this.state;
+
+    return <Dialog
+      open={editable}
+      onClose={this.handleClose}
+      aria-labelledby="form-dialog-title">
+          <DialogTitle>
+            Edit this list title
+          </DialogTitle>
+          <DialogContent>
+              <TextField
+                  autoFocus
+                  margin="normal"
+                  label="New list title"
+                  fullWidth
+                  value={listTitle}
+                  onChange={e => this.setState({listTitle: e.target.value})}/>
+          </DialogContent>
+          <DialogActions>
+              <Button onClick={this.handleClose} color="default">
+                  Cancel
+              </Button>
+              <Button onClick={this.updateList} color="primary">
+                  Update
+              </Button>
+          </DialogActions>
+      </Dialog>
+}
+
 
   render() {
-    const { list } = this.props;
-
+    const { list, classes } = this.props;
+    const { editable } = this.state;
     return (
         <Grid container direction="column" justify="center">
+          {this.renderEditDialogue()}
             <Card>
               <CardHeader 
                 title={list.title}
+                onClick={this.onTitleClick}
                 action={
-                  <Tooltip title="Archive list">
-                    <IconButton onClick={this.archiveList}>
-                      <ArchiveIcon />
+                  <Tooltip title="Edit list tile">
+                    <IconButton onClick={this.onEditClick}>
+                      <EditIcon />
                     </IconButton>
                   </Tooltip>
                 } />
                 <CardContent style={{paddingBottom: 0}}>
                   <List dense={true}>
-                      {list && list.list_items && this.sortedListItems(list.list_items).map((item, index) => {
-                        return <ListItemEditable key={index} listItem={item} listId={list.id} />
-                      })}
-                      <Divider />
-                      <CreateListItem listId={list.id} />
+                    <CreateListItem listId={list.id} />
+                    <Divider />
+                    {list && list.list_items && this.sortedListItems(list.list_items).map((item, index) => {
+                      return <ListItemEditable key={index} listItem={item} listId={list.id} />
+                    })}  
                   </List>
                 </CardContent>
+                <CardActions className={classes.actions}>
+                  {/* <Tooltip title="Archive list">
+                      <IconButton onClick={this.archiveList}>
+                        <ArchiveIcon />
+                      </IconButton>
+                    </Tooltip> */}
+                    <Tooltip title="Archive list">
+                      <IconButton className={classes.expand} onClick={this.archiveList}>
+                        <ArchiveIcon />
+                      </IconButton>
+                    </Tooltip>
+                </CardActions>
             </Card>
 
 
@@ -110,4 +194,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {updateList, deleteList, createListItem })(ListContainer);
+export default withStyles(styles)(connect(mapStateToProps, {updateList, deleteList, createListItem })(ListContainer));

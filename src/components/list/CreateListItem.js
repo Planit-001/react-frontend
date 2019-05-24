@@ -42,8 +42,12 @@ const CreateListItem = React.memo(({listId, dispatch }) => {
 
 
    return (
-        <ListItem style={{marginTop: 5}} button disableRipple onClick={() => setCreatable(true)}>
-            <ListItemIcon>
+        <ListItem 
+            style={{marginBottom: 15, padding: 10}} 
+            button 
+            disableRipple 
+            onClick={() => setCreatable(true)}>
+            <ListItemIcon style={{marginLeft: 20}}>
                 <AddCircleOutlineIcon />
             </ListItemIcon>
 
@@ -67,7 +71,7 @@ const CreateListItem = React.memo(({listId, dispatch }) => {
                     </div>
                 </ClickAwayListener>
             ):(
-                <ListItemText primary="Add list item" />
+                <ListItemText primary="Add list item" style={{fontStyle: 'italic'}} />
             )}
         </ListItem>
    )

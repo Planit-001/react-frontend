@@ -64,7 +64,6 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
         dispatch(deleteListItem(listId, listItem.id))
     }
 
-
    return (
         <ListItem button disableRipple >
              <Checkbox
@@ -79,11 +78,9 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
                         onKeyPress={onEnter}
                         fullWidth
                         autoFocus
-                        // style={{width: '100%', paddingRight: 50}}
                         margin="dense"
                         value={listTitle}
                         onChange={(e) => setListTitle( e.target.value )}/>
-                    
                 </ClickAwayListener>
             ):(
                 <ListItemText 
