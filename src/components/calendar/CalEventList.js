@@ -11,34 +11,45 @@ import {readableDate, readableTime } from './../../utils/dateFuncs';
 
 import { withStyles } from '@material-ui/core/styles';
 
+const before = moment().subtract(7, 'd').format('X');
+const after = moment().add(4, 'weeks').format('X');
+
+
 function sortedEvents(events){
     return events.sort(function(a, b){
         return moment(a.start_time).format('X')-moment(b.start_time).format('X')
-    })
+    });
 }
+
+function filterEvents(events){
+    return events.filter(event => {
+        return moment(event.start_time).isBetween(moment().subtract(7, 'd'), moment().add(4, 'weeks'))
+    });
+}
+
 
 const styles = theme => ({
     root: {
-    //   display: 'flex',
-    //   marginTop: theme.spacing.unit * 3,
         width: '100%',
         overflowX: 'auto',
     },
     table: {
       minWidth: 650,
-    //   height: '100%'
     },
     cell: {
         paddingRight: 20,
-        // width: 150
     }
   });
+
+const strikeThru = {
+    textDecoration: 'line-through'
+};
 
 function CalEventList({events, classes}){
     
     return (
         <div>
-            <ComponentTitle title="Calendar event list (5)" />
+            <ComponentTitle title="Calendar events" />
             <Paper className={classes.root}>
                 <Table className={classes.table}>
                     <TableHead>
@@ -58,8 +69,8 @@ function CalEventList({events, classes}){
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {sortedEvents(events).slice(0,5).map(event => (
-                        <TableRow key={event.id}>
+                    {events && sortedEvents(filterEvents(events)).map(event => (
+                        <TableRow style={ moment(event.start_time).isBefore(moment().subtract(1, 'd')) ? strikeThru : {} }  key={event.id}>
                             <TableCell className={classes.cell} style={{width: 140}} >
                                     {readableDate(event.start_time)}
                             </TableCell>
