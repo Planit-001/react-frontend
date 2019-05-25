@@ -31,6 +31,7 @@ import { withStyles } from '@material-ui/core';
 const styles = theme => ({
   actions: {
       display: 'flex',
+      // paddingTop: 0
   },
   expand: {
       marginLeft: 'auto',
@@ -153,7 +154,7 @@ class ListContainer extends React.Component {
                     </IconButton>
                   </Tooltip>
                 } />
-                <CardContent>
+                <CardContent style={{paddingBottom: 0}}>
                   <List dense={true}>
                     <Divider />
                     <CreateListItem listId={list.id} />
@@ -161,7 +162,7 @@ class ListContainer extends React.Component {
                     {list && list.list_items && this.sortedListItems(list.list_items).map((item, index) => {
                       return <ListItemEditable key={index} listItem={item} listId={list.id} />
                     })}  
-                    {/* <Divider /> */}
+                    <Divider />
                   </List>
                 </CardContent>
                 <CardActions className={classes.actions}>
