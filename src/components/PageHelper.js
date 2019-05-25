@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Fab from '@material-ui/core/Fab';
-import HelpIcon from '@material-ui/icons/Help';
+// import HelpIcon from '@material-ui/icons/Help';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -54,7 +54,7 @@ function PageHelper({page, classes}){
                     {pageInfo[page].title}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
+                    <DialogContentText id="alert-dialog-slide-description" style={{whiteSpace: 'pre-line'}} >
                         {pageInfo[page].description}
                     </DialogContentText>
                 </DialogContent>

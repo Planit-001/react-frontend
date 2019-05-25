@@ -11,10 +11,6 @@ import {readableDate, readableTime } from './../../utils/dateFuncs';
 
 import { withStyles } from '@material-ui/core/styles';
 
-const before = moment().subtract(7, 'd').format('X');
-const after = moment().add(4, 'weeks').format('X');
-
-
 function sortedEvents(events){
     return events.sort(function(a, b){
         return moment(a.start_time).format('X')-moment(b.start_time).format('X')

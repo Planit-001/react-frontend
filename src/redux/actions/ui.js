@@ -2,8 +2,6 @@ import {
     DARK_MODE,
     GET_COORDINATES
   } from "../constants/actionTypes";
-  
-  import _ from 'lodash';
 
   export function changeDarkMode(darkModeBool){
     return {

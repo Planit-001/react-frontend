@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from "react-redux";
-import Typography from '@material-ui/core/Typography';
 
 import moment from 'moment';
 import BigCalendar from 'react-big-calendar'

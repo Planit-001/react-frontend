@@ -28,7 +28,7 @@ function shouldFetchLists(state){
 export function getLists() {  
   return function(dispatch, getState){
     const shouldFetch = shouldFetchLists(getState());
-    if(true){
+    if(shouldFetch){
       return fetch(`${apiBase}/api/v1/lists`, {
           method: "GET",
           headers: buildHeaders(getState().auth.token, true)

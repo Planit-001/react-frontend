@@ -139,7 +139,6 @@ class ListContainer extends React.Component {
 
   render() {
     const { list, classes } = this.props;
-    const { editable } = this.state;
     return (
         <Grid container direction="column" justify="center">
           {this.renderEditDialogue()}
