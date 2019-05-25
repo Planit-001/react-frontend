@@ -33,22 +33,17 @@ class Dashboard extends React.Component {
                 <Grid container spacing={32}>
                     <Grid item xs={12} sm={12} md={7} lg={6}>
                         <WindyWeatherCard />
+                        <Spacer height={40} />
+                        <CalEventList events={calEvents} />
                     </Grid>
                     <Grid item sm={12} md={5} lg={6}>
                         <TodoBlock 
                             title="Today's To-do's"
                             todos={todayNullOrBefore(todos)} />
-                    </Grid>
-
-                    <Grid item xs={12} sm={12} md={7} lg={6}>
-                        <CalEventList events={calEvents} />
-                    </Grid>
-
-                    <Grid item xs={12} md={5} lg={6}>
                         <Spacer height={54} />
                         <SuggestionWizard />
+                        <Spacer height={30} />
                     </Grid>
-                    
                 </Grid>
             </div>
 

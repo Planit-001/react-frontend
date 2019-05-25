@@ -23,6 +23,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import ComponentTitle from './../ComponentTitle';
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -215,10 +217,11 @@ class SuggestionWizard extends React.Component {
 
     return (
       <div>
+         <ComponentTitle title="Have a suggestion?" />
          <ExpansionPanel expanded={open} onChange={() => this.setState({open: !open})}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading}>
-              Have a suggestion to make this app better?
+              Let us know how to make this app better
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
