@@ -17,6 +17,11 @@ const styles = {
   root: {
     // width: 500,
   },
+  stickToBottom: {
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
+  },
 };
 
 class BottomNav extends React.Component {
@@ -35,7 +40,7 @@ class BottomNav extends React.Component {
     return (
         <Hidden smUp>
             <Spacer height={30} />
-            <BottomNavigation value={value} onChange={this.handleChange} className={classes.root}>
+            <BottomNavigation value={value} onChange={this.handleChange} className={classes.stickToBottom}>
                 <BottomNavigationAction component={Link} to="/" label="Dashboard" value="dashboard" icon={<DashboardIcon />} />
                 <BottomNavigationAction component={Link} to="/todos" label="To-do's" value="todos"  icon={<FormatListBulletedIcon />} />
                 <BottomNavigationAction component={Link} to="/lists" label="Lists" value="lists" icon={<ListAltIcon />} />
