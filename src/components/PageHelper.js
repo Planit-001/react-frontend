@@ -11,8 +11,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-
+import _ from 'lodash';
 import {pageInfo} from './../utils/pageInfo';
+
+
+const btnWords = ["Cool", "OK", "Got it"]
 
 function Transition(props) {
     return <Slide direction="down" {...props} />;
@@ -60,7 +63,7 @@ function PageHelper({page, classes}){
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
-                        Cool
+                        {_.sample(btnWords)}
                     </Button>
                 </DialogActions>
                 </Dialog>

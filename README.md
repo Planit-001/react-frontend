@@ -7,6 +7,7 @@ Next steps:
       - https://stackoverflow.com/questions/35622588/how-to-reset-the-state-of-a-redux-store/35641992#35641992
     - add a redux cache file (for time expiry)
     - ability to download .ics file
+    - replace weather widget
 
 Future steps:
     - finish pipeline (front-end)
@@ -15,7 +16,6 @@ Future steps:
     - add a 'bulletin board' page. That imitates a bulletin board
 
 Design improvements: 
-  - improve header on mobile
   - make 'snackbar'/toasts themed according to success or error (green, red, etc.)
 
 Issues:
@@ -23,7 +23,8 @@ Issues:
 
 Meta ideas:
     - make a 'notes' page (like a bulleten board), where I can leave notes
-    - Text editor could be a medium-like tool leveraging draftjs.
+    - Text editor could be a medium-like tool leveraging draftjs. 
+    - Microsoft open-sourced a collaborative editor microsoft (ask mikhail)
     - Save in db as a JSON blob
     - see: bitwiser.in or megadraft.io
     - gamify dashboard icon by showing a different https://fontawesome.com/icons?d=gallery&q=dashboard based on todos count (?)

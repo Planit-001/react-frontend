@@ -94,6 +94,8 @@ class ListContainer extends React.Component {
 
 
   sortedListItems = (listItems) => {
+    // sorted by done and then id
+    
     if (listItems.length >= 1){
       return listItems.sort((a, b) => {
         if(a.done === b.done){
