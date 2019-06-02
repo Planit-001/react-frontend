@@ -30,6 +30,12 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
         }
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key === "Escape"){
+            setEditable(false)
+        }
+    }
+
     const handleUpdate = () => {
         if(listItem){
             const listItemBody = {
@@ -60,7 +66,6 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
     }
 
     const handleDelete = () => {
-        console.log('delete')
         dispatch(deleteListItem(listId, listItem.id))
     }
 
@@ -76,6 +81,7 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
                     <TextField
                         label="Add list item"
                         onKeyPress={onEnter}
+                        onKeyDown={handleKeyDown}
                         fullWidth
                         autoFocus
                         margin="dense"
