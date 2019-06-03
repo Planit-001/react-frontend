@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core';
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,8 +14,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { updateListItem, deleteListItem } from "../../redux/actions/list";
 import { ding } from './../../utils/uiFuncs';
 
-
-const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
+const styles = theme => ({
+    input: {
+        fontSize: '0.9em'
+    }
+})
+const ListItemEditable = React.memo(({listId, listItem, dispatch, classes }) => {
 
     const [editable, setEditable] = useState(false);
     
@@ -84,6 +89,11 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
                         onKeyDown={handleKeyDown}
                         fullWidth
                         autoFocus
+                        InputProps={{
+                            classes: {
+                                input: classes.input,
+                            },
+                        }}
                         margin="dense"
                         value={listTitle}
                         onChange={(e) => setListTitle( e.target.value )}/>
@@ -107,4 +117,4 @@ const ListItemEditable = React.memo(({listId, listItem, dispatch }) => {
    )
 });
   
-  export default connect()(ListItemEditable);
+  export default withStyles(styles)(connect()(ListItemEditable));
