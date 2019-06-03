@@ -42,7 +42,7 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
                         Delete
                     </Button>
                     <Button onClick={onUpdate} size="small" color="default">
-                        Update
+                        Edit
                     </Button>
                 </CardActions>}
                     
