@@ -32,6 +32,10 @@ const styles = {
     paddingRight: '50px',
     wordBreak: "break-word"
   },
+  input: {
+    fontSize: '0.9em',
+    width: "84%"
+  }
 };
 
 class TodoItem extends React.Component {
@@ -125,54 +129,70 @@ class TodoItem extends React.Component {
     }  
   }
 
-  render() {
-    const { todo, classes } = this.props;
+
+  handleKeyDown = (e) => {
+    if(e.key === "Escape"){
+        this.setState({
+          editable: false
+        })
+    }
+  }
+
+  renderDialogue = (todo) => {
     const { selectedDate } = this.state;
 
     return (
+        <Dialog
+          onClose={this.handleClose}
+          open={this.state.timeModal}>
+          <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+            Choose a Date for the Todo
+          </DialogTitle>
+          <DialogContent>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+
+              <Grid container justify="space-between" >
+                {/* <Grid item sm={6}> */}
+                  <DatePicker
+                    margin="normal"
+                    disablePast={true}
+                    label="Date picker"
+                    value={selectedDate}
+                    clearable={true}
+                    onChange={this.handleDateChange}/>
+                {/* </Grid> */}
+                {/* <Grid item sm={6}>
+                  <TimePicker
+                    margin="normal"
+                    disabled={this.state.selectedDate === null}
+                    clearable={true}
+                    helperText="(optional)"
+                    label="Time picker"
+                    value={selectedTime}
+                    onChange={this.handleTimeChange}/>
+                </Grid> */}
+              </Grid>
+
+            </MuiPickersUtilsProvider>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="secondary">
+              Cancel
+            </Button>
+            <Button onClick={() => this.handleSave(todo.id)} color="primary">
+              Save changes
+            </Button>
+          </DialogActions>
+      </Dialog>
+    )
+  }
+
+  render() {
+    const { todo, classes } = this.props;
+
+    return (
         <ListItem button disableRipple>
-          <Dialog
-            onClose={this.handleClose}
-            open={this.state.timeModal}>
-            <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-              Choose a Date for the Todo
-            </DialogTitle>
-            <DialogContent>
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-
-                <Grid container justify="space-between" >
-                  {/* <Grid item sm={6}> */}
-                    <DatePicker
-                      margin="normal"
-                      disablePast={true}
-                      label="Date picker"
-                      value={selectedDate}
-                      clearable={true}
-                      onChange={this.handleDateChange}/>
-                  {/* </Grid> */}
-                  {/* <Grid item sm={6}>
-                    <TimePicker
-                      margin="normal"
-                      disabled={this.state.selectedDate === null}
-                      clearable={true}
-                      helperText="(optional)"
-                      label="Time picker"
-                      value={selectedTime}
-                      onChange={this.handleTimeChange}/>
-                  </Grid> */}
-                </Grid>
-
-              </MuiPickersUtilsProvider>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="secondary">
-                Cancel
-              </Button>
-              <Button onClick={() => this.handleSave(todo.id)} color="primary">
-                Save changes
-              </Button>
-            </DialogActions>
-          </Dialog>
+          {this.renderDialogue(todo)}
         
           <Checkbox
               checked={todo.done}
@@ -181,16 +201,20 @@ class TodoItem extends React.Component {
               disableRipple />
           {this.state.editable ? (
             <ClickAwayListener onClickAway={this.handleClickAway}>
-              {/* <ListItem> */}
                 <TextField
                   label="Update Todo"
-                  // className={classes.textField}
-                  autoFocus
                   onKeyPress={this.onEnter}
+                  onKeyDown={this.handleKeyDown}
+                  autoFocus
+                  fullWidth
+                  InputProps={{
+                    classes: {
+                        input: classes.input,
+                    },
+                  }}
                   margin="dense"
                   value={this.state.newTitle}
                   onChange={(e) => this.setState({newTitle: e.target.value})}/>
-              {/* </ListItem> */}
             </ClickAwayListener>
           ):(
             <ListItemText
