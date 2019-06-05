@@ -1,42 +1,42 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { updateList, deleteList, createListItem } from "./../../redux/actions/list";
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import CreateListItem from './CreateListItem';
-// import ListItem from '@material-ui/core/ListItem';
-import ListItemEditable from './ListItemEditable';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
+import { 
+  updateList, 
+  deleteList, 
+  createListItem,
+  updateListItem,
+  deleteListItem
+} from "./../../redux/actions/list";
 
 import ArchiveIcon from '@material-ui/icons/Archive';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 
+import Button from '@material-ui/core/Button';
+import CreateListItem from './CreateListItem';
+
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import ItemEditable from './../ItemEditable';
+import List from '@material-ui/core/List';
+import ListItemEditable from './ListItemEditable';
+import Tooltip from '@material-ui/core/Tooltip';
+import TextField from '@material-ui/core/TextField';
+
 import { withStyles } from '@material-ui/core';
 
-const styles = theme => ({
-  actions: {
-      display: 'flex',
-      // paddingTop: 0
-  },
-  expand: {
-      marginLeft: 'auto',
-  },
-});
+
 
 class ListContainer extends React.Component {
   state = {
@@ -61,6 +61,10 @@ class ListContainer extends React.Component {
         this.setState({editable: false})
       });
     }
+  }
+
+  updateListItem = (itemId, itemBody) => {
+    this.props.updateListItem(this.props.list.id, itemId, itemBody )
   }
 
   onEditClick = () => {
@@ -162,7 +166,13 @@ class ListContainer extends React.Component {
                     <CreateListItem listId={list.id} />
                     <Divider />
                     {list && list.list_items && this.sortedListItems(list.list_items).map((item, index) => {
-                      return <ListItemEditable key={index} listItem={item} listId={list.id} />
+                      return <ItemEditable 
+                                key={index} 
+                                item={item}
+                                label="Add list item"
+                                handleUpdate={this.updateListItem}
+                                handleDelete={() => this.props.deleteListItem(list.id, item.id)} />
+                      // return <ListItemEditable key={index} listItem={item} listId={list.id} />
                     })}  
                     <Divider />
                   </List>
@@ -181,10 +191,7 @@ class ListContainer extends React.Component {
                 </CardActions>
             </Card>
 
-
               {/* <ComponentTitle title={list.title} /> */}
-              
-
               {/* {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} user={user} />}  */}
               {/* <TodoList showDate={this.props.showDate} sortByDate={this.props.sortByDate} todos={todos} user={user} /> */}
         </Grid>
@@ -192,10 +199,27 @@ class ListContainer extends React.Component {
   }
 }
 
+const styles = theme => ({
+  actions: {
+      display: 'flex',
+      // paddingTop: 0
+  },
+  expand: {
+      marginLeft: 'auto',
+  },
+});
+
 const mapStateToProps = state => {
   return { 
       user: state.auth.user,
   };
 };
 
-export default withStyles(styles)(connect(mapStateToProps, {updateList, deleteList, createListItem })(ListContainer));
+export default withStyles(styles)(connect(
+  mapStateToProps, { 
+    updateList, 
+    deleteList, 
+    createListItem,
+    updateListItem,
+    deleteListItem
+  })(ListContainer));

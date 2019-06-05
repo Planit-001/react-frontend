@@ -19,6 +19,7 @@ const styles = theme => ({
         fontSize: '0.9em'
     }
 })
+
 const ListItemEditable = React.memo(({listId, listItem, dispatch, classes }) => {
 
     const [editable, setEditable] = useState(false);
