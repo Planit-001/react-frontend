@@ -83,7 +83,7 @@ export function createList(payload) {
       .then(handleErrors)
       .then(response => response.json())
       .then(json => {
-        dispatch({ type: UPDATE_LIST, payload: json})
+        dispatch({ type: UPDATE_LIST, payload: json});
         toastEvent("List updated!")
       })
       .catch(err => {
@@ -137,7 +137,7 @@ export function createList(payload) {
     }
   };
 
-  export function updateListItem(listId, listItemId, payload) {
+  export function updateListItem(listId, listItemId, payload, shouldDing = false) {
     return function(dispatch, getState){
       const headers = buildHeaders(getState().auth.token)
       return fetch(`${apiBase}/api/v1/lists/${listId}/list_items/${listItemId}`, {
@@ -154,6 +154,9 @@ export function createList(payload) {
           listId,
           listItemId
         });
+        if(shouldDing){
+          ding()
+        }
         toastEvent("List item updated!");
       })
       .catch(err => {

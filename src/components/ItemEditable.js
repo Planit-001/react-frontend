@@ -12,12 +12,16 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 
-
 const styles = theme => ({
+    root: {
+      paddingRight: '50px',
+      wordBreak: "break-word"
+    },
     input: {
-        fontSize: '0.9em'
+      fontSize: '0.9em',
+      width: "84%"
     }
-});
+  });
 
 const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handleDelete }) => {
 
@@ -45,10 +49,10 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
         }
     }
 
-    const onUpdate = (itemBody) => {
+    const onUpdate = (itemBody, shouldDing = false) => {
         if(item){
             // ItemBody needs to be an object
-            handleUpdate(item.id, itemBody)
+            handleUpdate(item.id, itemBody, shouldDing)
             setEditable(false);
         }
     }
@@ -59,11 +63,6 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
         }
         setEditable(false)
         
-        // this.setState({
-        //   editable: false
-        // }, () => {
-        //   this.updateTodoTitle(this.state.newTitle, this.props.todo.id)
-        // })
       }
 
     return (
@@ -75,7 +74,7 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
                 checked={item.done || false}
                 tabIndex={-1}
                 disableRipple
-                onClick={(e) => e.target.checked !== undefined ? onUpdate({done: e.target.checked}) : null} />
+                onClick={(e) => e.target.checked !== undefined ? onUpdate({done: e.target.checked}, e.target.checked) : null} />
 
                 {editable ? (
                     <ClickAwayListener onClickAway={handleClickAway}>

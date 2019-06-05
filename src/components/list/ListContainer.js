@@ -63,8 +63,8 @@ class ListContainer extends React.Component {
     }
   }
 
-  updateListItem = (itemId, itemBody) => {
-    this.props.updateListItem(this.props.list.id, itemId, itemBody )
+  updateListItem = (itemId, itemBody, shouldDing) => {
+    this.props.updateListItem(this.props.list.id, itemId, itemBody, shouldDing )
   }
 
   onEditClick = () => {
