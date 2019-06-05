@@ -1,21 +1,26 @@
 import React from 'react';
 import { connect } from "react-redux";
+import { getCalEvents, createCalEvent, updateCalEvent, deleteCalEvent } from "../redux/actions/calEvent";
 
 import moment from 'moment';
+
 import BigCalendar from 'react-big-calendar'
-import { Paper } from "@material-ui/core";
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 // import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { getCalEvents, createCalEvent, updateCalEvent, deleteCalEvent } from "../redux/actions/calEvent";
-import 'react-big-calendar/lib/css/react-big-calendar.css';
 import InfoBox from './../components/calendar/InfoBox';
 import PageTitle from './../components/PageTitle';
+import { Paper } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
 
 const localizer = BigCalendar.momentLocalizer(moment)
 
@@ -29,6 +34,8 @@ class Calendar extends React.Component {
         newEventDescription: '',
         openDialogue: false,
 
+        allDay: false,
+
         updateEventId: null,
         updateEventTitle: '',
         updateEventStart: '',
@@ -39,6 +46,7 @@ class Calendar extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
+    this.updateAllDay = this.updateAllDay.bind(this);
   }
 
   componentDidMount(){
@@ -164,6 +172,12 @@ class Calendar extends React.Component {
       })
   }
 
+  updateAllDay(e){
+    if(e.target.checked !== undefined){
+        this.setState({allDay: e.target.checked})
+      }
+  }
+
   renderCreateDialogue(){
       return <Dialog
         open={this.state.openDialogue}
@@ -173,9 +187,7 @@ class Calendar extends React.Component {
               Describe this event
             </DialogTitle>
             <DialogContent>
-                {/* <DialogContentText>
-                    Event Title
-                </DialogContentText> */}
+             
                 <TextField
                     autoFocus
                     margin="normal"
@@ -221,6 +233,18 @@ class Calendar extends React.Component {
                         fullWidth
                         value={this.state.updateEventTitle}
                         onChange={e => this.setState({updateEventTitle: e.target.value})}/>
+                        {/* <FormGroup > */}
+                            {/* <FormControlLabel
+                                control={
+                                    <Checkbox
+                                    checked={this.state.allDay}
+                                    onChange={e => this.updateAllDay(e)}
+                                    value="allDay"
+                                    color="primary" />
+                                }
+                                label="All day event" /> */}
+                        {/* </FormGroup> */}
+
                     <TextField
                         label="Description"
                         placeholder="Add a description to the Event (optional)"
@@ -265,13 +289,6 @@ class Calendar extends React.Component {
                         views={["month", "week", "day", "agenda"]}
                         style={{minHeight: '600px'}}
                         popup={true}
-                        // eventPropGetter={event => ({
-                        //     style: {
-                        //         backgroundColor: '#2196f3'
-                        //     }
-                        // })}
-                        // // step={15}
-                        // timeslots={8}
                         events={this.eventsMutator(calEvents)}
                         onSelectEvent={event => this.onEventSelect(event)}
                         onSelectSlot={this.handleSelect}

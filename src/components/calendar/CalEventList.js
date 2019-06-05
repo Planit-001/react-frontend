@@ -66,7 +66,7 @@ function CalEventList({events, classes}){
                     </TableHead>
                     <TableBody>
                     {events && sortedEvents(filterEvents(events)).map(event => (
-                        <TableRow style={ moment(event.start_time).isBefore(moment().subtract(1, 'd')) ? strikeThru : {} }  key={event.id}>
+                        <TableRow style={ moment(event.end_time).isBefore(moment()) ? strikeThru : {}} key={event.id}>
                             <TableCell className={classes.cell} style={{width: 140}} >
                                     {readableDate(event.start_time)}
                             </TableCell>
