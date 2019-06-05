@@ -73,7 +73,7 @@ export function createList(payload) {
     }
   };
   
-  export function updateList(id, payload){
+  export function updateList(id, payload, archive = false){
     return function(dispatch, getState){
       return fetch(`${apiBase}/api/v1/lists/${id}`, {
         method: "PUT",
@@ -84,7 +84,11 @@ export function createList(payload) {
       .then(response => response.json())
       .then(json => {
         dispatch({ type: UPDATE_LIST, payload: json});
-        toastEvent("List updated!")
+        if(archive){
+          toastEvent("List archived!");
+        }else{
+          toastEvent("List updated!");
+        }
       })
       .catch(err => {
         console.log(err)

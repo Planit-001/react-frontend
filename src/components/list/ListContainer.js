@@ -86,7 +86,7 @@ class ListContainer extends React.Component {
       const _payload = {
         archived: true
       }
-      this.props.updateList(this.props.list.id, _payload).then(() => {
+      this.props.updateList(this.props.list.id, _payload, true).then(() => {
         this.setState({editable: false})
       })
     }
@@ -106,7 +106,7 @@ class ListContainer extends React.Component {
           return a.id < b.id ? 1 : -1
         }
         return a.done ? 1 : -1 
-      })
+      });
     }else{
       return listItems
     }
