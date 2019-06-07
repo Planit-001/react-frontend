@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { withStyles } from '@material-ui/core';
+import {readableDate} from './../utils/dateFuncs';
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -23,7 +24,7 @@ const styles = theme => ({
     }
   });
 
-const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handleDelete }) => {
+const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handleDelete, showDate }) => {
 
     const [editable, setEditable] = useState(false);
     
@@ -98,6 +99,7 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
                     <ListItemText 
                         className={item.done ? 'checkedTodo' : ''}
                         onClick={() => onTextClick()}
+                        secondary={showDate ? readableDate(item.due_date) : null}
                         primary={item.title} />
                 )}
 

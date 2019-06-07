@@ -109,7 +109,7 @@ export function createTodo(payload) {
   }
 };
 
-export function updateTodo(id, payload){
+export function updateTodo(id, payload, shouldDing=false){
   return function(dispatch, getState){
     return fetch(`${apiBase}/api/v1/todos/${id}`, {
       method: "PUT",
@@ -119,7 +119,10 @@ export function updateTodo(id, payload){
     .then(handleErrors)
     .then(response => response.json())
     .then(json => {
-      dispatch({ type: UPDATE_TODO, payload: json})
+      dispatch({ type: UPDATE_TODO, payload: json});
+      if(shouldDing){
+        ding()
+      }
       toastEvent("To-do updated!")
     })
     .catch(err => {

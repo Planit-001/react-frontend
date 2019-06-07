@@ -9,12 +9,10 @@ import { updateTodo, deleteTodo } from "../redux/actions/todo";
 
 class TodoBlock extends React.Component {
   
-  updateTodo = (e, id) => {
-    if(e.target.checked !== undefined){
-      const todoBody = {todo: {done: e.target.checked}};
-      this.props.updateTodo(id, todoBody);
-    }
+  updateTodo = (itemId, itemBody, shouldDing) => {
+    this.props.updateTodo(itemId, itemBody, shouldDing);
   }
+
 
   deleteTodo = (id) => {
     this.props.deleteTodo(id);
@@ -30,7 +28,13 @@ class TodoBlock extends React.Component {
             {title}
         </Typography>
         {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} user={user} />} 
-        <TodoList showDate={this.props.showDate} sortByDate={this.props.sortByDate} todos={todos} user={user} />
+        <TodoList 
+          showDate={this.props.showDate} 
+          handleUpdate={this.updateTodo}
+          handleDelete={this.deleteTodo}
+          sortByDate={this.props.sortByDate} 
+          todos={todos} 
+          user={user} />
       </div>
     );
   }

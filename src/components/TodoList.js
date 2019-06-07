@@ -3,6 +3,8 @@ import { List, Paper } from "@material-ui/core";
 import TodoItem from "./TodoItem";
 import moment from 'moment';
 
+import ItemEditable from './../components/ItemEditable';
+
 function sortTodos(todos){
   if (todos.length >= 1){
     return todos.sort((a, b) => {
@@ -32,17 +34,23 @@ const TodoList = memo(props => {
         {props.todos && props.todos.length > 0 && (
           <Paper >
               <List dense={true}>
-                {sorted.map((todo, idx) => (
-                    <TodoItem
+                {sorted.map((todo, idx) => {
+                  // return <TodoItem
+                  //     key={`TodoItem.${idx}`}
+                  //     showDate={props.showDate}
+                  //     todo={todo}
+                  //     user={props.user}
+                  //     divider={idx !== props.todos.length - 1}
+                  //     deleteTodo={props.deleteTodo}
+                  //     updateTodo={props.updateTodo} />
+                  return <ItemEditable 
+                      key={idx} 
+                      item={todo}
                       showDate={props.showDate}
-                      todo={todo}
-                      user={props.user}
-                      key={`TodoItem.${idx}`}
-                      divider={idx !== props.todos.length - 1}
-                      deleteTodo={props.deleteTodo}
-                      updateTodo={props.updateTodo}
-                    />
-                ))}
+                      label="Add to-do"
+                      handleUpdate={props.handleUpdate}
+                      handleDelete={() => props.handleDelete(todo.id)} />
+                })}
               </List>
           </Paper>
         )}
