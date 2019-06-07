@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Fab from '@material-ui/core/Fab';
 // import HelpIcon from '@material-ui/icons/Help';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import { withStyles } from '@material-ui/core/styles';
+
 import Button from '@material-ui/core/Button';
 
 import Dialog from '@material-ui/core/Dialog';
@@ -17,22 +17,13 @@ import {pageInfo} from './../utils/pageInfo';
 
 const btnWords = ["Cool", "OK", "Got it"]
 
-function Transition(props) {
-    return <Slide direction="down" {...props} />;
-}
+const Transition = React.forwardRef((props, ref) => {
+    return <Slide ref={ref} direction="down" {...props} />;
+})
 
   
 
-const styles = theme => ({
-    fab: {
-        margin: theme.spacing.unit,
-    },
-    extendedIcon: {
-        marginRight: theme.spacing.unit,
-    },
-});
-
-function PageHelper({page, classes}){
+function PageHelper({page}){
     const [open, setOpen] = useState(false);
 
 
@@ -68,11 +59,10 @@ function PageHelper({page, classes}){
                 </DialogActions>
                 </Dialog>
                 <Fab onClick={handleClickOpen} color="primary" size="small" aria-label="Help" >
-                    {/* <HelpIcon /> */}
                     <HelpOutlineIcon />
                 </Fab>
             </div>
     )
 }
 
-export default withStyles(styles)(PageHelper);
+export default PageHelper;

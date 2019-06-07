@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Redirect  } from "react-router-dom";
+
 import { withStyles } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { connect } from "react-redux";
@@ -123,7 +124,6 @@ class App extends Component {
         // E.g., shift from Red 500 to Red 300 or Red 700.
         tonalOffset: 0.2,
       },
-      typography: { useNextVariants: true },
     });
 
     return (
@@ -159,7 +159,7 @@ class App extends Component {
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
             <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
-            {devMode && <Route path="/pipelines/" component={Pipeline} />}
+            {/* {devMode && <Route path="/pipelines/" component={Pipeline} />} */}
             <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
@@ -235,15 +235,15 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing.unit * 7,
+    width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
+      width: theme.spacing(9),
     },
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing(3),
     height: '100vh',
     overflow: 'auto',
   },
@@ -254,7 +254,7 @@ const styles = theme => ({
     height: 320,
   },
   h5: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
   },
 });
 

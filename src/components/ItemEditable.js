@@ -4,7 +4,13 @@ import MomentUtils from '@date-io/moment';
 
 import { withStyles } from '@material-ui/core';
 import {readableDate} from './../utils/dateFuncs';
-import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+// import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+  } from '@material-ui/pickers';
+
 import moment from 'moment';
 
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
@@ -16,9 +22,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
-import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import TextField from '@material-ui/core/TextField';
@@ -106,14 +112,27 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
               <DialogContent>
                 <MuiPickersUtilsProvider utils={MomentUtils}>
     
-                  
-                <DatePicker
+                {/* <KeyboardDatePicker
+                    margin="normal"
+                    id="mui-pickers-date"
+                    label="Date picker"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                    /> */}
+                <KeyboardDatePicker
                     margin="normal"
                     disablePast={true}
                     label="Date picker"
                     value={selectedDate}
                     clearable={true}
-                    onChange={(date) =>  setSelectedDate(date)}/>
+                    variant="inline"
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                    onChange={(date) => setSelectedDate(date)}/>
     
                 </MuiPickersUtilsProvider>
               </DialogContent>
@@ -134,11 +153,13 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
             button 
             disableRipple >
             {renderDialogue(item)}
-            <Checkbox 
-                checked={item.done || false}
-                tabIndex={-1}
-                disableRipple
-                onClick={(e) => e.target.checked !== undefined ? onUpdate({done: e.target.checked}, e.target.checked) : null} />
+            <ListItemIcon>
+                <Checkbox 
+                    checked={item.done || false}
+                    tabIndex={-1}
+                    disableRipple
+                    onClick={(e) => e.target.checked !== undefined ? onUpdate({done: e.target.checked}, e.target.checked) : null} />
+            </ListItemIcon>
 
                 {editable ? (
                     <ClickAwayListener onClickAway={handleClickAway}>

@@ -3,7 +3,12 @@ import { TextField, Paper, Button, Grid } from "@material-ui/core";
 import { createTodo } from "./../../redux/actions/todo";
 import { connect } from "react-redux";
 import moment from 'moment';
-import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+// import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 import MomentUtils from '@date-io/moment';
 // import {readableDate} from './../utils/dateFuncs';
 
@@ -59,7 +64,7 @@ class FutureTodoCreate extends React.Component {
           }}>
           <Grid container spacing={8} justify="space-around">
             <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DatePicker
+                <KeyboardDatePicker
                     margin="normal"
                     label="Date picker"
                     disablePast={true}

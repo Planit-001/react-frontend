@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
                 <Grid container justify="space-between">
                     <PageTitle title="Dashboard" page="dashboard" />
                 </Grid>
-                <Grid container spacing={32}>
+                <Grid container spacing={4}>
                     <Grid item xs={12} sm={12} md={7} lg={6}>
                         <WindyWeatherCard />
                         <Spacer height={40} />
