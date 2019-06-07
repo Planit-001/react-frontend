@@ -44,9 +44,11 @@ const TodoList = memo(props => {
                   //     deleteTodo={props.deleteTodo}
                   //     updateTodo={props.updateTodo} />
                   return <ItemEditable 
+
                       key={idx} 
                       item={todo}
                       showDate={props.showDate}
+                      showDateSelect={true}
                       label="Add to-do"
                       handleUpdate={props.handleUpdate}
                       handleDelete={() => props.handleDelete(todo.id)} />

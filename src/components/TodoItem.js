@@ -44,7 +44,7 @@ class TodoItem extends React.Component {
     timeModal: false,
     editable: false,
     newTitle: '',
-    selectedDate: null, // moment().format(),
+    selectedDate: null, 
     // selectedTime: null
   }
 
