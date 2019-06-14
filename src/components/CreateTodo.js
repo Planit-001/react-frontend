@@ -14,8 +14,14 @@ class CreateTodo extends React.Component {
   }
 
   onEnter = (e) => {
-    if (e.key === 'Enter' && !(e.target.value === '')) {
+    if (e.key === 'Enter' && !(e.target.value.trim() === '')) {
         this.createTodo(e.target.value)
+    }  
+  }
+
+  onCreate = () => {
+    if (this.state.inputValue && (this.state.inputValue.trim() !== '')) {
+      this.createTodo(this.state.inputValue)
     }  
   }
 
@@ -56,7 +62,7 @@ class CreateTodo extends React.Component {
                   color="primary"
                   variant="contained"
                   fullWidth
-                  onClick={() => this.createTodo(this.state.inputValue)}>
+                  onClick={this.onCreate}>
                   Add
               </Button>
             </Grid>

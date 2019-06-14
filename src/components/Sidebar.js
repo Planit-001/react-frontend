@@ -37,7 +37,7 @@ class Sidebar extends Component {
                 }}
                 open={open}>
                 <div className={classes.toolbarIcon}>
-                    <span style={{fontStyle: 'italic'}}>Explore!</span>
+                    {/* <span style={{fontStyle: 'italic'}}>Explore!</span> */}
                     <IconButton onClick={drawerClose}>
                         <ChevronLeftIcon />
                     </IconButton>
