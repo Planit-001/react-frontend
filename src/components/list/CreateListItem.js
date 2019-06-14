@@ -11,9 +11,19 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import { createListItem } from "./../../redux/actions/list";
+import { withStyles } from '@material-ui/core';
 
+const styles = theme => ({
+    root: {
+        width: '75%'
+    },
+    input: {
+        fontSize: '0.9em',
+        // width: '84%'
+    }
+})
 
-const CreateListItem = React.memo(({listId, dispatch }) => {
+const CreateListItem = React.memo(({listId, dispatch, classes }) => {
     const [createable, setCreatable] = useState(false);
     const [listItem, setListItem] = useState('');
   
@@ -59,7 +69,12 @@ const CreateListItem = React.memo(({listId, dispatch }) => {
                             onKeyPress={onEnter}
                             fullWidth
                             autoFocus
-                            style={{width: '100%', paddingRight: 50}}
+                            className={classes.root}
+                            InputProps={{
+                                classes: {
+                                    input: classes.input
+                                }
+                            }}
                             margin="dense"
                             value={listItem}
                             onChange={(e) => setListItem( e.target.value )}/>
@@ -77,4 +92,7 @@ const CreateListItem = React.memo(({listId, dispatch }) => {
    )
   });
   
-  export default connect()(CreateListItem);
+//   export default connect()(CreateListItem);
+
+
+export default withStyles(styles)(connect()(CreateListItem));
