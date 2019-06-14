@@ -50,12 +50,12 @@ function CalEventList({events, classes}){
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{width:140}}>
-                                Date
+                            <TableCell style={{width:160}}>
+                                Date & time
                             </TableCell>
-                            <TableCell style={{width:100}}>
+                            {/* <TableCell style={{width:100}}>
                                 Time
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell style={{width: 160}}>
                                 Event
                             </TableCell>
@@ -67,12 +67,12 @@ function CalEventList({events, classes}){
                     <TableBody>
                     {events && sortedEvents(filterEvents(events)).map(event => (
                         <TableRow style={ moment(event.end_time).isBefore(moment()) ? strikeThru : {}} key={event.id}>
-                            <TableCell className={classes.cell} style={{width: 140}} >
-                                    {readableDate(event.start_time)}
+                            <TableCell className={classes.cell} style={{width: 160}} >
+                                {readableDate(event.start_time)} - {readableTime(event.start_time)}
                             </TableCell>
-                            <TableCell className={classes.cell} style={{width: 100}}>
+                            {/* <TableCell className={classes.cell} style={{width: 100}}>
                                 {readableTime(event.start_time)}
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell className={classes.cell} style={{width: 160}}>
                                 {event.title} <br />
                             </TableCell>
