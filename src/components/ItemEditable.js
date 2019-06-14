@@ -36,8 +36,12 @@ const styles = theme => ({
       wordBreak: "break-word"
     },
     input: {
-      fontSize: '0.9em',
-      width: "84%"
+        fontSize: '0.9em',
+    //   width: "84%"
+        paddingRight: 54
+    },
+    text: {
+        paddingRight: 50
     }
   });
 
@@ -184,7 +188,10 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
                         className={item.done ? 'checkedTodo' : ''}
                         onClick={() => onTextClick()}
                         secondary={showDate ? readableDate(item.due_date) : null}
-                        primary={item.title} />
+                        primary={item.title}
+                        classes={{
+                            root: classes.text
+                        }} />
                 )}
 
                 <ListItemSecondaryAction>
