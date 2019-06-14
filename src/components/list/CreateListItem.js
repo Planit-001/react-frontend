@@ -37,6 +37,13 @@ const CreateListItem = React.memo(({listId, dispatch, classes }) => {
         }
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key === "Escape"){
+            setCreatable(false)
+        }
+    }
+
+
     const handleCreate = () => {
         if(listItem){
             const listItemBody = {
@@ -67,6 +74,7 @@ const CreateListItem = React.memo(({listId, dispatch, classes }) => {
                         <TextField
                             label="Add list item"
                             onKeyPress={onEnter}
+                            onKeyDown={handleKeyDown}
                             fullWidth
                             autoFocus
                             className={classes.root}
