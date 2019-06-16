@@ -200,7 +200,7 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
                             <AccessTimeIcon />
                         </IconButton>                
                     </Tooltip>}
-                    <Tooltip title="Delete item" >
+                    <Tooltip title="Delete item" placement="right-start">
                         <IconButton onClick={handleDelete}>
                             <DeleteIcon/>
                         </IconButton>
