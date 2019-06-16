@@ -30,7 +30,6 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import ItemEditable from './../ItemEditable';
 import List from '@material-ui/core/List';
-import ListItemEditable from './ListItemEditable';
 import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
 

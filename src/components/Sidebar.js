@@ -53,12 +53,12 @@ class Sidebar extends Component {
                         <ListItemText primary="Dashboard" />
                     </ListItem>  
                     <ListItem component={Link} to="/todos/" button={true} >
-                        <Tooltip title="Todos" disableHoverListener={open} placement="right-start">
+                        <Tooltip title="To-do's" disableHoverListener={open} placement="right-start">
                             <ListItemIcon>
                                 <FormatListBulletedIcon />
                             </ListItemIcon>
                         </Tooltip>
-                        <ListItemText primary="Todos" />
+                        <ListItemText primary="To-do's" />
                     </ListItem>
                     <ListItem component={Link} to="/lists/" button={true} >
                         <Tooltip title="Lists" disableHoverListener={open} placement="right-start">
