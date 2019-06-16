@@ -32,7 +32,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
     root: {
-      paddingRight: '50px',
+      paddingRight: 45,
       wordBreak: "break-word"
     },
     input: {
@@ -41,7 +41,7 @@ const styles = theme => ({
         paddingRight: 54
     },
     text: {
-        paddingRight: 50
+        wordBreak: "break-word"
     }
   });
 
@@ -190,7 +190,7 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
                         secondary={showDate ? readableDate(item.due_date) : null}
                         primary={item.title}
                         classes={{
-                            root: classes.text
+                            root: showDateSelect ? classes.root : classes.text
                         }} />
                 )}
 
