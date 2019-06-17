@@ -23,6 +23,7 @@ import Sidebar from './components/Sidebar';
 import List from './views/Lists';
 // import PipelineBuilder from './views/PipelineBuilder';
 import Pipeline from './views/Pipeline';
+import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
 import ToastAlert from './components/ToastAlert';
@@ -156,6 +157,7 @@ class App extends Component {
             <div className={classes.appBarSpacer} />
             <PrivateRoute path="/" exact component={Dashboard} auth={isAuthenticated} />
             <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
+            <Route path="/home/" component={Home} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
             <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
