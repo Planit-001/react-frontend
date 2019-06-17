@@ -1,28 +1,60 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { getCalEvents, createCalEvent, updateCalEvent, deleteCalEvent } from "../redux/actions/calEvent";
+import { 
+    getCalEvents, 
+    createCalEvent, 
+    updateCalEvent, 
+    deleteCalEvent 
+} from "../redux/actions/calEvent";
 
 import moment from 'moment';
+import { Editor } from 'slate-react'
+import { Value } from 'slate'
 
 import BigCalendar from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Grid from '@material-ui/core/Grid';
+// import FormGroup from '@material-ui/core/FormGroup';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import DialogContentText from '@material-ui/core/DialogContentText';
+import Grid from '@material-ui/core/Grid';
 import InfoBox from './../components/calendar/InfoBox';
 import PageTitle from './../components/PageTitle';
 import { Paper } from "@material-ui/core";
+import Spacer from './../components/Spacer';
 import TextField from '@material-ui/core/TextField';
 
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
 const localizer = BigCalendar.momentLocalizer(moment)
+
+
+// Create our initial value...
+const eventDescription = Value.fromJSON({
+    document: {
+      nodes: [
+        {
+          object: 'block',
+          type: 'paragraph',
+          nodes: [
+            {
+              object: 'text',
+              leaves: [
+                {
+                  text: 'A line of text in a paragraph.',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  })
 
 class Calendar extends React.Component {
   constructor(props){
@@ -31,7 +63,7 @@ class Calendar extends React.Component {
         newEventTitle: '',
         newEventStart: '',
         newEventEnd: '',
-        newEventDescription: '',
+        newEventDescription: eventDescription,
         openDialogue: false,
 
         allDay: false,
@@ -43,10 +75,12 @@ class Calendar extends React.Component {
         updateEventDescription: '',
         openUpdateDialogue: false
     };
+
     this.handleClose = this.handleClose.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
     this.updateAllDay = this.updateAllDay.bind(this);
+
   }
 
   componentDidMount(){
@@ -57,20 +91,29 @@ class Calendar extends React.Component {
     this.setState({ openDialogue: true });
   };
 
-  handleClose = () => {
-    this.setState({ 
+  handleClose = (small=false) => {
+
+    const baseReset = {
+        allDay: false,
         openDialogue: false,
         newEventEnd: '',
         newEventStart: '',
         newEventTitle: '',
-        newEventDescription: '',
-        updateEventId: null,
-        updateEventTitle: '',
-        updateEventStart: '',
-        updateEventEnd: '',
-        updateEventDescription: '',
+        newEventDescription: "",
         openUpdateDialogue: false
-    });
+    }
+
+    if(small){
+        this.setState(baseReset)
+    }else{
+        baseReset.updateEventId = null;
+        baseReset.updateEventTitle = '';
+        baseReset.updateEventStart = '';
+        baseReset.updateEventEnd = '';
+        baseReset.updateEventDescription = '';
+        baseReset.openUpdateDialogue = false;
+        this.setState(baseReset);
+    }
   };
 
   handleSmallClose = () => {
@@ -95,6 +138,8 @@ class Calendar extends React.Component {
 
   handleSubmit = () => {
       const { newEventStart, newEventEnd, newEventTitle, newEventDescription } = this.state;
+
+
       if(!newEventTitle.trim()){
           return
       }
@@ -178,42 +223,71 @@ class Calendar extends React.Component {
       }
   }
 
-  renderCreateDialogue(){
-      return <Dialog
-        open={this.state.openDialogue}
-        onClose={this.handleClose}
-        aria-labelledby="form-dialog-title">
+  onEditorStateChange = (newEventDescription) => {
+    this.setState({
+        newEventDescription: newEventDescription,
+    });
+  };
+
+    // On change, update the app's React state with the new editor value.
+  onChange = ({ value }) => {
+    this.setState({ newEventDescription: value })
+  }
+    
+
+  renderDialogue(type='create'){
+
+    const {
+        newEventDescription, 
+        newEventTitle, 
+        updateEventTitle, 
+        updateEventDescription,
+        openDialogue
+    } = this.state;
+
+    const createType = type === 'create'
+    
+    return (
+        <Dialog
+            fullWidth
+            open={openDialogue}
+            onClose={this.handleClose}>
             <DialogTitle>
-              Describe this event
+              {createType ? "Describe this event" : "Update or Delete this Event"}
             </DialogTitle>
             <DialogContent>
-             
                 <TextField
                     autoFocus
                     margin="normal"
                     label="Event title"
                     fullWidth
-                    value={this.state.newEventTitle}
-                    onChange={e => this.setState({newEventTitle: e.target.value})}/>
+                    value={createType ? newEventTitle : updateEventTitle}
+                    onChange={e => createType ? this.setState({newEventTitle: e.target.value}) : this.setState({updateEventTitle: e.target.value}) }/>
+                <Spacer height={20} />
+                {/* <Editor value={newEventDescription || ''} onChange={this.onChange} /> */}
                 <TextField
                     label="Description"
                     placeholder="Add a description to the Event (optional)"
-                    value={this.state.newEventDescription}
+                    value={newEventDescription || ''}
                     multiline
                     fullWidth
                     onChange={(e) => this.setState({newEventDescription: e.target.value})}
                     rows="4"
                     margin="normal"/>
+              
             </DialogContent>
             <DialogActions>
-                <Button onClick={this.handleClose} color="default">
+                <Button onClick={() => createType ? this.handleClose() : this.handleClose(true)} color="default">
                     Cancel
                 </Button>
-                <Button onClick={this.handleSubmit} color="primary">
+                {createType ? <Button onClick={this.handleSubmit} color="primary">
                     Create
-                </Button>
+                </Button>: <Button onClick={this.handleUpdate} color="primary">
+                    Update
+                </Button>}
             </DialogActions>
         </Dialog>
+      )
   }
 
   renderUpdateDialogue(){
@@ -273,10 +347,11 @@ class Calendar extends React.Component {
       <div>
         <PageTitle page={"calendar"} helper={true} />
 
-        {this.renderCreateDialogue()}
+        {/* {this.renderCreateDialogue()} */}
+        {this.renderDialogue('create')}
         {this.renderUpdateDialogue()}
 
-        <Grid container spacing={32}>
+        <Grid container spacing={4}>
             <Grid item xs={12} md={9}>
                 <Paper style={{padding: 15}}>
                     <BigCalendar
@@ -322,4 +397,9 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { getCalEvents , createCalEvent, updateCalEvent, deleteCalEvent })(Calendar);
+export default connect(mapStateToProps, { 
+    getCalEvents , 
+    createCalEvent, 
+    updateCalEvent, 
+    deleteCalEvent 
+})(Calendar);
