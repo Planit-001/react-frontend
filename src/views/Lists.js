@@ -24,6 +24,12 @@ class Lists extends React.Component {
     return lists ? lists.filter((list) => list.archived !== true) : []
   }
 
+  sortedLists(lists){
+    return lists.sort((a, b) => {
+      return b.id - a.id
+    }) 
+  }
+
 
   render() {
 
@@ -43,9 +49,9 @@ class Lists extends React.Component {
         <Grid 
           container 
           spacing={6} >
-          {lists && lists.map((item, index) => {
+          {lists && this.sortedLists(lists).map((list, index) => {
             return <Grid xs={12} md={6} lg={4} item key={index}>
-              <ListContainer list={item} />
+              <ListContainer list={list} />
             </Grid>
           })}
           
