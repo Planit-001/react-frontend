@@ -1,6 +1,5 @@
 import React, { memo } from "react";
 import { List, Paper } from "@material-ui/core";
-import TodoItem from "./TodoItem";
 import moment from 'moment';
 
 import ItemEditable from './../components/ItemEditable';
