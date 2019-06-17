@@ -1,6 +1,5 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-
+import ComponentTitle from './../components/ComponentTitle'
 import CreateTodo from './../components/CreateTodo';
 import TodoList from './../components/TodoList';
 
@@ -24,9 +23,7 @@ class TodoBlock extends React.Component {
 
     return (
       <div>
-        <Typography variant="h5" align="center" gutterBottom component="h4">
-            {title}
-        </Typography>
+        <ComponentTitle title={title} />
         {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} user={user} />} 
         <TodoList 
           showDate={this.props.showDate} 

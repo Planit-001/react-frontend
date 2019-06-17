@@ -3,7 +3,6 @@ import { TextField, Paper, Button, Grid } from "@material-ui/core";
 import { createTodo } from "./../../redux/actions/todo";
 import { connect } from "react-redux";
 import moment from 'moment';
-// import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -53,32 +52,24 @@ class FutureTodoCreate extends React.Component {
   };
 
   render() {
-      const { selectedDate } = this.state;
+    const { selectedDate } = this.state;
     return (
         <Paper style={{ 
             marginBottom: 16, 
-            padding: 16, 
-            display: 'flex', 
-            flexDirection: "column", 
-            justifyContent: 'center' 
+            padding: 16,
           }}>
-          <Grid container spacing={8} justify="space-around">
-            <MuiPickersUtilsProvider utils={MomentUtils}>
-                <KeyboardDatePicker
-                    margin="normal"
-                    label="Date picker"
-                    disablePast={true}
-                    clearable={true}
-                    value={selectedDate}
-                    style={{marginBottom: 40}}
-                    onChange={this.handleDateChange}/>
-            <div className="spacer"></div>
-            </MuiPickersUtilsProvider>
-
-          </Grid>
-          <Grid container spacing={8} justify="space-around">
-            <div className="spacer"></div>
-            
+          <Grid container spacing={2} justify="space-around">
+            <Grid sm={12} item>
+              <MuiPickersUtilsProvider utils={MomentUtils}>
+                    <KeyboardDatePicker
+                        margin="none"
+                        label="Date picker"
+                        disablePast={true}
+                        clearable={true}
+                        value={selectedDate}
+                        onChange={this.handleDateChange}/>
+                </MuiPickersUtilsProvider>
+            </Grid>
             <Grid sm={12} md={9} item>
                 <TextField
                     placeholder="Add Todo here"
