@@ -111,6 +111,13 @@ class ListContainer extends React.Component {
     }
   }
 
+  subheaderCount(listItems){
+
+    const done = listItems.filter(item => item.done === true);
+    return `${done.length}/${listItems.length} done`
+
+  }
+
   renderEditDialogue(){
 
     const {listTitle, editable} = this.state;
@@ -151,6 +158,7 @@ class ListContainer extends React.Component {
             <Card>
               <CardHeader 
                 title={list.title}
+                subheader={list.list_items.length >= 1 ? this.subheaderCount(list.list_items) : null}
                 onClick={this.onTitleClick}
                 action={
                   <Tooltip title="Edit list tile">
