@@ -38,8 +38,8 @@ class CreateList extends React.Component {
   render() {
     return (
         <Paper style={{padding: 16 }}>
-          <Grid container spacing={4} justify="space-around">            
-            <Grid sm={12} md={9} item>
+          <Grid container spacing={2} justify="space-around">            
+            <Grid sm={9} md={9} item>
                 <TextField
                     placeholder="Create a new list"
                     value={this.state.inputValue}
@@ -48,7 +48,7 @@ class CreateList extends React.Component {
                     fullWidth/>
             </Grid>
 
-            <Grid sm={3} item >
+            <Grid sm={3} md={3} item >
               <Button
                   color="primary"
                   variant="contained"
