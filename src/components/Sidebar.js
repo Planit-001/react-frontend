@@ -10,6 +10,7 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle'
 
 import Hidden from '@material-ui/core/Hidden';
 
@@ -26,7 +27,7 @@ import ViewWeekIcon from '@material-ui/icons/ViewWeek';
 class Sidebar extends Component {
  
   render() {
-    const { classes, drawerClose, open, devMode } = this.props;
+    const { classes, drawerClose, open, devMode, admin } = this.props;
     return (
         <Hidden only="xs">
 
@@ -44,6 +45,15 @@ class Sidebar extends Component {
                 </div>
                 <Divider />
                 <List>
+                    {admin && <ListItem button component={Link} to="/admin">
+                        <Tooltip title="Dashboard" disableHoverListener={open} placement="right-start">
+                            <ListItemIcon>
+                                <SupervisedUserCircleIcon />
+                            </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText primary="Dashboard" />
+                    </ListItem>}
+
                     <ListItem button component={Link} to="/">
                         <Tooltip title="Dashboard" disableHoverListener={open} placement="right-start">
                             <ListItemIcon>

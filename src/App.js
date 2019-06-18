@@ -23,6 +23,7 @@ import Sidebar from './components/Sidebar';
 import List from './views/Lists';
 // import PipelineBuilder from './views/PipelineBuilder';
 import Pipeline from './views/Pipeline';
+import Admin from './views/Admin';
 import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
@@ -90,6 +91,10 @@ class App extends Component {
     return !!this.props.user && !!this.props.token;
   }
 
+  isAdmin(){
+    return this.isAuthenticated() && this.props.user.admin === true
+  }
+
   handleDrawerOpen = () => {
     this.setState({ open: true });
   };
@@ -109,6 +114,7 @@ class App extends Component {
   render() {
     const { classes, darkMode, changeDarkMode } = this.props;
     const isAuthenticated =  this.isAuthenticated();
+    const isAdmin =  this.isAdmin();
     const { anchorEl } = this.state;
 
     const muiTheme = createMuiTheme({
@@ -148,6 +154,7 @@ class App extends Component {
           <Sidebar 
             classes={classes}
             devMode={devMode}
+            admin={isAdmin}
             open={this.state.open} 
             drawerOpen={this.handleDrawerOpen} 
             drawerClose={this.handleDrawerClose} />
@@ -161,7 +168,9 @@ class App extends Component {
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
             <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
-            {/* {devMode && <Route path="/pipelines/" component={Pipeline} />} */}
+            <PrivateRoute path="/admin" component={Admin} auth={isAdmin} />
+            {devMode && <Route path="/pipelines/" component={Pipeline} />}
+
             <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
             <Route path="/calendar-full/" component={FullCalendar} />
             <Route path="/calendar-toast/" component={ToastCalendar} />
