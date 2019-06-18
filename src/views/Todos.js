@@ -5,7 +5,7 @@ import moment from 'moment';
 import { getTodos, getArchived } from "../redux/actions/todo";
 import { todayNullOrBefore, tomorrowsTodos, dayAfterTodos, futureTodos } from './../utils/todoFuncs';
 import { withStyles } from '@material-ui/core/styles';
-
+import {today, tomorrow, dayAfter } from './../utils/dateFuncs';
 import Grid from '@material-ui/core/Grid';
 import TodoBlock from './../components/TodoBlock';
 import RecentArchived from './../components/todo/RecentArchived';
@@ -63,18 +63,22 @@ class Todos extends React.Component {
           <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               title="Today's to-do's"
+
+              subtitle={today()}
               todos={this.filterTodosToday(todos)} />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(1, 'day')}
               title="Tomorrow's to-do's"
+              subtitle={tomorrow()}
               todos={this.filterTodosTomorrow(todos)} />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <TodoBlock 
               defaultDueDate={moment().add(2, 'day')}
               title="The day after"
+              subtitle={dayAfter()}
               todos={dayAfterTodos(todos)} />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
