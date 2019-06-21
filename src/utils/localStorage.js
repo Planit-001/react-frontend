@@ -1,4 +1,13 @@
 export const loadState = () => {
+    // const stateVersionNo  = require('../.version.json').version
+    // const localVersion    = localStorage.getItem('version');
+
+    // if (localVersion < stateVersionNo){
+    //   //Update local version, and get a new version of redux state.
+    //   localStorage.setItem('version', stateVersionNo);
+    //   return undefined
+    // }
+
     try {
       const serializedState = localStorage.getItem('bbstate');
       if(serializedState === null ) {

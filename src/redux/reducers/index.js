@@ -6,6 +6,7 @@ import authReducer from './auth';
 import suggestion from './suggestion';
 import pipeline from './pipeline';
 import list from './list';
+import admin from './admin';
 import calEvent from './calEvent';
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   pipeline,
   list,
   calEvent,
+  admin,
   ui: uiReducer,
   auth: authReducer
 })

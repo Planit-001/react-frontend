@@ -46,6 +46,11 @@ export const REMEMBER_ME = "REMEMBER_ME";
 export const GET_COORDINATES = "GET_COORDINATES";
 export const INVALIDATE_COORDINATES = "INVALIDATE_COORDINATES";
 
+// Admin
+export const GET_USERS = "GET_USERS";
+export const GET_SUGGESTIONS = "GET_SUGGESTIONS";
+
+
 // Pipeline
 export const GET_PIPELINES = "GET_PIPELINES";
 export const CREATE_PIPELINE = "CREATE_PIPELINE";
