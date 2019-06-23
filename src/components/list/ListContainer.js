@@ -48,6 +48,12 @@ class ListContainer extends React.Component {
       listTitle: this.props.list.title
     })
   }
+
+  onEnter = (e) => {
+    if (e.key === 'Enter' && !(e.target.value === '')) {
+        this.updateList()
+    }  
+  }
   
   updateList = () => {
     const { listTitle } = this.state;
@@ -136,6 +142,7 @@ class ListContainer extends React.Component {
                   label="New list title"
                   fullWidth
                   value={listTitle}
+                  onKeyPress={this.onEnter}
                   onChange={e => this.setState({listTitle: e.target.value})}/>
           </DialogContent>
           <DialogActions>
