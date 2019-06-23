@@ -158,7 +158,7 @@ class ListContainer extends React.Component {
             <Card>
               <CardHeader 
                 title={list.title}
-                subheader={list.list_items.length >= 1 ? this.subheaderCount(list.list_items) : null}
+                subheader={list.list_items && list.list_items.length >= 1 ? this.subheaderCount(list.list_items) : null}
                 onClick={this.onTitleClick}
                 action={
                   <Tooltip title="Edit list tile">
