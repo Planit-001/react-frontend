@@ -63,7 +63,7 @@ class Calendar extends React.Component {
         newEventTitle: '',
         newEventStart: '',
         newEventEnd: '',
-        newEventDescription: eventDescription,
+        newEventDescription: '', //eventDescription,
         openDialogue: false,
 
         allDay: false,
