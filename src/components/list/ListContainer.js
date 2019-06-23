@@ -36,7 +36,6 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core';
 
 
-
 class ListContainer extends React.Component {
   state = {
     editable: false,
@@ -49,6 +48,13 @@ class ListContainer extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.list.title !== prevProps.list.title) {
+      this.setState({
+        listTitle: this.props.list.title
+      })
+    }
+  }
   onEnter = (e) => {
     if (e.key === 'Enter' && !(e.target.value === '')) {
         this.updateList()
