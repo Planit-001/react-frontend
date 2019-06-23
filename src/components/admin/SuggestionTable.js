@@ -21,51 +21,54 @@ const useStyles = makeStyles(theme => ({
 
 export default function SuggestionTable({suggestions}) {
   const classes = useStyles();
-
-  return (
-    suggestions && <Paper className={classes.root}>
-        <Table className={classes.table}>
-            <TableHead>
-                <TableRow>
-                    <TableCell>
-                        ID
-                    </TableCell>
-                    <TableCell align="right">
-                        Type
-                    </TableCell>
-                    <TableCell align="right">
-                        Body
-                    </TableCell>
-                    <TableCell align="right">
-                        User ID
-                    </TableCell>
-                    <TableCell align="right">
-                        Created at
-                    </TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {suggestions.map(sugg => (
-                    <TableRow key={sugg.id}>
-                        <TableCell component="th" scope="row">
-                            {sugg.id}
-                        </TableCell>
-                        <TableCell align="right">
-                            {sugg.suggestion_type}
-                        </TableCell>
-                        <TableCell align="right">
-                            {sugg.body}
-                        </TableCell>
-                        <TableCell align="right">
-                            {sugg.user_id}
-                        </TableCell>
-                        <TableCell align="right">
-                            {sugg.created_at}
-                        </TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-        </Table>
-    </Paper>
-  );
+    if(suggestions){
+        return (
+          <Paper className={classes.root}>
+              <Table className={classes.table}>
+                  <TableHead>
+                      <TableRow>
+                          <TableCell>
+                              ID
+                          </TableCell>
+                          <TableCell align="right">
+                              Type
+                          </TableCell>
+                          <TableCell align="right">
+                              Body
+                          </TableCell>
+                          <TableCell align="right">
+                              User ID
+                          </TableCell>
+                          <TableCell align="right">
+                              Created at
+                          </TableCell>
+                      </TableRow>
+                  </TableHead>
+                  <TableBody>
+                      {suggestions.map(sugg => (
+                          <TableRow key={sugg.id}>
+                              <TableCell component="th" scope="row">
+                                  {sugg.id}
+                              </TableCell>
+                              <TableCell align="right">
+                                  {sugg.suggestion_type}
+                              </TableCell>
+                              <TableCell align="right">
+                                  {sugg.body}
+                              </TableCell>
+                              <TableCell align="right">
+                                  {sugg.user_id}
+                              </TableCell>
+                              <TableCell align="right">
+                                  {sugg.created_at}
+                              </TableCell>
+                          </TableRow>
+                      ))}
+                  </TableBody>
+              </Table>
+          </Paper>
+        );
+    }else{
+        return null;
+    }
 }

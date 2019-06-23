@@ -21,45 +21,49 @@ const useStyles = makeStyles(theme => ({
 
 export default function UserTable({users}) {
   const classes = useStyles();
+ if (users){
 
-  return (
-    users && <Paper className={classes.root}>
-        <Table className={classes.table}>
-            <TableHead>
-                <TableRow>
-                    <TableCell>
-                        Email
-                    </TableCell>
-                    <TableCell align="right">
-                        ID
-                    </TableCell>
-                    <TableCell align="right">
-                        Admin
-                    </TableCell>
-                    <TableCell align="right">
-                        Created at
-                    </TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {users.map(user => (
-                    <TableRow key={user.email}>
-                        <TableCell component="th" scope="row">
-                            {user.email}
-                        </TableCell>
-                        <TableCell align="right">
-                            {user.id}
-                        </TableCell>
-                        <TableCell align="right">
-                            {String(user.admin)}
-                        </TableCell>
-                        <TableCell align="right">
-                            {user.created_at}
-                        </TableCell>
-                    </TableRow>
-                ))}
-            </TableBody>
-        </Table>
-    </Paper>
-  );
+     return (
+       <Paper className={classes.root}>
+           <Table className={classes.table}>
+               <TableHead>
+                   <TableRow>
+                       <TableCell>
+                           Email
+                       </TableCell>
+                       <TableCell align="right">
+                           ID
+                       </TableCell>
+                       <TableCell align="right">
+                           Admin
+                       </TableCell>
+                       <TableCell align="right">
+                           Created at
+                       </TableCell>
+                   </TableRow>
+               </TableHead>
+               <TableBody>
+                   {users.map(user => (
+                       <TableRow key={user.email}>
+                           <TableCell component="th" scope="row">
+                               {user.email}
+                           </TableCell>
+                           <TableCell align="right">
+                               {user.id}
+                           </TableCell>
+                           <TableCell align="right">
+                               {String(user.admin)}
+                           </TableCell>
+                           <TableCell align="right">
+                               {user.created_at}
+                           </TableCell>
+                       </TableRow>
+                   ))}
+               </TableBody>
+           </Table>
+       </Paper>
+     );
+ }else{
+     return null
+ }
 }

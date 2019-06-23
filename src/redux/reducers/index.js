@@ -8,6 +8,9 @@ import pipeline from './pipeline';
 import list from './list';
 import admin from './admin';
 import calEvent from './calEvent';
+import {
+  LOGOUT_USER
+} from './../../redux/constants/actionTypes'; 
 
 const rootReducer = combineReducers({
   external: externalReducer,
@@ -22,4 +25,10 @@ const rootReducer = combineReducers({
 })
 
 
-export default rootReducer;
+export default (state, action) => (
+  action.type === LOGOUT_USER
+      ? rootReducer(undefined, action)
+      : rootReducer(state, action)
+)
+
+

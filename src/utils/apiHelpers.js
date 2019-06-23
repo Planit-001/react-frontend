@@ -3,6 +3,7 @@ import store from './../redux/store';
 import {devMode } from './constants';
 import moment from 'moment';
 import _ from 'lodash';
+import expiry from './apiExpiry';
 
 export function handleErrors(response) {
     if (!response.ok) {
@@ -31,20 +32,18 @@ export function buildHeaders(token, tokenOnly=false){
 }
 
 export function shouldFetchData(state, reducer, itemFromState) {
-    const expiry = state.settings.items.expiry || [];
     try {
       const item = state[reducer][itemFromState];
-      const expSetting = expiry.find(exp => exp.name === _.snakeCase(itemFromState) && exp.group_name === _.snakeCase(reducer)) || {};
-      const timeToExpire = expSetting.value || 0
-  
+      const expTime = expiry[reducer][itemFromState] 
       if (!item || _.isEmpty(item)) {
         return true;
       } else if (item.isFetching) {
         return false;
-      } else if (timeToExpire) {
-        const expiration = moment(item.lastUpdated).add(timeToExpire, 'ms');
+      } else if (expTime) {
+        const expiration = moment(item.lastUpdated).add(expTime, 'ms');
+        // debugger;
         return moment().isAfter(expiration);
-      } else if (expiry.lenth === 0 || !timeToExpire) {
+      } else if (!expTime) {
         return true;
       } else {
         return item.didInvalidate;
