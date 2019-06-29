@@ -52,7 +52,7 @@ class Header extends Component {
               color="inherit"
               noWrap
               className={classes.title}>
-              Simple Planner
+              Planit
             </Typography>
             <Tooltip title={ darkMode ? "Switch to day mode" : "Switch to dark mode"}>
               <IconButton

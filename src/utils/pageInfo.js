@@ -6,7 +6,7 @@ export const pageInfo =  {
     todos: {
         title: "Daily To-do's",
         description: `
-            Here you can create to-do's by date. Creating a todo in a column will assign it with the due date of that day.
+            Here you can create to-do's by date. Creating a to-do in a column will assign it with the due date of that day.
 
             If you check off a to-do it will be archived the next day. Most recently archived to-do's will be displayed in the 'recently archived' column.
 

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import moment from 'moment';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
+  DatePicker
 } from '@material-ui/pickers';
 
 import MomentUtils from '@date-io/moment';
@@ -61,9 +61,10 @@ class FutureTodoCreate extends React.Component {
           <Grid container spacing={2} justify="space-around">
             <Grid sm={12} item>
               <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <KeyboardDatePicker
+                    <DatePicker
                         margin="none"
-                        label="Date picker"
+                        fullWidth
+                        label="Choose date"
                         disablePast={true}
                         clearable={true}
                         value={selectedDate}
