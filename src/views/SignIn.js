@@ -51,6 +51,7 @@ const styles = theme => ({
 
 class SignIn extends React.Component{
   state = { 
+    redirectToReferrer: false,
     email: '',
     password: '',
     error: true
@@ -59,7 +60,12 @@ class SignIn extends React.Component{
 
   componentDidUpdate(){
     if(this.props.user){
-      this.props.history.push('/');
+      console.log("pushing");
+      if(this.props.location && this.props.location.state && this.props.location.state.from && this.props.location.state.from.pathname){
+        this.props.history.push(this.props.location.state.from.pathname);
+      }else{
+        this.props.history.push('/');
+      }
     }
   }
 
@@ -70,7 +76,6 @@ class SignIn extends React.Component{
       password: this.state.password
     }
     // this.props.history.push("/");
-
     this.props.signInUser(body) //.then(() => console.log())
   }
 
