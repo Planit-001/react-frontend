@@ -45,7 +45,7 @@ class BottomNav extends React.Component {
   };
 
   render() {
-    const { classes, location } = this.props;
+    const { classes } = this.props;
     const { value } = this.state;
 
     return (

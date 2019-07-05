@@ -8,13 +8,14 @@ import {
 } from "../redux/actions/calEvent";
 
 import moment from 'moment';
-import { Editor } from 'slate-react'
+// import { Editor } from 'slate-react'
 import { Value } from 'slate'
 
 import BigCalendar from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -22,6 +23,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 // import FormGroup from '@material-ui/core/FormGroup';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import DialogContentText from '@material-ui/core/DialogContentText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
 import InfoBox from './../components/calendar/InfoBox';
 import PageTitle from './../components/PageTitle';
@@ -64,14 +66,14 @@ class Calendar extends React.Component {
         newEventStart: '',
         newEventEnd: '',
         newEventDescription: '', //eventDescription,
+        newEventAllDay: false,
         openDialogue: false,
-
-        allDay: false,
 
         updateEventId: null,
         updateEventTitle: '',
         updateEventStart: '',
         updateEventEnd: '',
+        updateEventAllDay: false,
         updateEventDescription: '',
         openUpdateDialogue: false
     };
@@ -128,16 +130,19 @@ class Calendar extends React.Component {
     })
   }
 
-  handleSelect = ({ start, end }) => {
+  handleSelect = (event) => {
+    const { start, end } = event
+    const allDay = JSON.stringify(start) === JSON.stringify(end)
     this.setState({
         newEventStart: start,
         newEventEnd: end,
+        newEventAllDay: allDay,
         openDialogue: true
     });
   }
 
   handleSubmit = () => {
-      const { newEventStart, newEventEnd, newEventTitle, newEventDescription } = this.state;
+      const { newEventStart, newEventEnd, newEventTitle, newEventDescription, newEventAllDay } = this.state;
 
 
       if(!newEventTitle.trim()){
@@ -148,6 +153,7 @@ class Calendar extends React.Component {
           start_time: newEventStart,
           title: newEventTitle,
           description: newEventDescription,
+          all_day: newEventAllDay,
           user_id: this.props.user.id
       };
 
@@ -201,6 +207,7 @@ class Calendar extends React.Component {
   }
 
   onEventSelect(event){
+
     this.setState({
         updateEventId: event.id,
         updateEventTitle: event.title,
@@ -240,7 +247,9 @@ class Calendar extends React.Component {
     const {
         newEventDescription, 
         newEventTitle, 
+        newEventAllDay,
         updateEventTitle, 
+        updateEventAllDay,
         updateEventDescription,
         openDialogue
     } = this.state;
@@ -264,6 +273,14 @@ class Calendar extends React.Component {
                     value={createType ? newEventTitle : updateEventTitle}
                     onChange={e => createType ? this.setState({newEventTitle: e.target.value}) : this.setState({updateEventTitle: e.target.value}) }/>
                 <Spacer height={20} />
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={ createType ? newEventAllDay : updateEventAllDay}
+                      disableRipple
+                      onClick={(e) =>  e.target.checked !== undefined ? createType ? this.setState({newEventAllDay: e.target.checked}) : this.setState({updateEventAllDay: e.target.checked}) : null} />
+                  }
+                  label="All Day"/>
                 {/* <Editor value={newEventDescription || ''} onChange={this.onChange} /> */}
                 <TextField
                     label="Description"
