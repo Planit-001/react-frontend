@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import DateRangeIcon from '@material-ui/icons/DateRange';
@@ -30,12 +30,22 @@ class BottomNav extends React.Component {
     value: 'dashboard',
   };
 
+  componentDidMount(){
+    const {location} = this.props;
+    const _location = location.pathname.replace('/','');
+    if(_location){
+      this.setState({
+        value: _location
+      });
+    }
+  }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, location } = this.props;
     const { value } = this.state;
 
     return (
@@ -56,4 +66,4 @@ BottomNav.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BottomNav);
+export default withRouter(withStyles(styles)(BottomNav));
