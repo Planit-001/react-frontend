@@ -7,10 +7,14 @@ import Button from '@material-ui/core/Button';
 import {readableDateRange, readableTimeRange} from './../../utils/dateFuncs';
 import moment from 'moment';
 import AddToCalendarHOC from 'react-add-to-calendar-hoc';
-import Icon from '@material-ui/core/Icon';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import CardHeader from '@material-ui/core/CardHeader';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+// import Icon from '@material-ui/core/Icon';
+// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+// import Menu from '@material-ui/core/Menu';
+// import MenuItem from '@material-ui/core/MenuItem';
 
 const dropdownStyles = {
   padding: "10px",
@@ -53,14 +57,21 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
 
     return (
         <Card>
+            {eventId && <CardHeader 
+                style={{paddingBottom: 0}}
+                title={eventTitle}
+                action={
+                  <Tooltip title="Edit Event">
+                    <IconButton onClick={onUpdate} >
+                      <EditIcon />
+                    </IconButton>
+                  </Tooltip>
+            } />}
             <CardContent>
                 {!eventId && <Typography color="textSecondary" gutterBottom>
                     Click an event to view
                 </Typography>}
                 {eventId && <div>
-                    <Typography variant="h5" component="h2">
-                        {eventTitle}
-                    </Typography>
                     <Typography color="textSecondary" gutterBottom>
                         {readableDateRange(eventStart, eventEnd)}
                     </Typography>
@@ -75,12 +86,8 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
                 {/* <a href="javascript:cal.download()">Demo</a> */}
 
                 {eventId && <CardActions>
-                    
                     <Button onClick={onDelete} size="small" color="secondary">
                         Delete
-                    </Button>
-                    <Button onClick={onUpdate} size="small" color="default">
-                        Edit
                     </Button>
                     <AddToCalendarDropdown
                         buttonProps={{

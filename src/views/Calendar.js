@@ -16,6 +16,10 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import CreateEventForm from './../components/calendar/CreateEventForm';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -56,7 +60,7 @@ const eventDescription = Value.fromJSON({
         },
       ],
     },
-  })
+  });
 
 class Calendar extends React.Component {
   constructor(props){
@@ -75,7 +79,9 @@ class Calendar extends React.Component {
         updateEventEnd: '',
         updateEventAllDay: false,
         updateEventDescription: '',
-        openUpdateDialogue: false
+        openUpdateDialogue: false,
+
+        editing: false,
     };
 
     this.handleClose = this.handleClose.bind(this);
@@ -125,7 +131,8 @@ class Calendar extends React.Component {
         newEventStart: '',
         newEventTitle: '',
         newEventDescription: '',
-        openUpdateDialogue: false
+        openUpdateDialogue: false,
+        editing: false,
         
     })
   }
@@ -220,8 +227,9 @@ class Calendar extends React.Component {
 
   onUpdateBtnClick(){
       this.setState({
-          openUpdateDialogue: true
-      })
+          // openUpdateDialogue: true
+          editing: true
+      });
   }
 
   updateAllDay(e){
@@ -242,43 +250,39 @@ class Calendar extends React.Component {
   }
     
 
-  renderDialogue(type='create'){
+  renderDialogue(){
 
     const {
         newEventDescription, 
         newEventTitle, 
         newEventAllDay,
-        updateEventTitle, 
-        updateEventAllDay,
-        updateEventDescription,
         openDialogue
     } = this.state;
 
-    const createType = type === 'create'
-    
     return (
         <Dialog
             fullWidth
             open={openDialogue}
             onClose={this.handleClose}>
             <DialogTitle>
-              {createType ? "Describe this event" : "Update or Delete this Event"}
+              {"Describe this event" }
             </DialogTitle>
             <DialogContent>
+              {/* <CreateEventForm /> */}
                 <TextField
                     autoFocus
                     margin="normal"
                     label="Event title"
                     fullWidth
-                    value={createType ? newEventTitle : updateEventTitle}
-                    onChange={e => createType ? this.setState({newEventTitle: e.target.value}) : this.setState({updateEventTitle: e.target.value}) }/>
+                    value={newEventTitle }
+                    onChange={e =>  this.setState({newEventTitle: e.target.value}) }/>
                 <Spacer height={20} />
                 <FormControlLabel
                   control={
                     <Checkbox 
-                      checked={ createType ? newEventAllDay : updateEventAllDay}
+                      checked={ newEventAllDay }
                       disableRipple
-                      onClick={(e) =>  e.target.checked !== undefined ? createType ? this.setState({newEventAllDay: e.target.checked}) : this.setState({updateEventAllDay: e.target.checked}) : null} />
+                      onClick={(e) =>  e.target.checked !== undefined ? this.setState({newEventAllDay: e.target.checked}) : null} />
                   }
                   label="All Day"/>
                 {/* <Editor value={newEventDescription || ''} onChange={this.onChange} /> */}
@@ -294,69 +298,53 @@ class Calendar extends React.Component {
               
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => createType ? this.handleClose() : this.handleClose(true)} color="default">
+                <Button onClick={() => this.handleClose() } color="default">
                     Cancel
                 </Button>
-                {createType ? <Button onClick={this.handleSubmit} color="primary">
+                <Button onClick={this.handleSubmit} color="primary">
                     Create
-                </Button>: <Button onClick={this.handleUpdate} color="primary">
-                    Update
-                </Button>}
+                </Button>
             </DialogActions>
         </Dialog>
       )
   }
 
-  renderUpdateDialogue(){
+  renderUpdateForm(){
 
-      return <Dialog
-                open={this.state.openUpdateDialogue}
-                onClose={this.handleClose}
-                aria-labelledby="form-dialog-title">
-                <DialogTitle>
-                    Update or Delete this Event
-                </DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="normal"
-                        label="Event title"
-                        fullWidth
-                        value={this.state.updateEventTitle}
-                        onChange={e => this.setState({updateEventTitle: e.target.value})}/>
-                        {/* <FormGroup > */}
-                            {/* <FormControlLabel
-                                control={
-                                    <Checkbox
-                                    checked={this.state.allDay}
-                                    onChange={e => this.updateAllDay(e)}
-                                    value="allDay"
-                                    color="primary" />
-                                }
-                                label="All day event" /> */}
-                        {/* </FormGroup> */}
+    return(
+        <Card>
+          <CardContent>
+            <TextField
+              autoFocus
+              margin="normal"
+              label="Event title"
+              // variant="filled"
+              fullWidth
+              value={this.state.updateEventTitle}
+              onChange={e => this.setState({updateEventTitle: e.target.value})}/>
+            <TextField
+              label="Description"
+              placeholder="Add a description to the Event (optional)"
+              value={this.state.updateEventDescription}
+              // variant="filled"
+              multiline
+              fullWidth
+              onChange={(e) => this.setState({updateEventDescription: e.target.value})}
+              rows="4"
+              margin="normal"/>
 
-                    <TextField
-                        label="Description"
-                        placeholder="Add a description to the Event (optional)"
-                        value={this.state.updateEventDescription}
-                        multiline
-                        fullWidth
-                        onChange={(e) => this.setState({updateEventDescription: e.target.value})}
-                        rows="4"
-                        margin="normal"/>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.handleSmallClose} color="default">
-                        Cancel
-                    </Button>
-                    <Button onClick={this.handleUpdate} color="primary">
-                        Update
-                    </Button>
-                </DialogActions>
-            </Dialog>
+          </CardContent>
+          <CardActions>
+            <Button onClick={this.handleSmallClose} color="default">
+                Cancel
+            </Button>
+            <Button onClick={this.handleUpdate} color="primary">
+                Update
+            </Button>
+          </CardActions>
+        </Card>
+    )
   }
-
 
   render() {
     const { calEvents, darkMode } = this.props;
@@ -365,8 +353,7 @@ class Calendar extends React.Component {
         <PageTitle page={"calendar"} helper={true} />
 
         {/* {this.renderCreateDialogue()} */}
-        {this.renderDialogue('create')}
-        {this.renderUpdateDialogue()}
+        {this.renderDialogue()}
 
         <Grid container spacing={4}>
             <Grid item xs={12} md={9}>
@@ -388,15 +375,14 @@ class Calendar extends React.Component {
                 </Paper>
             </Grid>
             <Grid item xs={12} md={3}>
-                <InfoBox 
+                {this.state.editing ? this.renderUpdateForm() : <InfoBox 
                     eventId={this.state.updateEventId}
                     eventTitle={this.state.updateEventTitle}
                     eventStart={this.state.updateEventStart}
                     eventEnd={this.state.updateEventEnd}
                     eventDescription={this.state.updateEventDescription}
                     onUpdate={this.onUpdateBtnClick}
-                    onDelete={this.handleDelete}
-                />
+                    onDelete={this.handleDelete} />}
             </Grid>
         </Grid>
         
