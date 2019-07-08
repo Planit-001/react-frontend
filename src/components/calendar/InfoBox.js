@@ -85,26 +85,25 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
                 {/* <div onClick={() => cal.download()}>dl</div> */}
                 {/* <a href="javascript:cal.download()">Demo</a> */}
 
-                {eventId && <CardActions>
-                    <Button onClick={onDelete} size="small" color="secondary">
-                        Delete
-                    </Button>
-                    <AddToCalendarDropdown
-                        buttonProps={{
-                            size: 'small',
-                            color: "primary"
-                        }}
-                        buttonText="Download"
-                        // className={componentStyles}
-                        // linkProps={{
-                        //     className: linkStyles,
-                        // }}
-                        event={event()}
-                    />
-                </CardActions>}
-                    
                 
             </CardContent>
+            {eventId && <CardActions>
+                <Button onClick={onDelete} color="secondary">
+                    Delete
+                </Button>
+                <AddToCalendarDropdown
+                    buttonProps={{
+                        color: "primary"
+                    }}
+                    buttonText="Download"
+                    // className={componentStyles}
+                    // linkProps={{
+                    //     className: linkStyles,
+                    // }}
+                    event={event()}
+                />
+            </CardActions>}
+                
         </Card>
     )
 }

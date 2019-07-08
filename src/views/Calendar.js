@@ -19,7 +19,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import CreateEventForm from './../components/calendar/CreateEventForm';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -256,9 +255,11 @@ class Calendar extends React.Component {
         newEventDescription, 
         newEventTitle, 
         newEventAllDay,
+        newEventStart,
+        newEventEnd,
         openDialogue
     } = this.state;
-
+    console.log("newEventStart: ", newEventStart)
     return (
         <Dialog
             fullWidth
@@ -285,6 +286,22 @@ class Calendar extends React.Component {
                       onClick={(e) =>  e.target.checked !== undefined ? this.setState({newEventAllDay: e.target.checked}) : null} />
                   }
                   label="All Day"/>
+                  <br/>
+                  <TextField
+                    label="Start time"
+                    type="datetime-local"
+                    defaultValue={moment(newEventStart).format('YYYY-MM-DDTHH:mm')}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  /> <span>&nbsp;</span> <TextField
+                  label="End time"
+                  type="datetime-local"
+                  defaultValue={moment(newEventEnd).format('YYYY-MM-DDTHH:mm')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />  
                 {/* <Editor value={newEventDescription || ''} onChange={this.onChange} /> */}
                 <TextField
                     label="Description"
