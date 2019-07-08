@@ -260,6 +260,8 @@ class Calendar extends React.Component {
         openDialogue
     } = this.state;
     console.log("newEventStart: ", newEventStart)
+
+
     return (
         <Dialog
             fullWidth
@@ -286,22 +288,27 @@ class Calendar extends React.Component {
                       onClick={(e) =>  e.target.checked !== undefined ? this.setState({newEventAllDay: e.target.checked}) : null} />
                   }
                   label="All Day"/>
-                  <br/>
-                  <TextField
-                    label="Start time"
+
+                  { !newEventAllDay && <div>
+                    <br/>
+                    <TextField
+                      label="Start time"
+                      type="datetime-local"
+                      defaultValue={moment(newEventStart).format('YYYY-MM-DDTHH:mm')}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    /> <span>&nbsp;</span> <TextField
+                    label="End time"
                     type="datetime-local"
-                    defaultValue={moment(newEventStart).format('YYYY-MM-DDTHH:mm')}
+                    inputProps={{
+                      min: moment(newEventStart).format('YYYY-MM-DDTHH:mm')
+                    }}
+                    defaultValue={moment(newEventEnd).format('YYYY-MM-DDTHH:mm')}
                     InputLabelProps={{
                       shrink: true,
-                    }}
-                  /> <span>&nbsp;</span> <TextField
-                  label="End time"
-                  type="datetime-local"
-                  defaultValue={moment(newEventEnd).format('YYYY-MM-DDTHH:mm')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />  
+                    }}/>  
+                  </div>}
                 {/* <Editor value={newEventDescription || ''} onChange={this.onChange} /> */}
                 <TextField
                     label="Description"
@@ -385,6 +392,7 @@ class Calendar extends React.Component {
                         views={["month", "week", "day", "agenda"]}
                         style={{minHeight: '600px'}}
                         popup={true}
+                        // showMultiDayTimes={false}
                         events={this.eventsMutator(calEvents)}
                         onSelectEvent={event => this.onEventSelect(event)}
                         onSelectSlot={this.handleSelect}
