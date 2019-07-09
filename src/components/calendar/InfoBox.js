@@ -38,7 +38,6 @@ function Dropdown({ children }) {
 }
 
 function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, onUpdate, onDelete}){
-    console.log(eventStart)
     const event = () => {
         const startDatetime = moment(eventStart);
         const endDatetime = moment(eventEnd) //startDatetime.clone().add(2, 'hours');

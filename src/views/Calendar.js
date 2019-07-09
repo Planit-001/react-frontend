@@ -259,8 +259,6 @@ class Calendar extends React.Component {
         newEventEnd,
         openDialogue
     } = this.state;
-    console.log("newEventStart: ", newEventStart)
-
 
     return (
         <Dialog
@@ -294,20 +292,23 @@ class Calendar extends React.Component {
                     <TextField
                       label="Start time"
                       type="datetime-local"
-                      defaultValue={moment(newEventStart).format('YYYY-MM-DDTHH:mm')}
+                      value={moment(newEventStart).format('YYYY-MM-DDTHH:mm')}
+                      onChange={(e) => this.setState({newEventStart: new Date(e.target.value)})}
                       InputLabelProps={{
                         shrink: true,
                       }}
-                    /> <span>&nbsp;</span> <TextField
-                    label="End time"
-                    type="datetime-local"
-                    inputProps={{
-                      min: moment(newEventStart).format('YYYY-MM-DDTHH:mm')
-                    }}
-                    defaultValue={moment(newEventEnd).format('YYYY-MM-DDTHH:mm')}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}/>  
+                    /> <span>&nbsp;</span> 
+                    <TextField
+                      label="End time"
+                      type="datetime-local"
+                      value={moment(newEventEnd).format('YYYY-MM-DDTHH:mm')}
+                      onChange={(e) => this.setState({newEventEnd: new Date(e.target.value)})}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      inputProps={{
+                        min: moment(newEventStart).format('YYYY-MM-DDTHH:mm')
+                      }}/>  
                   </div>}
                 {/* <Editor value={newEventDescription || ''} onChange={this.onChange} /> */}
                 <TextField
