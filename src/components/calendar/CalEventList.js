@@ -42,6 +42,14 @@ const strikeThru = {
 };
 
 function CalEventList({events, classes}){
+
+    const checkStrikeThru = (event) => {
+        if(event.all_day){
+            return moment(event.end_time).isBefore(moment(), 'day');
+        }else{
+            return moment(event.end_time).isBefore(moment());
+        }
+    }
     
     return (
         <div>
@@ -66,7 +74,7 @@ function CalEventList({events, classes}){
                     </TableHead>
                     <TableBody>
                     {events && sortedEvents(filterEvents(events)).map(event => (
-                        <TableRow style={ moment(event.end_time).isBefore(moment()) ? strikeThru : {}} key={event.id}>
+                        <TableRow style={ checkStrikeThru(event) ? strikeThru : {}} key={event.id}>
                             <TableCell className={classes.cell} style={{width: 160}} >
                                 {readableDate(event.start_time)} - {readableTime(event.start_time)}
                             </TableCell>
