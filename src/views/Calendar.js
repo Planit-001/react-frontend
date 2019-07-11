@@ -179,16 +179,18 @@ class Calendar extends React.Component {
 
   handleUpdate = () => {
     const { 
-        // updateEventStart, 
-        // updateEventEnd, 
+        updateEventStart, 
+        updateEventAllDay,
+        updateEventEnd, 
         updateEventId,
         updateEventTitle, 
         updateEventDescription 
     } = this.state;
 
     const payload = {
-        // end_time: updateEventEnd,
-        // start_time: updateEventStart,
+        all_day: updateEventAllDay,
+        end_time: updateEventEnd,
+        start_time: updateEventStart,
         title: updateEventTitle,
         description: updateEventDescription,
     };
@@ -360,7 +362,13 @@ class Calendar extends React.Component {
   }
 
   renderUpdateForm(){
-
+    const {
+      updateEventAllDay, 
+      updateEventTitle, 
+      updateEventDescription,
+      updateEventEnd, 
+      updateEventStart
+    } = this.state;
     return(
         <Card>
           <CardContent>
@@ -370,12 +378,49 @@ class Calendar extends React.Component {
               label="Event title"
               // variant="filled"
               fullWidth
-              value={this.state.updateEventTitle}
+              value={updateEventTitle}
               onChange={e => this.setState({updateEventTitle: e.target.value})}/>
+            <FormControlLabel
+              control={
+                <Checkbox 
+                  checked={ updateEventAllDay }
+                  disableRipple
+                  onClick={(e) =>  e.target.checked !== undefined ? this.setState({updateEventAllDay: e.target.checked}) : null} />
+              }
+              label="All Day"/>
+            {!updateEventAllDay && <div>
+
+              <br/>
+              <TextField
+                  label="Start time"
+                  type="time"
+                  value={moment(updateEventStart).format('HH:mm')}
+                  onChange={(e) => this.updateDateTime('updateEventStart', updateEventStart, e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    step: 1800, // 30 min
+                  }}/>
+              <span>&nbsp;</span> 
+                <TextField
+                  label="End time"
+                  type="time"
+                  value={moment(updateEventEnd).format('HH:mm')}
+                  onChange={(e) => this.updateDateTime('updateEventEnd', updateEventEnd, e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  inputProps={{
+                    min: moment(updateEventStart).format('HH:mm'), // Doesn't work??
+                    step: 1800, // 30 min
+                  }}/>
+
+            </div>}
             <TextField
               label="Description"
               placeholder="Add a description to the Event (optional)"
-              value={this.state.updateEventDescription}
+              value={updateEventDescription}
               // variant="filled"
               multiline
               fullWidth
