@@ -8,11 +8,15 @@ import {
 } from "../redux/actions/calEvent";
 
 import moment from 'moment';
+import _ from 'lodash';
+
 // import { Editor } from 'slate-react'
 import { Value } from 'slate'
-
+import { readableDate } from './../utils/dateFuncs';
 import BigCalendar from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+import { toastEvent } from './../utils/uiFuncs';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -151,6 +155,11 @@ class Calendar extends React.Component {
       const { newEventStart, newEventEnd, newEventTitle, newEventDescription, newEventAllDay } = this.state;
 
 
+      if(newEventEnd < newEventStart){
+        toastEvent("End time is before start time. Please adjust.");
+        return
+      }
+
       if(!newEventTitle.trim()){
           return
       }
@@ -247,6 +256,18 @@ class Calendar extends React.Component {
   onChange = ({ value }) => {
     this.setState({ newEventDescription: value })
   }
+
+  updateDateTime(itemFromState, dateObj, timeString){
+
+    let _dateObj = _.cloneDeep(dateObj);
+    const _times = timeString.split(':').map(item => Number(item));
+    _dateObj.setHours(_times[0]);
+    _dateObj.setMinutes(_times[1]);
+
+    this.setState({
+      [itemFromState]: _dateObj
+    });
+  }
     
 
   renderDialogue(){
@@ -266,7 +287,7 @@ class Calendar extends React.Component {
             open={openDialogue}
             onClose={this.handleClose}>
             <DialogTitle>
-              {"Describe this event" }
+              Describe this event {newEventStart && `(on ${readableDate(newEventStart)})`}
             </DialogTitle>
             <DialogContent>
               {/* <CreateEventForm /> */}
@@ -290,25 +311,29 @@ class Calendar extends React.Component {
                   { !newEventAllDay && <div>
                     <br/>
                     <TextField
-                      label="Start time"
-                      type="datetime-local"
-                      value={moment(newEventStart).format('YYYY-MM-DDTHH:mm')}
-                      onChange={(e) => this.setState({newEventStart: new Date(e.target.value)})}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    /> <span>&nbsp;</span> 
-                    <TextField
-                      label="End time"
-                      type="datetime-local"
-                      value={moment(newEventEnd).format('YYYY-MM-DDTHH:mm')}
-                      onChange={(e) => this.setState({newEventEnd: new Date(e.target.value)})}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      inputProps={{
-                        min: moment(newEventStart).format('YYYY-MM-DDTHH:mm')
-                      }}/>  
+                        label="Start time"
+                        type="time"
+                        value={moment(newEventStart).format('HH:mm')}
+                        onChange={(e) => this.updateDateTime('newEventStart', newEventStart, e.target.value)}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        inputProps={{
+                          step: 1800, // 30 min
+                        }}/>
+                    <span>&nbsp;</span> 
+                      <TextField
+                        label="End time"
+                        type="time"
+                        value={moment(newEventEnd).format('HH:mm')}
+                        onChange={(e) => this.updateDateTime('newEventEnd', newEventEnd, e.target.value)}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        inputProps={{
+                          min: moment(newEventStart).format('HH:mm'), // Doesn't work??
+                          step: 1800, // 30 min
+                        }}/>
                   </div>}
                 {/* <Editor value={newEventDescription || ''} onChange={this.onChange} /> */}
                 <TextField
@@ -427,7 +452,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, { 
-    getCalEvents , 
+    getCalEvents, 
     createCalEvent, 
     updateCalEvent, 
     deleteCalEvent 

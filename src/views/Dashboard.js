@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { getTodos } from "../redux/actions/todo";
+import { getCalEvents } from "../redux/actions/calEvent";
 import { getWeatherCurrent } from "../redux/actions/external";
 import { changeDarkMode, getCurrentCoordinates } from "../redux/actions/ui";
 
@@ -20,6 +21,7 @@ class Dashboard extends React.Component {
 
     componentDidMount(){
         this.props.getTodos();
+        this.props.getCalEvents();
         this.props.getCurrentCoordinates();
     }
 
@@ -61,4 +63,10 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {changeDarkMode, getTodos, getWeatherCurrent, getCurrentCoordinates})(Dashboard);
+export default connect(mapStateToProps, { 
+    changeDarkMode, 
+    getTodos, 
+    getCalEvents,
+    getWeatherCurrent, 
+    getCurrentCoordinates
+})(Dashboard);
