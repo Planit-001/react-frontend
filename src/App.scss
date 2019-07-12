@@ -2,6 +2,7 @@
 @import '~@fullcalendar/daygrid/main.css';
 
 $theme: #2196f3;
+$secondary: #f50057;
 
 .checkedTodo {
 	text-decoration: line-through;
@@ -67,4 +68,22 @@ div.rbc-time-content div.rbc-events-container {
 	.rbc-time-header > div.rbc-time-header-content > div.rbc-allday-cell > div.rbc-row-bg > .rbc-day-bg{
 		background-color: inherit;
 	}
+}
+
+.cal-dropdown {
+	background-color: inherit;
+	padding: 5px;
+	border-top: "none";
+	text-align: center;
+  	background-color: inherit;
+	margin: 0 auto;
+	  div {
+		margin: 5px;
+		border: 1px solid #E5E5E5;
+		a {
+			text-decoration: none;
+			color: $theme;
+			font-size: 16px;
+		}
+	}  
 }

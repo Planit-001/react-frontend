@@ -478,7 +478,8 @@ class Calendar extends React.Component {
                     eventEnd={this.state.updateEventEnd}
                     eventDescription={this.state.updateEventDescription}
                     onUpdate={this.onUpdateBtnClick}
-                    onDelete={this.handleDelete} />}
+                    onDelete={this.handleDelete}
+                    darkMode={this.props.darkMode} />}
             </Grid>
         </Grid>
         

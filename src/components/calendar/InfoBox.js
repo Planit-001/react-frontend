@@ -11,33 +11,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-// import Icon from '@material-ui/core/Icon';
-// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-// import Menu from '@material-ui/core/Menu';
-// import MenuItem from '@material-ui/core/MenuItem';
 
-const dropdownStyles = {
-  padding: "10px",
-  border: "1px solid #E5E5E5",
-  borderTop: "none",
-  width: "300px",
-  backgroundColor: "#FFF",
-  margin: "0 auto",
-};
-
-function Dropdown({ children }) {
-  return (
-    <div style={dropdownStyles}>
-      {children.map((child, index) => (
-          <div key={index}>
-              {child}
-          </div>
-      ))}
-    </div>
-  );
-}
-
-function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, onUpdate, onDelete}){
+function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, onUpdate, onDelete, darkMode}){
     const event = () => {
         const startDatetime = moment(eventStart);
         const endDatetime = moment(eventEnd) //startDatetime.clone().add(2, 'hours');
@@ -50,6 +25,21 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
           title: eventTitle,
         }
         return event;      
+    }
+
+    const Dropdown = ({children}) => {
+        return (
+            <div className={`cal-dropdown ${darkMode ? 'dropdown-dark' : ''}`}>
+              {children.map((child, index) => (
+                // <Typography key={index}>
+                //     {child}
+                // </Typography>
+                  <div key={index}>
+                      {child}
+                  </div>
+              ))}
+            </div>
+          );    
     }
 
     const AddToCalendarDropdown = AddToCalendarHOC(Button, Dropdown);
@@ -66,6 +56,7 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
                     </IconButton>
                   </Tooltip>
             } />}
+            
             <CardContent>
                 {!eventId && <Typography color="textSecondary" gutterBottom>
                     Click an event to view
@@ -81,11 +72,8 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
                         {eventDescription}
                     </Typography>
                 </div>}
-                {/* <div onClick={() => cal.download()}>dl</div> */}
-                {/* <a href="javascript:cal.download()">Demo</a> */}
-
-                
             </CardContent>
+
             {eventId && <CardActions>
                 <Button onClick={onDelete} color="secondary">
                     Delete
@@ -94,7 +82,7 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
                     buttonProps={{
                         color: "primary"
                     }}
-                    buttonText="Download"
+                    buttonText="Download Event"
                     // className={componentStyles}
                     // linkProps={{
                     //     className: linkStyles,
