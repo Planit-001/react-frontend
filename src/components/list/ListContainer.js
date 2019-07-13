@@ -192,17 +192,11 @@ class ListContainer extends React.Component {
                                 label="Add list item"
                                 handleUpdate={this.updateListItem}
                                 handleDelete={() => this.props.deleteListItem(list.id, item.id)} />
-                      // return <ListItemEditable key={index} listItem={item} listId={list.id} />
                     })}  
                     <Divider />
                   </List>
                 </CardContent>
                 <CardActions className={classes.actions}>
-                  {/* <Tooltip title="Archive list">
-                      <IconButton onClick={this.archiveList}>
-                        <ArchiveIcon />
-                      </IconButton>
-                    </Tooltip> */}
                     <Tooltip title="Archive list">
                       <IconButton className={classes.expand} onClick={this.archiveList}>
                         <ArchiveIcon />
@@ -210,10 +204,6 @@ class ListContainer extends React.Component {
                     </Tooltip>
                 </CardActions>
             </Card>
-
-              {/* <ComponentTitle title={list.title} /> */}
-              {/* {disableCreate !== true && <CreateTodo defaultDueDate={this.props.defaultDueDate} user={user} />}  */}
-              {/* <TodoList showDate={this.props.showDate} sortByDate={this.props.sortByDate} todos={todos} user={user} /> */}
         </Grid>
     );
   }
@@ -222,7 +212,6 @@ class ListContainer extends React.Component {
 const styles = theme => ({
   actions: {
       display: 'flex',
-      // paddingTop: 0
   },
   expand: {
       marginLeft: 'auto',
