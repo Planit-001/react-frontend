@@ -369,6 +369,19 @@ class Calendar extends React.Component {
       updateEventEnd, 
       updateEventStart
     } = this.state;
+
+    const dashStyle = {
+      marginRight: 5,
+      fontSize: 16,
+      marginLeft: 5,
+    }
+
+    const timeContainer = {
+      display: "flex",
+      alignItems: "center",
+      margin: "10px 0"
+    }
+
     return(
         <Card>
           <CardContent>
@@ -388,7 +401,7 @@ class Calendar extends React.Component {
                   onClick={(e) =>  e.target.checked !== undefined ? this.setState({updateEventAllDay: e.target.checked}) : null} />
               }
               label="All Day"/>
-            {!updateEventAllDay && <div>
+            {!updateEventAllDay && <div style={timeContainer}>
 
               <br/>
               <TextField
@@ -402,7 +415,7 @@ class Calendar extends React.Component {
                   inputProps={{
                     step: 1800, // 30 min
                   }}/>
-              <span>&nbsp;</span> 
+              <span style={dashStyle}>&nbsp;-&nbsp;</span> 
                 <TextField
                   label="End time"
                   type="time"
