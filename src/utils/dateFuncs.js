@@ -40,7 +40,7 @@ export function readableDateRange(startDateString, endDateString){
         if(startDate.format("ddd MMM Do YYYY") === endDate.format("ddd MMM Do YYYY") ){
             return startDate.format("dddd MMM Do, YYYY");
         }
-        return `${startDate ? startDate.format("dddd MMM Do, YYYY") : ''} ${ endDate ?  ` - ${endDate.format("ddd MMM Do, YYYY")}` : '' }`;
+        return `${startDate ? startDate.format("ddd MMM Do, YYYY") : ''} ${ endDate ?  ` - ${endDate.format("ddd MMM Do, YYYY")}` : '' }`;
     }
     return 
 }
