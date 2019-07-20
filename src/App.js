@@ -27,6 +27,8 @@ import Admin from './views/Admin';
 import Home from './views/Home';
 import SignIn from './views/SignIn';
 import SignUp from './views/SignUp';
+import ForgotPassword from './views/ForgotPassword';
+import ResetPassword from './views/ResetPassword';
 import ToastAlert from './components/ToastAlert';
 import Todos from './views/Todos'
 import Typography from '@material-ui/core/Typography';
@@ -167,6 +169,8 @@ class App extends Component {
             <Route path="/home/" component={Home} />
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
+            <Route path="/forgot_password/" component={ForgotPassword} />
+            <Route path="/reset_password/" component={ResetPassword} />
             <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
             <PrivateRoute path="/admin" component={Admin} auth={isAdmin} />
             {devMode && <Route path="/pipelines/" component={Pipeline} />}

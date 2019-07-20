@@ -4,11 +4,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import { Link } from "react-router-dom";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +13,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import { signInUser } from './../redux/actions/auth';
 import { connect } from 'react-redux';
+
+import {handleErrors, apiBase} from './../utils/apiHelpers';
+import { toastEvent } from './../utils/uiFuncs';
+
 
 
 const styles = theme => ({
@@ -50,23 +51,15 @@ const styles = theme => ({
   },
 });
 
-class SignIn extends React.Component{
+class ForgotPassword extends React.Component{
   state = { 
-    redirectToReferrer: false,
     email: '',
-    password: '',
-    error: true
   }
 
 
   componentDidUpdate(){
     if(this.props.user){
-      console.log("pushing");
-      if(this.props.location && this.props.location.state && this.props.location.state.from && this.props.location.state.from.pathname){
-        this.props.history.push(this.props.location.state.from.pathname);
-      }else{
         this.props.history.push('/');
-      }
     }
   }
 
@@ -74,10 +67,21 @@ class SignIn extends React.Component{
     e.preventDefault();
     const body = {
       email: this.state.email,
-      password: this.state.password
     }
-    // this.props.history.push("/");
-    this.props.signInUser(body) //.then(() => console.log())
+
+    fetch(`${apiBase}/api/v1/password_resets`, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json",        
+        }
+    })
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(json => {
+        toastEvent("Reset password link mailed. Check your email.")
+    });
+    // this.props.signInUser(body)
   }
 
 
@@ -92,7 +96,7 @@ class SignIn extends React.Component{
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Forgot Password
           </Typography>
           <form className={classes.form} onSubmit={(e) => this.onSubmit(e)}>
             <FormControl margin="normal" required fullWidth>
@@ -105,30 +109,13 @@ class SignIn extends React.Component{
                 value={this.state.email}
                 autoFocus  />
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input 
-                name="password" 
-                type="password" 
-                id="password" 
-                onChange={(e) => this.setState({password: e.target.value})} 
-                value={this.state.password}
-                autoComplete="current-password" />
-            </FormControl>
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"/>
-            <Link to="/forgot_password">
-              Forgot Password?
-            </Link>
-              
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}>
-              Sign in
+              Enter
             </Button>
           </form>
         </Paper>
@@ -144,8 +131,8 @@ const mapStateToProps = state => {
   };
 };
 
-SignIn.propTypes = {
+ForgotPassword.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(connect(mapStateToProps, {signInUser} )(SignIn));
+export default withStyles(styles)(connect(mapStateToProps, {signInUser} )(ForgotPassword));
