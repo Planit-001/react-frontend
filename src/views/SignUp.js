@@ -53,6 +53,7 @@ class SignUp extends React.Component{
   state = { 
     email: '',
     password: '',
+    checked: false,
     error: true
   }
 
@@ -108,7 +109,10 @@ class SignUp extends React.Component{
                 autoComplete="current-password" />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox 
+                checked={this.state.checked} 
+                color="primary"
+                onClick={(e) => e.target.checked !== undefined ? this.setState({checked: e.target.checked}) : null} />}
               label="Remember me"/>
             <Button
               type="submit"

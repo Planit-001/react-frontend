@@ -55,6 +55,7 @@ class SignIn extends React.Component{
     redirectToReferrer: false,
     email: '',
     password: '',
+    checked: false,
     error: true
   }
 
@@ -74,7 +75,8 @@ class SignIn extends React.Component{
     e.preventDefault();
     const body = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      remember_me: this.state.checked
     }
     // this.props.history.push("/");
     this.props.signInUser(body) //.then(() => console.log())
@@ -116,7 +118,10 @@ class SignIn extends React.Component{
                 autoComplete="current-password" />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={<Checkbox 
+                checked={this.state.checked} 
+                color="primary"
+                onClick={(e) => e.target.checked !== undefined ? this.setState({checked: e.target.checked}) : null} />}
               label="Remember me"/>
             <Link to="/forgot_password">
               Forgot Password?
