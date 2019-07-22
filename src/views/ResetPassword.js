@@ -66,19 +66,36 @@ class ResetPassword extends React.Component{
 
   onSubmit(e){
     e.preventDefault();
-    
+    let email;
     const { pw1, pw2 } = this.state;
+    const {match, location, history } = this.props;
     
     if(pw1.trim() !== pw2.trim()){
-        toastEvent("Passwords do not match");
-        return false
+        toastEvent("Passwords do not match.");
+        return false;
+    }
+
+    if(!(match && match.params && match.params.token)){
+      toastEvent("Reset Password token not present. Please check the link sent to your email.");
+      return false;
+    }
+
+    if(!(location.search && location.search.split('=') && location.search.split('=')[1])){
+      toastEvent("Email not present in url. Please check the link sent to your email.");
+      return false;
+    }else{
+      email = location.search.split('=')[1]
     }
 
     const body = {
-      password: this.state.pw1,
+      email: email,
+      user: {
+        password: pw1,
+        email: email
+      }
     }
 
-    fetch(`${apiBase}/api/v1/password_resets`, {
+    fetch(`${apiBase}/api/v1/password_resets/${match.params.token}`, {
         method: "PUT",
         body: JSON.stringify(body),
         headers: {
@@ -88,7 +105,12 @@ class ResetPassword extends React.Component{
     .then(handleErrors)
     .then(response => response.json())
     .then(json => {
-        toastEvent("Password updated!")
+        toastEvent("Password updated! Please sign in.");
+        history.push('/signin');
+    })
+    .catch((err) => {
+      toastEvent(err.message);
+      console.log(err.message);
     });
   }
 

@@ -5,6 +5,7 @@ import {
 } from './../constants/actionTypes';
   
 import {handleErrors, apiBase} from './../../utils/apiHelpers';
+import { toastEvent } from './../../utils/uiFuncs';
 
 export function createUser(payload){
     return function(dispatch){
@@ -19,6 +20,9 @@ export function createUser(payload){
         .then(response => response.json())
         .then(json => {
             dispatch({type: CREATE_USER, payload: json});
+        })
+        .catch((err) => {
+            toastEvent(err.message)
         });
     }
 }
@@ -36,6 +40,9 @@ export function signInUser(payload){
         .then(response => response.json())
         .then(json => {
             dispatch({type: SET_USER, payload: json});
+        })
+        .catch((err) => {
+            toastEvent(err.message)
         });
     }
 }

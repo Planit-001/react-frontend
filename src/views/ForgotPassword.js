@@ -80,6 +80,9 @@ class ForgotPassword extends React.Component{
     .then(response => response.json())
     .then(json => {
         toastEvent("Reset password link mailed. Check your email.")
+        this.setState({email: ''})
+    }).catch(err => {
+      toastEvent(err.message);
     });
     // this.props.signInUser(body)
   }

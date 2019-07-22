@@ -170,7 +170,7 @@ class App extends Component {
             <Route path="/signup/" component={SignUp} />
             <Route path="/signin/" component={SignIn} />
             <Route path="/forgot_password/" component={ForgotPassword} />
-            <Route path="/reset_password/" component={ResetPassword} />
+            <Route path="/reset_password/:token" component={ResetPassword} />
             <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
             <PrivateRoute path="/admin" component={Admin} auth={isAdmin} />
             {devMode && <Route path="/pipelines/" component={Pipeline} />}
