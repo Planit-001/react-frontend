@@ -54,4 +54,4 @@ export function shouldFetchData(state, reducer, itemFromState) {
   }
 
   
-export const apiBase = devMode ? "http://localhost:3000" : "http://134.209.153.124";
+export const apiBase = devMode ? "http://localhost:3000" : "https://api.planit.best";
