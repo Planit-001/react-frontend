@@ -16,6 +16,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { createUser } from './../redux/actions/auth';
 import { connect } from 'react-redux';
 
+import { toastEvent } from './../utils/uiFuncs';
+
 
 const styles = theme => ({
   main: {
@@ -54,7 +56,8 @@ class SignUp extends React.Component{
     email: '',
     password: '',
     checked: false,
-    error: true
+    error: true,
+    btnDisabled: false
   }
 
   componentDidUpdate(){
@@ -69,7 +72,12 @@ class SignUp extends React.Component{
       email: this.state.email,
       password: this.state.password
     }
-    this.props.createUser(body)
+    this.setState({
+      btnDisabled: true
+    }, () => {
+      toastEvent("Creating user...");
+      this.props.createUser(body);
+    })
   }
 
 
@@ -116,6 +124,7 @@ class SignUp extends React.Component{
               label="Remember me"/>
             <Button
               type="submit"
+              disabled={this.state.btnDisabled}
               fullWidth
               variant="contained"
               color="primary"

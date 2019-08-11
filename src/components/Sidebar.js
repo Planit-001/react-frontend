@@ -14,7 +14,6 @@ import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle'
 
 import Hidden from '@material-ui/core/Hidden';
 
-
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,10 +23,21 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 import ViewWeekIcon from '@material-ui/icons/ViewWeek';
 
+import logo from './../images/logo-dk.png'
+
+
+
+
 class Sidebar extends Component {
  
   render() {
     const { classes, drawerClose, open, devMode, admin } = this.props;
+
+    const logoContainer = {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
     return (
         <Hidden only="xs">
 
@@ -38,7 +48,9 @@ class Sidebar extends Component {
                 }}
                 open={open}>
                 <div className={classes.toolbarIcon}>
-                    {/* <span style={{fontStyle: 'italic'}}>Explore!</span> */}
+                    <div style={logoContainer}>
+                        <img src={logo} style={{maxWidth: '75%'}} alt="Planit logo"/>
+                    </div>
                     <IconButton onClick={drawerClose}>
                         <ChevronLeftIcon />
                     </IconButton>

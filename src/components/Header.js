@@ -16,6 +16,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
 
+import logo from './../images/logo-wt.png'
+
+
 class Header extends Component {
 
   render() {
@@ -28,6 +31,10 @@ class Header extends Component {
       changeDarkMode
     } = this.props;
     
+    const logoContainer = {
+      flexGrow: 1,
+      marginLeft: 5
+    }
     return (
         <AppBar
           position="absolute"
@@ -46,14 +53,18 @@ class Header extends Component {
               </IconButton>
 
             </Hidden>
-            <Typography
+            {/* <Typography
               component="h1"
               variant="h6"
               color="inherit"
               noWrap
               className={classes.title}>
               Planit
-            </Typography>
+            </Typography> */}
+            <div style={logoContainer}>
+                {!open && <img src={logo} style={{maxWidth: 155}} alt="Planit logo"/>}
+            </div>
+
             <Tooltip title={ darkMode ? "Switch to day mode" : "Switch to dark mode"}>
               <IconButton
                   onClick={() => changeDarkMode(!darkMode)}
