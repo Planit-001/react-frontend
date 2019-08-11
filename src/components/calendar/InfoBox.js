@@ -20,8 +20,8 @@ function InfoBox({eventId, eventTitle, eventStart, eventEnd, eventDescription, o
         const event = {
           description: eventDescription,
           duration: String(duration),
-          endDatetime: endDatetime.format('YYYYMMDDTHHmmssZ'),
-          startDatetime: startDatetime.format('YYYYMMDDTHHmmssZ'),
+          endDatetime: endDatetime.format('YYYYMMDDTHHmmss'),
+          startDatetime: startDatetime.format('YYYYMMDDTHHmmss'),
           title: eventTitle,
         }
         return event;      
