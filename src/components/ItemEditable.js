@@ -4,6 +4,7 @@ import MomentUtils from '@date-io/moment';
 
 import { withStyles } from '@material-ui/core';
 import {readableDate} from './../utils/dateFuncs';
+import {beforeToday } from './../utils/todoFuncs';
 
 import {
     MuiPickersUtilsProvider,
@@ -42,7 +43,7 @@ const styles = theme => ({
     }
   });
 
-const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handleDelete, showDate, showDateSelect }) => {
+const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handleDelete, showDate, showDateSelect, defaultDueDate }) => {
 
     const [editable, setEditable] = useState(false);
     const [timeModal, setTimeModal] = useState(false);
@@ -86,10 +87,10 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
         setEditable(false)   
     }
 
-    const handleClose = () => {
-        setTimeModal(false);
-        setSelectedDate(null);
-    }
+    // const handleClose = () => {
+    //     setTimeModal(false);
+    //     setSelectedDate(null);
+    // }
 
     const handleSave = (id) => {
         setTimeModal(false);
@@ -112,6 +113,7 @@ const ItemEditable = React.memo(({item, classes, inputLabel, handleUpdate, handl
                     onClose={() => setTimeModal(false)}
                     label="Date picker"
                     disablePast={true}
+                    initialFocusedDate={ (item.due_date && !beforeToday(item.due_date)) ? item.due_date : null}
                     variant="dialog"
                     okLabel="Save"
                     onAccept={() => handleSave(item.id)}
