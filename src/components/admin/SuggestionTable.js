@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SuggestionTable({suggestions}) {
   const classes = useStyles();
+
     if(suggestions){
         return (
           <Paper className={classes.root}>
@@ -45,7 +46,7 @@ export default function SuggestionTable({suggestions}) {
                       </TableRow>
                   </TableHead>
                   <TableBody>
-                      {suggestions.map(sugg => (
+                      {suggestions.sort((a,b) => b.id - a.id).map(sugg => (
                           <TableRow key={sugg.id}>
                               <TableCell component="th" scope="row">
                                   {sugg.id}

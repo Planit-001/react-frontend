@@ -21,6 +21,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function UserTable({users}) {
   const classes = useStyles();
+
+  const sortUsers = (users) => {
+    if(users){
+        return users.sort((a, b) => {
+            return b.id - a.id
+        })
+    }
+    return [];
+  }
+
  if (users){
 
      return (
@@ -35,6 +45,9 @@ export default function UserTable({users}) {
                            ID
                        </TableCell>
                        <TableCell align="right">
+                           Activated
+                       </TableCell>
+                       <TableCell align="right">
                            Admin
                        </TableCell>
                        <TableCell align="right">
@@ -43,13 +56,16 @@ export default function UserTable({users}) {
                    </TableRow>
                </TableHead>
                <TableBody>
-                   {users.map(user => (
+                   {sortUsers(users).map(user => (
                        <TableRow key={user.email}>
                            <TableCell component="th" scope="row">
                                {user.email}
                            </TableCell>
                            <TableCell align="right">
                                {user.id}
+                           </TableCell>
+                           <TableCell align="right">
+                               {String(user.activated)}
                            </TableCell>
                            <TableCell align="right">
                                {String(user.admin)}
