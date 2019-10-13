@@ -9,11 +9,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
-// import Brightness4Icon from '@material-ui/icons/Brightness4';
-// import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+// import Brightness4Icon from '@material-ui/icons/Brightness4';
+// import Brightness7Icon from '@material-ui/icons/Brightness7';
+// import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
 
 import logo from './../images/logo-wt.png'

@@ -13,7 +13,12 @@ export function readableTime(dateString){
     }
     return;
 }
-
+export function readableDateTime(dateString){
+    const dateTime = moment(dateString);
+    if(dateTime){
+        return dateTime.format("ddd, MMM Do - h:mm a")
+    }
+}
 export function today(){
     return moment().format("ddd, MMM Do")
 }

@@ -9,6 +9,7 @@ import UserTable from './../components/admin/UserTable'
 import SuggestionTable from './../components/admin/SuggestionTable'
 import Typography from '@material-ui/core/Typography';
 import AppTable from './../components/AppTable';
+import {readableDateTime} from './../utils/dateFuncs';
 
 class Admin extends React.Component{
 
@@ -24,6 +25,12 @@ class Admin extends React.Component{
                     Header: item,
                     accessor: item,
                     Cell: props => String(props.value)
+                }
+            }else if(item === 'created_at'){
+                return {
+                    Header: item,
+                    accessor: item,
+                    Cell: props => readableDateTime(props.value)
                 }
             }else{
                 return {
@@ -43,20 +50,20 @@ class Admin extends React.Component{
 
         return (
             <Grid container spacing={4} >
-                <Grid item>
+                <Grid item xs={12}>
 
                     <Typography variant="h5" gutterBottom component="h4">
-                        New Table
+                        Users
                     </Typography>
                     <AppTable columns={this.generateUserCols(users[0])} data={users} />
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                     <Typography variant="h5" gutterBottom component="h4">
                         Users
                     </Typography>
                     <UserTable users={users} />
-                </Grid>
-                <Grid item>
+                </Grid> */}
+                <Grid item xs={12}>
                     <Typography variant="h5" gutterBottom component="h4">
                         Suggestions
                     </Typography>
