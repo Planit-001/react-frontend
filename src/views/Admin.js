@@ -18,10 +18,20 @@ class Admin extends React.Component{
     }
     
     generateUserCols(user){
-        return Object.keys(user).map((item) => ({
-            Header: item,
-            accessor: item
-        }));
+        return Object.keys(user).map((item) => {
+            if(typeof user[item] === 'boolean'){
+                return {
+                    Header: item,
+                    accessor: item,
+                    Cell: props => String(props.value)
+                }
+            }else{
+                return {
+                    Header: item,
+                    accessor: item
+                }
+            }
+        });
     }
 
 
