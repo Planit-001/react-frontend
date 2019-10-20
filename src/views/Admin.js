@@ -55,7 +55,7 @@ class Admin extends React.Component{
                     <Typography variant="h5" gutterBottom component="h4">
                         Users
                     </Typography>
-                    <AppTable columns={this.generateUserCols(users[0])} data={users} />
+                    <AppTable columns={ users ? this.generateUserCols(users[0]) : []} data={users} />
                 </Grid>
                 {/* <Grid item>
                     <Typography variant="h5" gutterBottom component="h4">
