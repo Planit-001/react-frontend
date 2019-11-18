@@ -28,6 +28,11 @@ div.rbc-time-content div.rbc-events-container {
 	margin-right: 2px;
 }
 
+.rbc-time-view{
+	max-height: 570px;
+	overflow-y: scroll;
+}
+
 .darkModeCal{
 	.rbc-toolbar{
 		color: #fff;
