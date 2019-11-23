@@ -5,8 +5,7 @@ import {
     getSuggestions
 } from "../redux/actions/admin";
 import Grid from '@material-ui/core/Grid';
-import UserTable from './../components/admin/UserTable'
-import SuggestionTable from './../components/admin/SuggestionTable'
+
 import Typography from '@material-ui/core/Typography';
 import AppTable from './../components/AppTable';
 import {readableDateTime} from './../utils/dateFuncs';
