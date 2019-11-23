@@ -8,14 +8,10 @@ import { connect } from "react-redux";
 import { devMode } from './utils/constants';
 
 import blue from '@material-ui/core/colors/blue';
-// import indigo from '@material-ui/core/colors/indigo';
 import pink from '@material-ui/core/colors/pink';
 import red from '@material-ui/core/colors/red';
 
 import Calendar from './views/Calendar';
-import CalendarFull from './components/CalendarFull';
-import CalendarToast from './components/CalendarToast';
-import CalendarBig from './components/CalendarBig';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Dashboard from './views/Dashboard';
 import Header from './components/Header';
@@ -31,36 +27,9 @@ import ForgotPassword from './views/ForgotPassword';
 import ResetPassword from './views/ResetPassword';
 import ToastAlert from './components/ToastAlert';
 import Todos from './views/Todos'
-import Typography from '@material-ui/core/Typography';
 import BottomNav from './components/BottomNav';
 import { logoutUser} from './redux/actions/auth';
 import { changeDarkMode } from "./redux/actions/ui";
-
-
-function BigCalendar() {
-  return <div>
-    <CalendarBig />
-  </div>;
-}
-
-function FullCalendar(){
-  return <div>
-    <Typography variant="h2" gutterBottom component="h1">
-        Your Calendar
-    </Typography>
-    <div className="spacer"></div>
-    <div className="amazebert" style={{height: '800px', width: '800px'}}>
-      <CalendarFull/>
-    </div>
-  </div> 
-}
-
-
-function ToastCalendar(){
-  return <div className="amazebert" style={{height: '800px'}}>
-    <CalendarToast/>
-  </div>
-}
 
 const PrivateRoute = ({ component: Component, auth, ...rest}) => (
   <Route {...rest} render={(props) => (
@@ -70,8 +39,6 @@ const PrivateRoute = ({ component: Component, auth, ...rest}) => (
     }} />
   )} />
 );
-
-
 
 
 class App extends Component {
@@ -137,53 +104,50 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={muiTheme}>
-      <div className={classes.root}>
+        <div className={classes.root}>
 
-        <CssBaseline />
-        <Router>
-          <Header
-            darkMode={darkMode}
-            changeDarkMode={changeDarkMode}
-            anchorEl={anchorEl}
-            classes={classes}
-            open={this.state.open}
-            auth={isAuthenticated}
-            logout={this.logout}
-            drawerOpen={this.handleDrawerOpen}
-            drawerClose={this.handleDrawerClose}
-            handleCalMenuClose={this.handleCalMenuClose}
-            handleCalMenuClick={this.handleCalMenuClick} />
-          <Sidebar 
-            classes={classes}
-            devMode={devMode}
-            admin={isAdmin}
-            open={this.state.open} 
-            drawerOpen={this.handleDrawerOpen} 
-            drawerClose={this.handleDrawerClose} />
+          <CssBaseline />
+          <Router>
+            <Header
+              darkMode={darkMode}
+              changeDarkMode={changeDarkMode}
+              anchorEl={anchorEl}
+              classes={classes}
+              open={this.state.open}
+              auth={isAuthenticated}
+              logout={this.logout}
+              drawerOpen={this.handleDrawerOpen}
+              drawerClose={this.handleDrawerClose}
+              handleCalMenuClose={this.handleCalMenuClose}
+              handleCalMenuClick={this.handleCalMenuClick} />
+            <Sidebar 
+              classes={classes}
+              devMode={devMode}
+              admin={isAdmin}
+              open={this.state.open} 
+              drawerOpen={this.handleDrawerOpen} 
+              drawerClose={this.handleDrawerClose} />
 
-          <main className={classes.content}>
-            <ToastAlert />
-            <div className={classes.appBarSpacer} />
-            <PrivateRoute path="/" exact component={Dashboard} auth={isAuthenticated} />
-            <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
-            <Route path="/home/" component={Home} />
-            <Route path="/signup/" component={SignUp} />
-            <Route path="/signin/" component={SignIn} />
-            <Route path="/forgot_password/" component={ForgotPassword} />
-            <Route path="/reset_password/:token" component={ResetPassword} />
-            <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
-            <PrivateRoute path="/admin" component={Admin} auth={isAdmin} />
-            {devMode && <Route path="/pipelines/" component={Pipeline} />}
+            <main className={classes.content}>
+              <ToastAlert />
+              <div className={classes.appBarSpacer} />
+              <PrivateRoute path="/" exact component={Dashboard} auth={isAuthenticated} />
+              <PrivateRoute path="/todos" component={Todos} auth={isAuthenticated} />
+              <Route path="/home/" component={Home} />
+              <Route path="/signup/" component={SignUp} />
+              <Route path="/signin/" component={SignIn} />
+              <Route path="/forgot_password/" component={ForgotPassword} />
+              <Route path="/reset_password/:token" component={ResetPassword} />
+              <PrivateRoute path="/lists" component={List} auth={isAuthenticated} />
+              <PrivateRoute path="/admin" component={Admin} auth={isAdmin} />
+              {devMode && <Route path="/pipelines/" component={Pipeline} />}
 
-            <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
-            <Route path="/calendar-full/" component={FullCalendar} />
-            <Route path="/calendar-toast/" component={ToastCalendar} />
-            <Route path="/calendar-big/" component={BigCalendar} />
-            <BottomNav />
-          </main>
+              <PrivateRoute path="/calendar/" component={Calendar} auth={isAuthenticated}/>
+              <BottomNav />
+            </main>
 
-        </Router>
-      </div>
+          </Router>
+        </div>
       </MuiThemeProvider>
     );
   }
