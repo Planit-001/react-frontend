@@ -10,8 +10,6 @@ import {
 import moment from 'moment';
 import _ from 'lodash';
 
-// import { Editor } from 'slate-react'
-import { Value } from 'slate'
 import { readableDate } from './../utils/dateFuncs';
 import BigCalendar from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -43,27 +41,6 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 const localizer = BigCalendar.momentLocalizer(moment)
 
 
-// Create our initial value...
-const eventDescription = Value.fromJSON({
-    document: {
-      nodes: [
-        {
-          object: 'block',
-          type: 'paragraph',
-          nodes: [
-            {
-              object: 'text',
-              leaves: [
-                {
-                  text: 'A line of text in a paragraph.',
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  });
 
 class Calendar extends React.Component {
   constructor(props){
