@@ -41,6 +41,29 @@ class Admin extends React.Component{
         });
     }
 
+    generateSuggestionCols(suggestions){
+        return Object.keys(suggestions).map((item) => {
+            if(typeof suggestions[item] === 'boolean'){
+                return {
+                    Header: item,
+                    accessor: item,
+                    Cell: props => String(props.value)
+                }
+            }else if(item === 'created_at'){
+                return {
+                    Header: item,
+                    accessor: item,
+                    Cell: props => readableDateTime(props.value)
+                }
+            }else{
+                return {
+                    Header: item,
+                    accessor: item
+                }
+            }
+        });
+    }
+
 
     render(){
         const {
@@ -55,19 +78,19 @@ class Admin extends React.Component{
                     <Typography variant="h5" gutterBottom component="h4">
                         Users
                     </Typography>
-                    <AppTable columns={ users ? this.generateUserCols(users[0]) : []} data={users} />
+                    <AppTable 
+                        columns={ users ? this.generateUserCols(users[0]) : []} 
+                        defaultSorted={[{id: "id", desc: true}]}
+                        data={users} />
                 </Grid>
-                {/* <Grid item>
-                    <Typography variant="h5" gutterBottom component="h4">
-                        Users
-                    </Typography>
-                    <UserTable users={users} />
-                </Grid> */}
                 <Grid item xs={12}>
                     <Typography variant="h5" gutterBottom component="h4">
                         Suggestions
                     </Typography>
-                    <SuggestionTable suggestions={suggestions} />
+                    <AppTable 
+                        columns={ suggestions ? this.generateSuggestionCols(suggestions[0]) : []}
+                        defaultSorted={[{id: "id", desc: true}]}
+                        data={suggestions} />
                 </Grid>
             </Grid>
         )
